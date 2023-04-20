@@ -1,0 +1,11 @@
+:root {
+  --clr_main_background: #282c34;
+  --clr_accent_darkGrey: #3c3e41;
+  --clr_accent_dark: green;
+
+  --ff_main: 'Roboto', sans-serif;
+  --ff_accent: 'Handlee', sans-serif;
+
+  --font_size: 1.8rem;
+  --font_color_bright: #fff;
+}

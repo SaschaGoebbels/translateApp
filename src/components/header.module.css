@@ -1,27 +1,27 @@
 .header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: min-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  border: red solid 2px;
+  margin-bottom: 0.8rem;
 }
 h1 {
-  border: red solid 2px;
-  display: block;
+  padding: 0.2rem 0.8rem;
 }
 .headline {
-  border: red solid 2px;
+  border-bottom: var(--clr_accent_dark) solid 2px;
+  padding: 0.2rem 0.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
 }
 .andSymbol {
-  height: 12vmin;
+  height: 8vmin;
   pointer-events: none;
   border-radius: 100px;
   border: red solid 2px;

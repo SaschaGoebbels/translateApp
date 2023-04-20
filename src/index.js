@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { createStore } from "redux";
-import allReducers from "./reducers/indexReducer";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import classes from './index.module.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import allReducers from './reducers/indexReducer';
+import { Provider } from 'react-redux';
 
 const store = createStore(
   allReducers,
@@ -14,9 +14,9 @@ const store = createStore(
 //store
 
 //action
-const action = (type) => {
+const action = type => {
   //
-  if (type === "UPDATEPROCESS") return { type: "UPDATEPROCESS" };
+  if (type === 'UPDATEPROCESS') return { type: 'UPDATEPROCESS' };
 };
 
 //reducer
@@ -25,7 +25,7 @@ const reducer = (state, action) => {
 };
 //dispatch
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>

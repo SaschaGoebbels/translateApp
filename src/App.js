@@ -1,6 +1,8 @@
 import classes from './App.module.css';
+import './variables.css';
 //components
 import Header from './components/header';
+import TranslateBar from './components/translateBar';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import loginReducer from './reducers/loginReducer';
@@ -41,24 +43,42 @@ const googleTranslate = async e => {
 
   //==================================================================
 };
+const languageArray = [
+  { name: 'Spanish', lang: 'sp' },
+  { name: 'English', lang: 'en' },
+  { name: 'Deutsch', lang: 'de' },
+];
 
 function App() {
   const state = useSelector(state => state);
   const processList = useSelector(state => state.processReducer);
   const dispatch = useDispatch();
   console.log('✅', processList);
-  onsubmit = () => {
-    const searchWord = document.querySelector('#input').value;
-    googleTranslate({ parameter: { q: searchWord } });
+  const onSubmitSearch = (searchTxt, setState, lang) => {
+    console.log('❌ txt', searchTxt, lang);
+    console.log('❌ state', setState);
+    setState('');
+    // googleTranslate({ parameter: { q: searchTxt } });
     // googleTranslate(searchWord, "DEU");
   };
+
   return (
-    <div className={classes.app}>
+    <div className={classes.App}>
       <Header></Header>
-      <input contentEditable spellCheck="true" id="input"></input>
+      <TranslateBar
+        defaultLanguage={'English'}
+        languageArray={languageArray}
+        onSubmitSearch={onSubmitSearch}
+      ></TranslateBar>
+      <TranslateBar
+        defaultLanguage={'Deutsch'}
+        languageArray={languageArray}
+        onSubmitSearch={onSubmitSearch}
+      ></TranslateBar>
+      {/* <input contentEditable spellCheck="true" id="input"></input>
       <textarea id="textarea" spellCheck="true"></textarea>
       <button onClick={onsubmit}>Submit</button>
-      <button onClick={() => dispatch(login())}>Login</button>
+      <button onClick={() => dispatch(login())}>Login</button> */}
     </div>
   );
 }
