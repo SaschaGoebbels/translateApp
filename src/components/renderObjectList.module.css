@@ -1,0 +1,58 @@
+.divBox {
+  width: 100%;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  padding: 1rem;
+  border-top: var(--clr_accent_green) solid 2px;
+}
+.iconTextBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  color: var(--firstClr);
+  font-size: 2rem;
+}
+.iconTextBox p {
+  background: linear-gradient(
+    to right,
+    var(--firstClr) 0%,
+    var(--secondClr) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+.listGridBox {
+  border-bottom: var(--clr_accent_green) dotted 2px;
+  width: 100%;
+  display: grid;
+  /* grid-template-columns: min-content 3rem 1fr 6rem; */
+  grid-template-columns: 1fr 3rem 1fr 6rem;
+}
+
+.listItemIcon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.listItem {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  gap: 0.3rem;
+}
+.wordSelected {
+  border: rgb(148, 38, 38) solid 2px;
+  border-radius: 0.5rem;
+  padding: 0.1rem 0.2rem;
+}
+.trash {
+  color: rgb(148, 38, 38);
+}
+.fav {
+  color: rgb(206, 209, 49);
+}

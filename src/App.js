@@ -1,8 +1,11 @@
 import classes from './App.module.css';
 import './variables.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 //components
 import Header from './components/header';
 import TranslateBar from './components/translateBar';
+import RenderObjectList from './components/renderObjectList';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import loginReducer from './reducers/loginReducer';
@@ -46,7 +49,7 @@ const googleTranslate = async e => {
 const languageArray = [
   { name: 'Spanish', lang: 'sp' },
   { name: 'English', lang: 'en' },
-  { name: 'Deutsch', lang: 'de' },
+  { name: 'German', lang: 'de' },
 ];
 
 function App() {
@@ -64,17 +67,32 @@ function App() {
 
   return (
     <div className={classes.App}>
-      <Header></Header>
+      <header className={classes.header_menu}>
+        <Header></Header>
+        <button className={classes.menuButton} onClick={''}>
+          <FontAwesomeIcon
+            icon={faEllipsisVertical}
+            className={classes.menuButtonIcon}
+          />
+        </button>
+      </header>
       <TranslateBar
-        defaultLanguage={'English'}
+        defaultLanguage={['German', 'English']}
         languageArray={languageArray}
         onSubmitSearch={onSubmitSearch}
       ></TranslateBar>
-      <TranslateBar
-        defaultLanguage={'Deutsch'}
-        languageArray={languageArray}
-        onSubmitSearch={onSubmitSearch}
-      ></TranslateBar>
+      {/* <RenderObjectList
+        icon={'faLightbulb'}
+        name={'result'}
+        list={[]}
+        wordClick={wordClick}
+      ></RenderObjectList> */}
+      <RenderObjectList
+        icon={'faHistory'}
+        name={'history'}
+        list={[]}
+        // wordClick={wordClick}
+      ></RenderObjectList>
       {/* <input contentEditable spellCheck="true" id="input"></input>
       <textarea id="textarea" spellCheck="true"></textarea>
       <button onClick={onsubmit}>Submit</button>

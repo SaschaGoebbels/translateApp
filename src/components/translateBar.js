@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import classes from './translateBar.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
 const langOrder = (languageArray, defaultLanguage) => {
   const languageOrder = languageArray.sort((a, b) => {
@@ -22,52 +26,72 @@ const TranslateBar = props => {
   };
   return (
     <div className={classes.translateBar_div}>
-      <div className={classes.input_div}>
+      <div className={classes.divBox}>
+        <select
+          onChange={selectLang}
+          className={`${classes.box} ${classes.inputField}`}
+          name="language"
+          id="dropdown_language"
+        >
+          {langArray}
+        </select>
+        <FontAwesomeIcon icon={faArrowRightArrowLeft} />
+        <select
+          onChange={selectLang}
+          className={`${classes.box} ${classes.inputField}`}
+          name="language"
+          id="dropdown_language"
+        >
+          {langArray}
+        </select>
+      </div>
+      <div className={classes.divBox}>
         <input
           onChange={() => {
             setSearchInputState(document.querySelector('#searchInput').value);
           }}
-          className={classes.box}
+          className={`${classes.box} ${classes.inputField}`}
           type="text"
           id="searchInput"
           value={searchInputState}
         />
-        <select
-          onChange={selectLang}
-          className={classes.sourceLang}
-          name="language"
-          id="dropdown_language"
-        >
-          <option
-            key={'1'}
-            value={''}
-            className={classes.sourceLang__withe}
-            // className={classes['sourceLang--withe']}
-          ></option>
-          {langArray}
-        </select>
+        <FontAwesomeIcon icon={faArrowRightArrowLeft} />
+        <input
+          onChange={() => {
+            setSearchInputState(document.querySelector('#searchInput').value);
+          }}
+          className={`${classes.box} ${classes.inputField}`}
+          type="text"
+          id="searchInput"
+          value={searchInputState}
+        />
       </div>
-      <p>to</p>
-      <select
-        onChange={selectLang}
-        className={classes.box}
-        name="language"
-        id="dropdown_language"
-      >
-        {langArray}
-      </select>
-      <button
-        className={classes.box}
-        onClick={() => {
-          props.onSubmitSearch(
-            searchInputState,
-            setSearchInputState,
-            langState
-          );
-        }}
-      >
-        GO
-      </button>
+      <div className={classes.divBox}>
+        <button
+          className={classes.box}
+          onClick={() => {
+            props.onSubmitSearch(
+              searchInputState,
+              setSearchInputState,
+              langState
+            );
+          }}
+        >
+          <FontAwesomeIcon icon={faX} /> clear
+        </button>
+        <button
+          className={classes.box}
+          onClick={() => {
+            props.onSubmitSearch(
+              searchInputState,
+              setSearchInputState,
+              langState
+            );
+          }}
+        >
+          <FontAwesomeIcon icon={faSearch} /> search
+        </button>
+      </div>
     </div>
   );
 };

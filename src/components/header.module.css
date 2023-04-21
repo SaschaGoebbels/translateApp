@@ -12,8 +12,26 @@
 h1 {
   padding: 0.2rem 0.8rem;
 }
+.h1Left {
+  background: linear-gradient(
+    to right,
+    var(--firstClr) 0%,
+    var(--secondClr) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.h1Right {
+  background: linear-gradient(
+    to right,
+    var(--secondClr) 0%,
+    var(--thirdClr) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .headline {
-  border-bottom: var(--clr_accent_dark) solid 2px;
+  border-bottom: var(--clr_accent_green) solid 2px;
   padding: 0.2rem 0.8rem;
   display: flex;
   justify-content: center;
@@ -24,10 +42,12 @@ h1 {
   height: 8vmin;
   pointer-events: none;
   border-radius: 100px;
-  border: red solid 2px;
   animation: pulse 2s infinite;
-  filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg)
-    brightness(119%) contrast(119%);
+  filter: invert(49%) sepia(55%) saturate(392%) hue-rotate(131deg)
+    brightness(110%) contrast(84%);
+  /* exact color */
+  /* filter: invert(49%) sepia(55%) saturate(392%) hue-rotate(131deg)
+    brightness(93%) contrast(84%); */
 }
 
 @keyframes pulse {

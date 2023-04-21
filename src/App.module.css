@@ -1,10 +1,28 @@
 .App {
-  background-color: var(--clr_main_background);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  background-color: var(--clr_main_background);
+  height: 100vh;
+  width: 100vw;
   color: white;
   gap: 1rem;
+  padding: 1rem;
+}
+.header_menu {
+  display: flex;
+  position: relative;
+}
+.menuButton {
+  position: absolute;
+  right: -2rem;
+  background-color: var(--clr_main_background);
+  border: none;
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.menuButtonIcon {
+  color: var(--clr_accent_blue);
 }

@@ -1,7 +1,13 @@
 :root {
   --clr_main_background: #282c34;
   --clr_accent_darkGrey: #3c3e41;
-  --clr_accent_dark: green;
+  --clr_accent_green: #44ad79;
+  --clr_accent_blue: #69b7f3;
+
+  /* gradient headline  */
+  --firstClr: #2ca268;
+  --secondClr: #439292;
+  --thirdClr: #44a5f0;
 
   --ff_main: 'Roboto', sans-serif;
   --ff_accent: 'Handlee', sans-serif;
