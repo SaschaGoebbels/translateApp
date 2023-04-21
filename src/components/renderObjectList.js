@@ -13,8 +13,18 @@ const wordArrayTest = [
   { text: 'eins', lang: 'en', id: '3' },
   { text: 'zwei', lang: 'en', id: '4' },
 ];
+const wordArrayTest2 = [
+  { text: 'Word', lang: 'en', id: '1' },
+  { text: 'Test', lang: 'en', id: '2' },
+  { text: 'eins', lang: 'en', id: '3' },
+  { text: 'zwei', lang: 'en', id: '4' },
+];
 
 const RenderObjectList = props => {
+  // // render history
+  // // take array of objects
+  // // each obj div
+  // // each word div
   const [selectedWord, setSelectedWord] = useState('');
   // const [list, setList] = useState(wordArrayTest);
   const icon = el => {
@@ -28,7 +38,7 @@ const RenderObjectList = props => {
     }
   };
   const eachWordToDiv = (array, selectedWord) => {
-    console.log('✅ Load', array);
+    // console.log('✅ Load', array);
     return array.map(el => {
       let select = selectedWord === el.id ? classes.wordSelected : '';
       return (
@@ -40,8 +50,12 @@ const RenderObjectList = props => {
     //
   };
   const listContent = array => {
+    console.log('✅', array);
+    // eachWordToDiv(wordArrayTest, selectedWord);
     if (!array) return;
-    return array.map(el => {});
+    return array.map(el => {
+      eachWordToDiv(el, selectedWord);
+    });
   };
   const wordClick = el => {
     if (selectedWord === el.target.id) {
@@ -63,13 +77,17 @@ const RenderObjectList = props => {
         <p>{props.name}</p>
       </div>
       <div className={classes.listGridBox}>
+        {/* //================================================================== */}
+
         <div className={classes.listItem}>Word</div>
+
         <div className={`${classes.listItem} ${classes.listItemIcon}`}>
           <FontAwesomeIcon icon={faEquals} />
         </div>
+
         <div className={`${classes.listItem}`}>
           {/* //================================================================== */}
-          {eachWordToDiv(wordArrayTest, selectedWord)}
+          {listContent([wordArrayTest, wordArrayTest2])}
           {/* <div id={'1'} onClick={wordClick}>
             Wort
           </div>
