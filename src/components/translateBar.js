@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './translateBar.module.css';
 // components
 import LanguageDropdown from './ui/languageDropdown';
@@ -28,6 +28,8 @@ const TranslateBar = props => {
   const [secondLanguageState, setSecondLanguage] = useState(
     props.secondaryLanguage
   );
+  const textareaSizeInitial = '26px';
+  const [textareaSize, setTextareaSize] = useState(textareaSizeInitial);
   const langArrayMain = langOrder(props.languageArray, props.mainLanguage);
   const langArraySecond = langOrder(
     props.languageArray,
@@ -36,6 +38,24 @@ const TranslateBar = props => {
   const setLanguage = (id, value) => {
     console.log('❌', id, value);
   };
+  const textInput = (textValue, id, textareaSize) => {
+    if (id === 'mainSearchInput') {
+      setSearchInputMainState(textValue);
+      setSearchInputSecondState('');
+    }
+    if (id === 'secondSearchInput') {
+      setSearchInputSecondState(textValue);
+      setSearchInputMainState('');
+    }
+    setTextareaSize(textareaSize);
+  };
+  // resize textarea if both inputs empty string
+  useEffect(() => {
+    if (searchInputMainState === '' && searchInputSecondState === '') {
+      setTextareaSize(textareaSizeInitial);
+      return;
+    }
+  }, [searchInputMainState, searchInputSecondState]);
   //==================================================================
   return (
     <div className={classes.translateBar_div}>
@@ -56,26 +76,18 @@ const TranslateBar = props => {
       </div>
       <div className={classes.divBox}>
         <TextBox
-          onChange={() => {
-            setSearchInputMainState(
-              document.querySelector('#searchInputMain').value
-            );
-          }}
-          id="searchInputMain"
+          onChange={textInput}
+          id="mainSearchInput"
           value={searchInputMainState}
+          textareaSize={textareaSize}
         ></TextBox>
         <FontAwesomeIcon icon={faArrowRightArrowLeft} />
-        <input
-          onChange={() => {
-            setSearchInputSecondState(
-              document.querySelector('#searchInputSecond').value
-            );
-          }}
-          className={`${classes.box} ${classes.inputField}`}
-          type="text"
-          id="searchInputSecond"
+        <TextBox
+          onChange={textInput}
+          id="secondSearchInput"
           value={searchInputSecondState}
-        />
+          textareaSize={textareaSize}
+        ></TextBox>
       </div>
       <div className={classes.divBox}>
         <button

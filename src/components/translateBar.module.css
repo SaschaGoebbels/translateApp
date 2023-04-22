@@ -7,6 +7,7 @@
 }
 .divBox {
   width: 100%;
+  height: min-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,9 +16,6 @@
 }
 
 .inputField {
-  width: 50%;
-}
-.textareaInput {
   width: 50%;
 }
 .sourceLang {
@@ -38,4 +36,8 @@
   color: var(--font_color_bright);
   padding: 0.2rem 0.8rem;
   font-size: var(--font_size);
+}
+
+.textareaInput {
+  width: 50%;
 }
