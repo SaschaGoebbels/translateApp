@@ -7,24 +7,44 @@ import { faEquals } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const wordArrayTest = [
-  { text: 'Word', lang: 'en', id: '1' },
-  { text: 'Test', lang: 'en', id: '2' },
-  { text: 'eins', lang: 'en', id: '3' },
-  { text: 'zwei', lang: 'en', id: '4' },
+const result1 = [
+  {
+    lang: 'de',
+    id: 'x1',
+    words: [
+      { text: 'Ein', lang: 'en', id: 'de1' },
+      { text: 'Zwei', lang: 'en', id: 'de2' },
+    ],
+  },
+  {
+    lang: 'en',
+    id: 'x2',
+    words: [
+      { text: 'One', lang: 'en', id: 'en1' },
+      { text: 'Two', lang: 'en', id: 'en2' },
+    ],
+  },
 ];
-const wordArrayTest2 = [
-  { text: 'Word', lang: 'en', id: '1' },
-  { text: 'Test', lang: 'en', id: '2' },
-  { text: 'eins', lang: 'en', id: '3' },
-  { text: 'zwei', lang: 'en', id: '4' },
+const result2 = [
+  {
+    lang: 'de',
+    id: 'x3',
+    words: [
+      { text: 'Hallo', lang: 'en', id: 'de3' },
+      { text: 'Welt', lang: 'en', id: 'de4' },
+    ],
+  },
+  {
+    lang: 'en',
+    id: 'x4',
+    words: [
+      { text: 'Hello', lang: 'en', id: 'en3' },
+      { text: 'World', lang: 'en', id: 'en4' },
+    ],
+  },
 ];
 
 const RenderObjectList = props => {
-  // // render history
-  // // take array of objects
-  // // each obj div
-  // // each word div
   const [selectedWord, setSelectedWord] = useState('');
   // const [list, setList] = useState(wordArrayTest);
   const icon = el => {
@@ -50,9 +70,15 @@ const RenderObjectList = props => {
     //
   };
   const listContent = array => {
+    // // render history
+    // // take array of objects
+    // // each obj div
+    // // each word div
     console.log('✅', array);
     // eachWordToDiv(wordArrayTest, selectedWord);
+    // if no array return immediately
     if (!array) return;
+    //
     return array.map(el => {
       eachWordToDiv(el, selectedWord);
     });
@@ -87,7 +113,7 @@ const RenderObjectList = props => {
 
         <div className={`${classes.listItem}`}>
           {/* //================================================================== */}
-          {listContent([wordArrayTest, wordArrayTest2])}
+          {listContent([result1, result2])}
           {/* <div id={'1'} onClick={wordClick}>
             Wort
           </div>

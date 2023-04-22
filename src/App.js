@@ -77,6 +77,8 @@ function App() {
         </button>
       </header>
       <TranslateBar
+        mainLanguage={'German'}
+        secondaryLanguage={'English'}
         defaultLanguage={['German', 'English']}
         languageArray={languageArray}
         onSubmitSearch={onSubmitSearch}
@@ -91,6 +93,7 @@ function App() {
         icon={'faHistory'}
         name={'history'}
         list={[]}
+        mainLanguage={'de'}
         // wordClick={wordClick}
       ></RenderObjectList>
       {/* <input contentEditable spellCheck="true" id="input"></input>

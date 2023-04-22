@@ -5,9 +5,9 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
-const langOrder = (languageArray, defaultLanguage) => {
+const langOrder = (languageArray, language) => {
   const languageOrder = languageArray.sort((a, b) => {
-    return b.name !== defaultLanguage ? -1 : 0;
+    return b.name !== language ? -1 : 0;
   });
   return languageOrder.map(el => (
     <option key={el.lang} value={el.lang}>
@@ -19,10 +19,22 @@ const langOrder = (languageArray, defaultLanguage) => {
 
 const TranslateBar = props => {
   const [searchInputState, setSearchInputState] = useState('');
-  const [langState, setLangState] = useState('');
-  const langArray = langOrder(props.languageArray, props.defaultLanguage);
+  const [mainLanguageState, setMainLanguage] = useState(props.mainLanguage);
+  const [secondaryLanguageState, setSecondaryLanguage] = useState(
+    props.secondaryLanguage
+  );
+  const langArrayMain = langOrder(props.languageArray, props.mainLanguage);
+  const langArraySecond = langOrder(
+    props.languageArray,
+    props.secondaryLanguage
+  );
+  // const langArray = langOrder(props.languageArray, props.defaultLanguage);
   const selectLang = () => {
-    setLangState(document.querySelector('#dropdown_language').value);
+    setMainLanguage(document.querySelector('#dropdown_mainLanguage').value);
+    setSecondaryLanguage(
+      document.querySelector('#dropdown_secondaryLanguage').value
+    );
+    // setLangState(document.querySelector('#dropdown_language').value);
   };
   return (
     <div className={classes.translateBar_div}>
@@ -31,18 +43,18 @@ const TranslateBar = props => {
           onChange={selectLang}
           className={`${classes.box} ${classes.inputField}`}
           name="language"
-          id="dropdown_language"
+          id="dropdown_mainLanguage"
         >
-          {langArray}
+          {langArrayMain}
         </select>
         <FontAwesomeIcon icon={faArrowRightArrowLeft} />
         <select
           onChange={selectLang}
           className={`${classes.box} ${classes.inputField}`}
           name="language"
-          id="dropdown_language"
+          id="dropdown_secondaryLanguage"
         >
-          {langArray}
+          {langArraySecond}
         </select>
       </div>
       <div className={classes.divBox}>
@@ -72,8 +84,8 @@ const TranslateBar = props => {
           onClick={() => {
             props.onSubmitSearch(
               searchInputState,
-              setSearchInputState,
-              langState
+              setSearchInputState
+              // langState ///////////////// BOOKMARK ///////////////// B
             );
           }}
         >
@@ -84,8 +96,8 @@ const TranslateBar = props => {
           onClick={() => {
             props.onSubmitSearch(
               searchInputState,
-              setSearchInputState,
-              langState
+              setSearchInputState
+              // langState ///////////////// BOOKMARK ///////////////// B
             );
           }}
         >
