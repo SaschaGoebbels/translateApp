@@ -17,6 +17,9 @@
 .inputField {
   width: 50%;
 }
+.textareaInput {
+  width: 50%;
+}
 .sourceLang {
   background-color: rgba(0, 0, 0, 0);
   border: none;

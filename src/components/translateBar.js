@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import classes from './translateBar.module.css';
+// components
+import LanguageDropdown from './ui/languageDropdown';
+import TextBox from './ui/textBox';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -18,9 +22,10 @@ const langOrder = (languageArray, language) => {
 // const searchWord = document.querySelector('#input').value;
 
 const TranslateBar = props => {
-  const [searchInputState, setSearchInputState] = useState('');
+  const [searchInputMainState, setSearchInputMainState] = useState('');
+  const [searchInputSecondState, setSearchInputSecondState] = useState('');
   const [mainLanguageState, setMainLanguage] = useState(props.mainLanguage);
-  const [secondaryLanguageState, setSecondaryLanguage] = useState(
+  const [secondLanguageState, setSecondLanguage] = useState(
     props.secondaryLanguage
   );
   const langArrayMain = langOrder(props.languageArray, props.mainLanguage);
@@ -28,78 +33,71 @@ const TranslateBar = props => {
     props.languageArray,
     props.secondaryLanguage
   );
-  // const langArray = langOrder(props.languageArray, props.defaultLanguage);
-  const selectLang = () => {
-    setMainLanguage(document.querySelector('#dropdown_mainLanguage').value);
-    setSecondaryLanguage(
-      document.querySelector('#dropdown_secondaryLanguage').value
-    );
-    // setLangState(document.querySelector('#dropdown_language').value);
+  const setLanguage = (id, value) => {
+    console.log('❌', id, value);
   };
+  //==================================================================
   return (
     <div className={classes.translateBar_div}>
       <div className={classes.divBox}>
-        <select
-          onChange={selectLang}
-          className={`${classes.box} ${classes.inputField}`}
-          name="language"
-          id="dropdown_mainLanguage"
-        >
-          {langArrayMain}
-        </select>
+        <LanguageDropdown
+          id="mainLanguage"
+          langArray={props.languageArray}
+          language={mainLanguageState}
+          onChange={setLanguage}
+        ></LanguageDropdown>
         <FontAwesomeIcon icon={faArrowRightArrowLeft} />
-        <select
-          onChange={selectLang}
-          className={`${classes.box} ${classes.inputField}`}
-          name="language"
-          id="dropdown_secondaryLanguage"
-        >
-          {langArraySecond}
-        </select>
+        <LanguageDropdown
+          id="secondLanguage"
+          langArray={props.languageArray}
+          language={secondLanguageState}
+          onChange={setLanguage}
+        ></LanguageDropdown>
       </div>
       <div className={classes.divBox}>
-        <input
+        <TextBox
           onChange={() => {
-            setSearchInputState(document.querySelector('#searchInput').value);
+            setSearchInputMainState(
+              document.querySelector('#searchInputMain').value
+            );
           }}
-          className={`${classes.box} ${classes.inputField}`}
-          type="text"
-          id="searchInput"
-          value={searchInputState}
-        />
+          id="searchInputMain"
+          value={searchInputMainState}
+        ></TextBox>
         <FontAwesomeIcon icon={faArrowRightArrowLeft} />
         <input
           onChange={() => {
-            setSearchInputState(document.querySelector('#searchInput').value);
+            setSearchInputSecondState(
+              document.querySelector('#searchInputSecond').value
+            );
           }}
           className={`${classes.box} ${classes.inputField}`}
           type="text"
-          id="searchInput"
-          value={searchInputState}
+          id="searchInputSecond"
+          value={searchInputSecondState}
         />
       </div>
       <div className={classes.divBox}>
         <button
           className={classes.box}
           onClick={() => {
-            props.onSubmitSearch(
-              searchInputState,
-              setSearchInputState
-              // langState ///////////////// BOOKMARK ///////////////// B
-            );
+            console.log('❌ Clear Input State');
           }}
         >
           <FontAwesomeIcon icon={faX} /> clear
         </button>
         <button
-          className={classes.box}
           onClick={() => {
             props.onSubmitSearch(
-              searchInputState,
-              setSearchInputState
-              // langState ///////////////// BOOKMARK ///////////////// B
+              searchInputMainState,
+              setSearchInputMainState,
+              mainLanguageState,
+              searchInputSecondState,
+              setSearchInputSecondState,
+              secondLanguageState
             );
           }}
+          className={classes.box}
         >
           <FontAwesomeIcon icon={faSearch} /> search
         </button>
