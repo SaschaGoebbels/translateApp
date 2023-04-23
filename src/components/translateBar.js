@@ -36,6 +36,7 @@ const TranslateBar = props => {
     sourceText = inputMain !== '' ? inputMain : inputSecond;
     sourceLang = inputMain !== '' ? mainLanguage : secondLanguage;
     targetLang = inputMain !== '' ? secondLanguage : mainLanguage;
+    const setTarget = inputMain !== '' ? setSecond : setMain;
     const getLangCode = (language, languageArray) => {
       const currentLanguage = languageArray.filter(el => el.name === language);
       return currentLanguage[0].lang;
@@ -46,7 +47,7 @@ const TranslateBar = props => {
         sourceLang: getLangCode(sourceLang, languageArray),
         targetLang: getLangCode(targetLang, languageArray),
       },
-      set: { setMain, setSecond },
+      setTarget,
     };
   };
 
@@ -97,6 +98,40 @@ const TranslateBar = props => {
       setTextareaSize(textareaSizeInitial);
     }
   };
+  const handleKeyDown = e => {
+    // tab to switch between input
+    const activeTextarea = document.activeElement.id;
+    if (e.code === 'Tab' && activeTextarea === 'secondSearchInput') {
+      setTimeout(() => {
+        document.getElementById('mainSearchInput').focus();
+      }, 1);
+    }
+    // submit when pushing enter
+    if (props.settings.submitEnter && e.key === 'Enter') {
+      submitQuery();
+    }
+    // clear input if pushing escape
+    if (props.settings.clearWithESC && e.key === 'Escape') {
+      clearInput();
+    }
+  };
+  const submitQuery = () => {
+    props.onSubmitSearch({
+      ...searchObj(
+        searchInputMainState,
+        searchInputSecondState,
+        setSearchInputMainState,
+        setSearchInputSecondState,
+        mainLanguage,
+        secondLanguage,
+        props.languageArray
+      ),
+    });
+  };
+  const clearInput = () => {
+    setSearchInputMainState('');
+    setSearchInputSecondState('');
+  };
   //==================================================================
   return (
     <div className={classes.translateBar_div}>
@@ -106,8 +141,9 @@ const TranslateBar = props => {
         secondLanguage={'English'}
         getCurrentLanguage={getCurrentLanguage}
       ></LanguageDoubleDropdown>
-      <div className={classes.divBox}>
+      <div className={classes.divBox} onKeyDown={handleKeyDown}>
         <TextBox
+          autoFocus={true}
           onChange={textInput}
           id="mainSearchInput"
           value={searchInputMainState}
@@ -124,30 +160,10 @@ const TranslateBar = props => {
         ></TextBox>
       </div>
       <div className={classes.divBox}>
-        <button
-          className={classes.box}
-          onClick={() => {
-            console.log('❌ Clear Input State');
-          }}
-        >
+        <button className={classes.box} onClick={clearInput}>
           <FontAwesomeIcon icon={faX} /> clear
         </button>
-        <button
-          onClick={() => {
-            props.onSubmitSearch({
-              ...searchObj(
-                searchInputMainState,
-                searchInputSecondState,
-                setSearchInputMainState,
-                setSearchInputSecondState,
-                mainLanguage,
-                secondLanguage,
-                props.languageArray
-              ),
-            });
-          }}
-          className={classes.box}
-        >
+        <button onClick={submitQuery} className={classes.box}>
           <FontAwesomeIcon icon={faSearch} /> search
         </button>
       </div>

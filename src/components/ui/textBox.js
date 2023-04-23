@@ -38,10 +38,13 @@ const TextBox = props => {
       );
     }
   };
+  const handleFocus = event => event.target.select();
   //==================================================================
   return (
     <textarea
+      autoFocus={props.autoFocus}
       onChange={onChangeText}
+      onFocus={handleFocus}
       style={{ height: textareaSize }}
       className={`${classes.box} ${classes.textareaInput} `}
       type="text"

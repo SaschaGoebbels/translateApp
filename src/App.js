@@ -19,7 +19,7 @@ const languageArray = [
   { name: 'English', lang: 'en' },
   { name: 'German', lang: 'de' },
 ];
-
+const settings = { clearWithESC: true, submitEnter: true };
 function App() {
   const state = useSelector(state => state);
   const processList = useSelector(state => state.processReducer);
@@ -45,8 +45,7 @@ function App() {
         </button>
       </header>
       <TranslateBar
-        // mainLanguage={'German'}
-        // secondLanguage={'English'}
+        settings={settings}
         defaultLanguage={['German', 'English']}
         languageArray={languageArray}
         onSubmitSearch={onSubmitSearch}
