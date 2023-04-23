@@ -3,27 +3,43 @@ import classes from '../translateBar.module.css';
 
 const TextBox = props => {
   //==================================================================
+  let allowChangeText;
   // resize textarea on input change
-  let textareaSize = props.textareaSize;
+  const getTextareaSize = array => {
+    const [current] = array.filter(el => el.id === props.id);
+    allowChangeText = current.allowChangeText;
+    if (current.useBiggestSize) {
+      // if use biggest return biggest number of array
+      return `${Math.max(...array.map(o => o.size))}px`;
+    }
+    return `${current.size}px`;
+  };
+  const textareaSize = getTextareaSize(props.textareaSize);
+
   if (props.value !== '') {
     const tx = document.getElementsByTagName('textarea');
     for (let i = 0; i < tx.length; i++) {
       tx[i].addEventListener('input', OnInput, false);
     }
     function OnInput() {
-      textareaSize = this.scrollHeight + 'px';
+      props.onChangeTextareaSize([
+        { id: props.id, size: `${this.scrollHeight}` },
+      ]);
     }
   }
+  const onChangeText = () => {
+    if (allowChangeText) {
+      props.onChange(
+        document.querySelector(`#${props.id}`).value,
+        props.id,
+        textareaSize
+      );
+    }
+  };
   //==================================================================
   return (
     <textarea
-      onChange={() => {
-        props.onChange(
-          document.querySelector(`#${props.id}`).value,
-          props.id,
-          textareaSize
-        );
-      }}
+      onChange={onChangeText}
       style={{ height: textareaSize }}
       className={`${classes.box} ${classes.textareaInput} `}
       type="text"

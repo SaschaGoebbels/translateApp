@@ -28,7 +28,21 @@ const TranslateBar = props => {
   const [secondLanguageState, setSecondLanguage] = useState(
     props.secondaryLanguage
   );
-  const textareaSizeInitial = '26px';
+  const textareaSizeInitial = [
+    {
+      id: 'mainSearchInput',
+      size: 26,
+      useBiggestSize: true,
+      allowChangeText: true,
+    },
+    {
+      id: 'secondSearchInput',
+      size: 26,
+      useBiggestSize: true,
+      allowChangeText: true,
+    },
+  ];
+  // const textareaSizeInitial = '26px';
   const [textareaSize, setTextareaSize] = useState(textareaSizeInitial);
   const langArrayMain = langOrder(props.languageArray, props.mainLanguage);
   const langArraySecond = langOrder(
@@ -36,7 +50,7 @@ const TranslateBar = props => {
     props.secondaryLanguage
   );
   const setLanguage = (id, value) => {
-    console.log('❌', id, value);
+    // console.log('❌', id, value);
   };
   const textInput = (textValue, id, textareaSize) => {
     if (id === 'mainSearchInput') {
@@ -47,15 +61,30 @@ const TranslateBar = props => {
       setSearchInputSecondState(textValue);
       setSearchInputMainState('');
     }
-    setTextareaSize(textareaSize);
+    // console.log('✅', textareaSize);
+    // setTextareaSize(textareaSize);
   };
   // resize textarea if both inputs empty string
   useEffect(() => {
+    // console.log('✅', textareaSize);
     if (searchInputMainState === '' && searchInputSecondState === '') {
       setTextareaSize(textareaSizeInitial);
       return;
     }
   }, [searchInputMainState, searchInputSecondState]);
+
+  const onChangeTextareaSize = change => {
+    setTextareaSize(prev => {
+      prev
+        .filter(el => el.id === change[0].id)
+        .map(el => (el.size = change[0].size));
+      return prev;
+    });
+
+    if (!change) {
+      setTextareaSize(textareaSizeInitial);
+    }
+  };
   //==================================================================
   return (
     <div className={classes.translateBar_div}>
@@ -79,6 +108,7 @@ const TranslateBar = props => {
           onChange={textInput}
           id="mainSearchInput"
           value={searchInputMainState}
+          onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}
         ></TextBox>
         <FontAwesomeIcon icon={faArrowRightArrowLeft} />
@@ -86,6 +116,7 @@ const TranslateBar = props => {
           onChange={textInput}
           id="secondSearchInput"
           value={searchInputSecondState}
+          onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}
         ></TextBox>
       </div>

@@ -40,4 +40,5 @@
 
 .textareaInput {
   width: 50%;
+  overflow: hidden;
 }
