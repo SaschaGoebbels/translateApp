@@ -9,6 +9,8 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
+import uuid from 'react-uuid';
+
 const langOrder = (languageArray, language) => {
   const languageOrder = languageArray.sort((a, b) => {
     return b.name !== language ? -1 : 0;
@@ -50,7 +52,7 @@ const TranslateBar = props => {
     props.secondaryLanguage
   );
   const setLanguage = (id, value) => {
-    // console.log('❌', id, value);
+    console.log('❌', id, value);
   };
   const textInput = (textValue, id, textareaSize) => {
     if (id === 'mainSearchInput') {
