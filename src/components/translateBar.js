@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import classes from './translateBar.module.css';
 // components
 import LanguageDropdown from './ui/languageDropdown';
+import LanguageDoubleDropdown from './ui/languageDoubleDropdown';
 import TextBox from './ui/textBox';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -66,7 +67,6 @@ const TranslateBar = props => {
   };
   // resize textarea if both inputs empty string
   useEffect(() => {
-    // console.log('✅', textareaSize);
     if (searchInputMainState === '' && searchInputSecondState === '') {
       setTextareaSize(textareaSizeInitial);
       return;
@@ -88,21 +88,11 @@ const TranslateBar = props => {
   //==================================================================
   return (
     <div className={classes.translateBar_div}>
-      <div className={classes.divBox}>
-        <LanguageDropdown
-          id="mainLanguage"
-          langArray={props.languageArray}
-          language={mainLanguageState}
-          onChange={setLanguage}
-        ></LanguageDropdown>
-        <FontAwesomeIcon icon={faArrowRightArrowLeft} />
-        <LanguageDropdown
-          id="secondLanguage"
-          langArray={props.languageArray}
-          language={secondLanguageState}
-          onChange={setLanguage}
-        ></LanguageDropdown>
-      </div>
+      <LanguageDoubleDropdown
+        languageArray={props.languageArray}
+        mainLanguage={'German'}
+        secondLanguage={'English'}
+      ></LanguageDoubleDropdown>
       <div className={classes.divBox}>
         <TextBox
           onChange={textInput}
