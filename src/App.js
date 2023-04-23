@@ -6,46 +6,14 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import Header from './components/header';
 import TranslateBar from './components/translateBar';
 import RenderObjectList from './components/renderObjectList';
+
+import { FetchToGoogle } from './components/logic/fetch';
+
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import loginReducer from './reducers/loginReducer';
 import { login, logout } from './actions/actions';
 
-const googleTranslate = async e => {
-  //==================================================================
-  let sourceText = '';
-  if (e.parameter.q) {
-    sourceText = e.parameter.q;
-  }
-
-  let sourceLang = 'auto';
-  if (e.parameter.source) {
-    sourceLang = e.parameter.source;
-  }
-
-  let targetLang = 'de';
-  if (e.parameter.target) {
-    targetLang = e.parameter.target;
-  }
-  // let resUrl;
-  let url =
-    'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
-    sourceLang +
-    '&tl=' +
-    targetLang +
-    '&dt=t&q=' +
-    encodeURI(sourceText);
-
-  console.log('✅', url);
-  const response = await fetch(url);
-  const body = await response.json();
-
-  console.log('✅ Body:', body);
-  console.log('💥 Translation:', body[0][0][0]);
-  console.log('👍 source language:', body[2]);
-
-  //==================================================================
-};
 const languageArray = [
   { name: 'Spanish', lang: 'sp' },
   { name: 'English', lang: 'en' },
@@ -56,11 +24,11 @@ function App() {
   const state = useSelector(state => state);
   const processList = useSelector(state => state.processReducer);
   const dispatch = useDispatch();
-  console.log('✅', processList);
-  const onSubmitSearch = (searchTxt, setState, lang) => {
-    console.log('❌ txt', searchTxt, lang);
-    console.log('❌ state', setState);
-    setState('');
+  // console.log('✅', processList);
+  const onSubmitSearch = searchObj => {
+    console.log('❌', searchObj);
+    FetchToGoogle(searchObj);
+    return;
     // googleTranslate({ parameter: { q: searchTxt } });
     // googleTranslate(searchWord, "DEU");
   };
@@ -77,8 +45,8 @@ function App() {
         </button>
       </header>
       <TranslateBar
-        mainLanguage={'German'}
-        secondaryLanguage={'English'}
+        // mainLanguage={'German'}
+        // secondLanguage={'English'}
         defaultLanguage={['German', 'English']}
         languageArray={languageArray}
         onSubmitSearch={onSubmitSearch}

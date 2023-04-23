@@ -75,7 +75,7 @@ const RenderObjectList = props => {
     // // take array of objects
     // // each obj div
     // // each word div
-    console.log('✅', array);
+    // console.log('✅', array);
     // eachWordToDiv(wordArrayTest, selectedWord);
     // if no array return immediately
     if (!array) return;

@@ -5,6 +5,7 @@ import LanguageDropdown from './languageDropdown';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useEffect } from 'react';
 
 const LanguageDoubleDropdown = props => {
   const [mainLanguageState, setMainLanguage] = useState(props.mainLanguage);
@@ -14,8 +15,11 @@ const LanguageDoubleDropdown = props => {
 
   const setLanguage = (id, value) => {
     if (id === 'mainLanguage') setMainLanguage(value);
-    if (id === 'secondLanguage') setMainLanguage(value);
+    if (id === 'secondLanguage') setSecondLanguage(value);
   };
+  useEffect(() => {
+    props.getCurrentLanguage([mainLanguageState, secondLanguageState]);
+  }, [mainLanguageState, secondLanguageState]);
   return (
     <div className={classesTranslateBar.divBox}>
       <LanguageDropdown

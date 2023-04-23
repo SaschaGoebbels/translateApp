@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import classes from './translateBar.module.css';
 // components
-import LanguageDropdown from './ui/languageDropdown';
 import LanguageDoubleDropdown from './ui/languageDoubleDropdown';
 import TextBox from './ui/textBox';
+import { FetchToGoogle } from './logic/fetch';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -15,10 +15,41 @@ import uuid from 'react-uuid';
 const TranslateBar = props => {
   const [searchInputMainState, setSearchInputMainState] = useState('');
   const [searchInputSecondState, setSearchInputSecondState] = useState('');
-  const [mainLanguageState, setMainLanguage] = useState(props.mainLanguage);
-  const [secondLanguageState, setSecondLanguage] = useState(
-    props.secondaryLanguage
-  );
+
+  // get selected language from child component
+  let mainLanguage = props.defaultLanguage[0];
+  let secondLanguage = props.defaultLanguage[1];
+  const getCurrentLanguage = state => {
+    [mainLanguage, secondLanguage] = state;
+  };
+  ///////////////// BOOKMARK ///////////////// B
+  const searchObj = (
+    inputMain,
+    inputSecond,
+    setMain,
+    setSecond,
+    mainLanguage,
+    secondLanguage,
+    languageArray
+  ) => {
+    let sourceText, sourceLang, targetLang;
+    sourceText = inputMain !== '' ? inputMain : inputSecond;
+    sourceLang = inputMain !== '' ? mainLanguage : secondLanguage;
+    targetLang = inputMain !== '' ? secondLanguage : mainLanguage;
+    const getLangCode = (language, languageArray) => {
+      const currentLanguage = languageArray.filter(el => el.name === language);
+      return currentLanguage[0].lang;
+    };
+    return {
+      search: {
+        sourceText,
+        sourceLang: getLangCode(sourceLang, languageArray),
+        targetLang: getLangCode(targetLang, languageArray),
+      },
+      set: { setMain, setSecond },
+    };
+  };
+
   const textareaSizeInitial = [
     {
       id: 'mainSearchInput',
@@ -73,6 +104,7 @@ const TranslateBar = props => {
         languageArray={props.languageArray}
         mainLanguage={'German'}
         secondLanguage={'English'}
+        getCurrentLanguage={getCurrentLanguage}
       ></LanguageDoubleDropdown>
       <div className={classes.divBox}>
         <TextBox
@@ -102,14 +134,17 @@ const TranslateBar = props => {
         </button>
         <button
           onClick={() => {
-            props.onSubmitSearch(
-              searchInputMainState,
-              setSearchInputMainState,
-              mainLanguageState,
-              searchInputSecondState,
-              setSearchInputSecondState,
-              secondLanguageState
-            );
+            props.onSubmitSearch({
+              ...searchObj(
+                searchInputMainState,
+                searchInputSecondState,
+                setSearchInputMainState,
+                setSearchInputSecondState,
+                mainLanguage,
+                secondLanguage,
+                props.languageArray
+              ),
+            });
           }}
           className={classes.box}
         >
