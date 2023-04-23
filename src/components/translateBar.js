@@ -61,8 +61,6 @@ const TranslateBar = props => {
       setSearchInputSecondState(textValue);
       setSearchInputMainState('');
     }
-    // console.log('✅', textareaSize);
-    // setTextareaSize(textareaSize);
   };
   // resize textarea if both inputs empty string
   useEffect(() => {

@@ -10,12 +10,13 @@ const TextBox = props => {
     allowChangeText = current.allowChangeText;
     if (current.useBiggestSize) {
       // if use biggest return biggest number of array
-      return `${Math.max(...array.map(o => o.size))}px`;
+      return `${Math.max(...array.map(el => el.size))}px`;
     }
     return `${current.size}px`;
   };
   const textareaSize = getTextareaSize(props.textareaSize);
 
+  // get textarea size and update state in translateBar
   if (props.value !== '') {
     const tx = document.getElementsByTagName('textarea');
     for (let i = 0; i < tx.length; i++) {
@@ -27,6 +28,7 @@ const TextBox = props => {
       ]);
     }
   }
+  // if text change allowed update state in translateBar, else just print results
   const onChangeText = () => {
     if (allowChangeText) {
       props.onChange(
