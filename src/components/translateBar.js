@@ -12,18 +12,6 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 
 import uuid from 'react-uuid';
 
-const langOrder = (languageArray, language) => {
-  const languageOrder = languageArray.sort((a, b) => {
-    return b.name !== language ? -1 : 0;
-  });
-  return languageOrder.map(el => (
-    <option key={el.lang} value={el.lang}>
-      {el.name}
-    </option>
-  ));
-};
-// const searchWord = document.querySelector('#input').value;
-
 const TranslateBar = props => {
   const [searchInputMainState, setSearchInputMainState] = useState('');
   const [searchInputSecondState, setSearchInputSecondState] = useState('');
@@ -47,14 +35,7 @@ const TranslateBar = props => {
   ];
   // const textareaSizeInitial = '26px';
   const [textareaSize, setTextareaSize] = useState(textareaSizeInitial);
-  const langArrayMain = langOrder(props.languageArray, props.mainLanguage);
-  const langArraySecond = langOrder(
-    props.languageArray,
-    props.secondaryLanguage
-  );
-  const setLanguage = (id, value) => {
-    console.log('❌', id, value);
-  };
+
   const textInput = (textValue, id, textareaSize) => {
     if (id === 'mainSearchInput') {
       setSearchInputMainState(textValue);

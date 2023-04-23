@@ -6,27 +6,10 @@ import LanguageDropdown from './languageDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-const langOrder = (languageArray, language) => {
-  const languageOrder = languageArray.sort((a, b) => {
-    return b.name !== language ? -1 : 0;
-  });
-  return languageOrder.map(el => (
-    <option key={el.lang} value={el.lang}>
-      {el.name}
-    </option>
-  ));
-};
-
 const LanguageDoubleDropdown = props => {
   const [mainLanguageState, setMainLanguage] = useState(props.mainLanguage);
   const [secondLanguageState, setSecondLanguage] = useState(
     props.secondLanguage
-  );
-
-  const langArrayMain = langOrder(props.languageArray, props.mainLanguage);
-  const langArraySecond = langOrder(
-    props.languageArray,
-    props.secondaryLanguage
   );
 
   const setLanguage = (id, value) => {
