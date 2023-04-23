@@ -10,8 +10,6 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
-import uuid from 'react-uuid';
-
 const TranslateBar = props => {
   const [searchInputMainState, setSearchInputMainState] = useState('');
   const [searchInputSecondState, setSearchInputSecondState] = useState('');
@@ -22,7 +20,7 @@ const TranslateBar = props => {
   const getCurrentLanguage = state => {
     [mainLanguage, secondLanguage] = state;
   };
-  ///////////////// BOOKMARK ///////////////// B
+
   const searchObj = (
     inputMain,
     inputSecond,
@@ -65,7 +63,6 @@ const TranslateBar = props => {
       allowChangeText: true,
     },
   ];
-  // const textareaSizeInitial = '26px';
   const [textareaSize, setTextareaSize] = useState(textareaSizeInitial);
 
   const textInput = (textValue, id, textareaSize) => {
@@ -108,6 +105,7 @@ const TranslateBar = props => {
     }
     // submit when pushing enter
     if (props.settings.submitEnter && e.key === 'Enter') {
+      e.preventDefault();
       submitQuery();
     }
     // clear input if pushing escape
