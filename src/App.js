@@ -13,6 +13,7 @@ import { FetchToGoogle } from './components/logic/fetch';
 import { useSelector, useDispatch } from 'react-redux';
 import loginReducer from './reducers/loginReducer';
 import { login, logout } from './actions/actions';
+import { historyList } from './actions/actions';
 
 const languageArray = [
   { name: 'Spanish', lang: 'sp' },
@@ -24,13 +25,11 @@ function App() {
   const state = useSelector(state => state);
   const processList = useSelector(state => state.processReducer);
   const dispatch = useDispatch();
-  // console.log('✅', processList);
-  const onSubmitSearch = searchObj => {
-    console.log('❌', searchObj);
-    FetchToGoogle(searchObj);
+
+  const onSubmitSearch = async searchObj => {
+    const res = await FetchToGoogle(searchObj);
+    if (res) dispatch(historyList({ type: 'add', payload: res }));
     return;
-    // googleTranslate({ parameter: { q: searchTxt } });
-    // googleTranslate(searchWord, "DEU");
   };
 
   return (

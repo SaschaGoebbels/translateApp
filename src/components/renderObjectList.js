@@ -8,6 +8,8 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import { useSelector } from 'react-redux';
+
 const result1 = [
   {
     lang: 'de',
@@ -47,7 +49,8 @@ const result2 = [
 
 const RenderObjectList = props => {
   const [selectedWord, setSelectedWord] = useState('');
-  // const [list, setList] = useState(wordArrayTest);
+  const historyList = useSelector(state => state.historyList);
+
   const icon = el => {
     switch (el) {
       case 'faLightbulb':
@@ -86,7 +89,7 @@ const RenderObjectList = props => {
   };
   const wordClick = el => {
     if (selectedWord === el.target.id) {
-      console.log('❌');
+      // console.log('❌');
       return;
     }
     setSelectedWord(el.target.id);

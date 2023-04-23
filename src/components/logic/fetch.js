@@ -1,4 +1,5 @@
 // import React from 'react';
+
 import uuid from 'react-uuid';
 
 class Result {
@@ -13,18 +14,21 @@ class Result {
     this.count = 0;
   }
 }
+const splitStringToArray = text => {
+  return text.split(' ');
+};
 
 export const FetchToGoogle = async obj => {
   let response, body;
   const { sourceText, sourceLang, targetLang } = obj.search;
-
+  const noSpecialCharacters = sourceText.replace(/[^\w\s]/gi, '');
   const url =
     'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
     sourceLang +
     '&tl=' +
     targetLang +
     '&dt=t&q=' +
-    encodeURI(sourceText);
+    encodeURI(noSpecialCharacters);
   try {
     response = await fetch(url);
     body = await response.json();
@@ -32,16 +36,18 @@ export const FetchToGoogle = async obj => {
     console.log('❌ Fetch Error:', err);
   }
   if (body) {
+    const text1Array = splitStringToArray(body[0][0][0]);
+    const text2Array = splitStringToArray(sourceText);
+
     const res = new Result(
-      body[0][0][0],
+      text1Array,
       targetLang,
-      sourceText,
+      text2Array,
       sourceLang,
       uuid()
     );
-    console.log('❌', res);
-
-    obj.setTarget(res.text1);
+    obj.setTarget(res.text1.join(' '));
+    return res;
   }
   return;
 };

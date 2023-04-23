@@ -13,10 +13,9 @@ const store = createStore(
 );
 //store
 
-//action
+//actions
 const action = type => {
-  //
-  if (type === 'UPDATEPROCESS') return { type: 'UPDATEPROCESS' };
+  if (type === 'UPDATEHISTORY') return { type: 'UPDATEHISTORY' };
 };
 
 //reducer
