@@ -1,5 +1,3 @@
-// import React from 'react';
-
 import uuid from 'react-uuid';
 
 class Result {
@@ -16,9 +14,6 @@ class Result {
     this.timestamp = Math.round(Date.now());
   }
 }
-// const splitStringToArray = text => {
-//   return text.split(' ');
-// };
 
 export const FetchToGoogle = async obj => {
   let response, body;

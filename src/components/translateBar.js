@@ -3,7 +3,6 @@ import classes from './translateBar.module.css';
 // components
 import LanguageDoubleDropdown from './ui/languageDoubleDropdown';
 import TextBox from './ui/textBox';
-import { FetchToGoogle } from './logic/fetch';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';

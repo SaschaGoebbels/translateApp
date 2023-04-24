@@ -30,8 +30,8 @@
   border-bottom: var(--clr_accent_green) dotted 2px;
   width: 100%;
   display: grid;
-  /* grid-template-columns: min-content 3rem 1fr 6rem; */
   grid-template-columns: 1fr 3rem 1fr 6rem;
+  padding: 0.4rem 0;
 }
 
 .listItemIcon {
