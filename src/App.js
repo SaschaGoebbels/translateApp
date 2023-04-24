@@ -13,30 +13,43 @@ import { FetchToGoogle } from './components/logic/fetch';
 import { useSelector, useDispatch } from 'react-redux';
 import loginReducer from './reducers/loginReducer';
 import { login, logout } from './actions/actions';
-import { historyList } from './actions/actions';
+import { historyListAdd } from './actions/actions';
 
-const languageArray = [
-  { name: 'Spanish', lang: 'sp' },
-  { name: 'English', lang: 'en' },
-  { name: 'German', lang: 'de' },
-];
-const settings = { clearWithESC: true, submitEnter: true };
+// const languageArray = [
+//   { name: 'Spanish', lang: 'sp' },
+//   { name: 'English', lang: 'en' },
+//   { name: 'German', lang: 'de' },
+// ];
+// const settings = { clearWithESC: true, submitEnter: true };
 function App() {
-  const state = useSelector(state => state);
-  const processList = useSelector(state => state.processReducer);
   const dispatch = useDispatch();
+  const shortcuts = useSelector(state => state.settings.shortcuts);
+
+  const languageArray = useSelector(state => state.settings.languageArray);
+  const [lang1, lang2] = useSelector(state => state.settings.defaultLanguage);
+  const defaultLanguageObjects = (array, lang) => {
+    console.log(
+      '✅',
+      array.filter(el => el.name === lang)
+    );
+    return array.filter(el => el.name === lang);
+  };
 
   const onSubmitSearch = async searchObj => {
     const res = await FetchToGoogle(searchObj);
-    if (res) dispatch(historyList({ type: 'add', payload: res }));
+    if (res) dispatch(historyListAdd({ type: 'ADD', payload: res }));
     return;
+  };
+
+  const onMenuButtonHandler = () => {
+    console.log('❌ Menu Button');
   };
 
   return (
     <div className={classes.App}>
       <header className={classes.header_menu}>
         <Header></Header>
-        <button className={classes.menuButton} onClick={''}>
+        <button className={classes.menuButton} onClick={onMenuButtonHandler}>
           <FontAwesomeIcon
             icon={faEllipsisVertical}
             className={classes.menuButtonIcon}
@@ -44,8 +57,11 @@ function App() {
         </button>
       </header>
       <TranslateBar
-        settings={settings}
-        defaultLanguage={['German', 'English']}
+        settings={shortcuts}
+        defaultLanguage={[
+          ...defaultLanguageObjects(languageArray, lang1),
+          ...defaultLanguageObjects(languageArray, lang2),
+        ]}
         languageArray={languageArray}
         onSubmitSearch={onSubmitSearch}
       ></TranslateBar>

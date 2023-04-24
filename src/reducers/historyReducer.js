@@ -1,7 +1,8 @@
 //
 const historyReducer = (state = [], action) => {
-  if (action.type === 'add') {
-    state = [...state, action.payload];
+  console.log('❌', action);
+  if (action.type === 'ADD') {
+    state = [action.payload, ...state];
     return state;
   }
   return state;

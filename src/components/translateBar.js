@@ -15,8 +15,8 @@ const TranslateBar = props => {
   const [searchInputSecondState, setSearchInputSecondState] = useState('');
 
   // get selected language from child component
-  let mainLanguage = props.defaultLanguage[0];
-  let secondLanguage = props.defaultLanguage[1];
+  let mainLanguage = props.defaultLanguage[0].name;
+  let secondLanguage = props.defaultLanguage[1].name;
   const getCurrentLanguage = state => {
     [mainLanguage, secondLanguage] = state;
   };

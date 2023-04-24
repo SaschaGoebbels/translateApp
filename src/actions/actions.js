@@ -6,6 +6,11 @@ export const logout = () => {
   return { type: 'LOGOUT' };
 };
 
-export const historyList = action => {
-  return { type: 'add', payload: action.payload };
+export const historyListAdd = action => {
+  console.log('✅', action);
+  return { type: 'ADD', payload: action.payload };
+};
+
+export const defaultLanguage = action => {
+  return { type: 'DEFAULTLANGUAGE', payload: action.payload };
 };

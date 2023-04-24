@@ -11,12 +11,14 @@ class Result {
     this.id = id;
     this.fav = false;
     this.interval = 1;
+    // this.lastRound = 0;
     this.count = 0;
+    this.timestamp = Math.round(Date.now());
   }
 }
-const splitStringToArray = text => {
-  return text.split(' ');
-};
+// const splitStringToArray = text => {
+//   return text.split(' ');
+// };
 
 export const FetchToGoogle = async obj => {
   let response, body;
@@ -36,17 +38,11 @@ export const FetchToGoogle = async obj => {
     console.log('❌ Fetch Error:', err);
   }
   if (body) {
-    const text1Array = splitStringToArray(body[0][0][0]);
-    const text2Array = splitStringToArray(sourceText);
+    const text2 = body[0][0][0];
+    const text1 = sourceText;
 
-    const res = new Result(
-      text1Array,
-      targetLang,
-      text2Array,
-      sourceLang,
-      uuid()
-    );
-    obj.setTarget(res.text1.join(' '));
+    const res = new Result(text1, targetLang, text2, sourceLang, uuid());
+    obj.setTarget(res.text2);
     return res;
   }
   return;
