@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 
 const RenderObjectList = props => {
   const historyList = useSelector(state => state.historyList);
+  // const [fav, setFav] = useState(false);
 
   useEffect(() => {
     console.log('❌', historyList);
@@ -33,8 +34,8 @@ const RenderObjectList = props => {
   };
   const onFavHandler = id => {
     console.log('❌ Fav', id);
+    console.log('✅ now', Date.now());
   };
-
   //==================================================================
   return (
     <div className={classes.divBox}>
@@ -73,7 +74,7 @@ const RenderObjectList = props => {
                 >
                   <FontAwesomeIcon
                     icon={faStar}
-                    className={'fav' && `${classes.fav}`}
+                    className={`${el.fav && classes.fav}`}
                   />
                 </div>
               </div>

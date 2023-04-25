@@ -10,7 +10,7 @@ class Result {
     this.fav = false;
     this.interval = 0;
     this.count = 0;
-    this.timestamp = Math.round(Date.now());
+    this.timestamp = Date.now();
   }
 }
 
