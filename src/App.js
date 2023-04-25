@@ -31,25 +31,25 @@ function App() {
 
   const onSubmitSearch = async searchObj => {
     const res = await FetchToGoogle(searchObj);
-    ///////////////// BOOKMARK ///////////////// B
-    // res 1 & res 2 combine together and sort also update result in textarea
     if (res) {
       const text = (res, searchObj) => {
         if (res.language1 === searchObj.search.targetLang) {
           return res.text2;
         } else return res.text1;
       };
-      const secondSearch = {
-        search: {
-          sourceText: text(res, searchObj),
-          sourceLang: searchObj.search.targetLang,
-          targetLang: searchObj.search.sourceLang,
-        },
-        setTarget: searchObj.setTarget,
-      };
-      const res2 = await FetchToGoogle(secondSearch);
-      if (res2) dispatch(historyListAdd({ type: 'ADD', payload: res2 }));
-      return;
+      // // ///////////////// BOOKMARK ///////////////// B
+      // // // res 1 & res 2 combine together and sort also update result in textarea
+      // const secondSearch = {
+      //   search: {
+      //     sourceText: text(res, searchObj),
+      //     sourceLang: searchObj.search.targetLang,
+      //     targetLang: searchObj.search.sourceLang,
+      //   },
+      //   setTarget: searchObj.setTarget,
+      // };
+      // const res2 = await FetchToGoogle(secondSearch);
+      // if (res2) dispatch(historyListAdd({ type: 'ADD', payload: res2 }));
+      // return;
     }
     if (res) dispatch(historyListAdd({ type: 'ADD', payload: res }));
     return;

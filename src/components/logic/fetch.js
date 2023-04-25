@@ -8,8 +8,7 @@ class Result {
     this.language2 = language2;
     this.id = id;
     this.fav = false;
-    this.interval = 1;
-    // this.lastRound = 0;
+    this.interval = 0;
     this.count = 0;
     this.timestamp = Math.round(Date.now());
   }

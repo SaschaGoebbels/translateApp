@@ -41,4 +41,6 @@
 .textareaInput {
   width: 50%;
   overflow: hidden;
+  resize: none;
+  font-family: 'Roboto', sans-serif;
 }
