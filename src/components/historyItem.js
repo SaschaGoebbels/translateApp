@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import classes from './renderObjectList.module.css'; ///////////////// BOOKMARK ///////////////// B
+import classes from './historyItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEquals } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -9,42 +9,41 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const HistoryItem = props => {
   const onTrashHandler = id => {
-    console.log('❌ Trash', id);
     props.onTrashHandler(id);
   };
   const onFavHandler = id => {
-    console.log('❌ Fav', id);
-    console.log('✅ now', Date.now());
     props.onFavHandler(id);
   };
+  // console.log('✅', props.el);
+  console.log('✅', props.el.id);
   //==================================================================
   return (
-    <li key={props.id} id={props.id} className={classes.listGridBox}>
+    <li key={props.el.id} id={props.el.id} className={classes.listGridBox}>
       <div id={'textBoxLeft'} className={classes.listItem}>
-        {props.text1}
+        {props.el.text1}
       </div>
       <div className={`${classes.listItem} ${classes.listItemIcon}`}>
         <FontAwesomeIcon icon={faEquals} />
       </div>
       <div id={'textBoxRight'} className={`${classes.listItem}`}>
-        {props.text2}
+        {props.el.text2}
       </div>
       <div className={`${classes.listItem} ${classes.listItemIcon}`}>
         <div
           onClick={() => {
-            onTrashHandler(props.id);
+            onTrashHandler(props.el.id);
           }}
         >
           <FontAwesomeIcon icon={faTrash} className={classes.trash} />
         </div>
         <div
           onClick={() => {
-            onFavHandler(props.id);
+            onFavHandler(props.el.id);
           }}
         >
           <FontAwesomeIcon
             icon={faStar}
-            className={`${props.fav && classes.fav}`}
+            className={`${props.el.fav && classes.fav}`}
           />
         </div>
       </div>

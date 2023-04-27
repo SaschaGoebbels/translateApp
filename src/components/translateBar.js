@@ -95,6 +95,7 @@ const TranslateBar = props => {
     }
   };
   const handleKeyDown = e => {
+    // console.log('✅', e.key);
     // tab to switch between input
     const activeTextarea = document.activeElement.id;
     if (e.code === 'Tab' && activeTextarea === 'secondSearchInput') {
@@ -110,6 +111,11 @@ const TranslateBar = props => {
     // clear input if pushing escape
     if (props.settings.clearWithESC && e.key === 'Escape') {
       clearInput();
+    }
+    if (e.ctrlKey && e.key === 's') {
+      // Prevent the Save dialog to open
+      e.preventDefault();
+      console.log('save as Fav');
     }
   };
   const submitQuery = () => {

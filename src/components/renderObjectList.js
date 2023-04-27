@@ -15,7 +15,6 @@ import { useSelector } from 'react-redux';
 
 const RenderObjectList = props => {
   const historyList = useSelector(state => state.historyList);
-  // const [fav, setFav] = useState(false);
 
   useEffect(() => {
     console.log('❌', historyList);
@@ -52,15 +51,14 @@ const RenderObjectList = props => {
         {historyList.map(el => {
           return (
             <HistoryItem
-              id={el.id}
-              text1={el.text1}
-              text2={el.text2}
+              el={el}
               key={el.id}
+              onFavHandler={onFavHandler}
+              onTrashHandler={onTrashHandler}
             ></HistoryItem>
           );
         })}
       </ul>
-      {/* <div className={classes.listBox}>{listContent}</div> */}
     </div>
   );
 };
