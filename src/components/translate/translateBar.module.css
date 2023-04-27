@@ -36,6 +36,7 @@
   color: var(--font_color_bright);
   padding: 0.2rem 0.8rem;
   font-size: var(--font_size);
+  min-width: 10rem;
 }
 
 .textareaInput {

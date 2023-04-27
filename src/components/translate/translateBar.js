@@ -3,6 +3,7 @@ import classes from './translateBar.module.css';
 // components
 import LanguageDoubleDropdown from './languageDoubleDropdown';
 import TextBox from './textBox';
+import Loader3dots from '../utils/loader3dots';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -164,10 +165,11 @@ const TranslateBar = props => {
       </div>
       <div className={classes.divBox}>
         <button className={classes.box} onClick={clearInput}>
-          <FontAwesomeIcon icon={faX} /> clear
+          <FontAwesomeIcon icon={faX} /> esc
         </button>
+        <Loader3dots load={true}></Loader3dots>
         <button onClick={submitQuery} className={classes.box}>
-          <FontAwesomeIcon icon={faSearch} /> search
+          <FontAwesomeIcon icon={faSearch} /> enter
         </button>
       </div>
     </div>
