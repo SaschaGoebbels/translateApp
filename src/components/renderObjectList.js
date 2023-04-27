@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import classes from './renderObjectList.module.css';
+
+import HistoryItem from './historyItem';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { faHistory } from '@fortawesome/free-solid-svg-icons';
 import { faEquals } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faAdd } from '@fortawesome/free-solid-svg-icons';
+// import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { useSelector } from 'react-redux';
@@ -48,37 +51,12 @@ const RenderObjectList = props => {
       <ul>
         {historyList.map(el => {
           return (
-            <li key={el.id} id={el.id} className={classes.listGridBox}>
-              {/* if main lang result left else right */}
-              <div id={'textBoxLeft'} className={classes.listItem}>
-                {el.text1}
-              </div>
-              <div className={`${classes.listItem} ${classes.listItemIcon}`}>
-                <FontAwesomeIcon icon={faEquals} />
-              </div>
-              <div id={'textBoxRight'} className={`${classes.listItem}`}>
-                {el.text2}
-              </div>
-              <div className={`${classes.listItem} ${classes.listItemIcon}`}>
-                <div
-                  onClick={() => {
-                    onTrashHandler(el.id);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrash} className={classes.trash} />
-                </div>
-                <div
-                  onClick={() => {
-                    onFavHandler(el.id);
-                  }}
-                >
-                  <FontAwesomeIcon
-                    icon={faStar}
-                    className={`${el.fav && classes.fav}`}
-                  />
-                </div>
-              </div>
-            </li>
+            <HistoryItem
+              id={el.id}
+              text1={el.text1}
+              text2={el.text2}
+              key={el.id}
+            ></HistoryItem>
           );
         })}
       </ul>

@@ -56,3 +56,10 @@
 .fav {
   color: rgb(206, 209, 49);
 }
+
+.truncate {
+  /* width: 250px; */
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+}

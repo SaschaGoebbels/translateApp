@@ -21,6 +21,7 @@ function App() {
 
   const languageArray = useSelector(state => state.settings.languageArray);
   const [lang1, lang2] = useSelector(state => state.settings.defaultLanguage);
+
   const defaultLanguageObjects = (array, lang) => {
     console.log(
       '✅',
