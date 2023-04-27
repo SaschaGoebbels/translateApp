@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import classes from './languageDoubleDropdown.module.css';
-import classesTranslateBar from '../translateBar.module.css';
+import classesTranslateBar from './translateBar.module.css';
 import LanguageDropdown from './languageDropdown';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

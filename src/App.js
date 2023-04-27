@@ -3,9 +3,9 @@ import './variables.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 //components
-import Header from './components/header';
-import TranslateBar from './components/translateBar';
-import RenderObjectList from './components/renderObjectList';
+import Header from './components/ui/header';
+import TranslateBar from './components/translate/translateBar';
+import RenderObjectList from './components/translate/renderObjectList';
 
 import { FetchToGoogle } from './components/logic/fetch';
 

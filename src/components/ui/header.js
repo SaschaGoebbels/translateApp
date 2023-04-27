@@ -1,5 +1,5 @@
 import React from 'react';
-import and from '../and.svg';
+import and from '../../files/and.svg';
 import classes from './header.module.css';
 
 const Header = props => {
