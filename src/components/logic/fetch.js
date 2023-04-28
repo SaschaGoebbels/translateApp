@@ -1,4 +1,6 @@
 import uuid from 'react-uuid';
+import { proxy, useSnapshot } from 'valtio';
+import { state } from '../../store/state';
 
 class Result {
   constructor(text1, language1, text2, language2, id) {
@@ -15,6 +17,7 @@ class Result {
 }
 
 export const FetchToGoogle = async obj => {
+  state.loading = true;
   let response, body;
   const { sourceText, sourceLang, targetLang } = obj.search;
   const noSpecialCharacters = sourceText.replace(/[^\w\s]/gi, '');
@@ -31,6 +34,7 @@ export const FetchToGoogle = async obj => {
   } catch (err) {
     console.log('❌ Fetch Error:', err);
   }
+  state.loading = false;
   if (body) {
     const text2 = body[0][0][0];
     const text1 = sourceText;

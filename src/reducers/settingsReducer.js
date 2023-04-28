@@ -12,8 +12,6 @@ const defaultSettings = {
 const settingsReducer = (state = defaultSettings, action) => {
   if (action.type === 'DEFAULTLANGUAGE') {
     state.defaultLanguage = action.payload;
-    console.log('✅', state);
-    // state = [...state, action.payload];
     return state;
   }
   if (action.type === 'SHORTCUTS') {

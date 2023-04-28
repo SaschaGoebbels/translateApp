@@ -147,7 +147,7 @@ const TranslateBar = props => {
       ></LanguageDoubleDropdown>
       <div className={classes.divBox} onKeyDown={handleKeyDown}>
         <TextBox
-          autoFocus={true}
+          autoFocus={props.loading}
           onChange={textInput}
           id="mainSearchInput"
           value={searchInputMainState}
@@ -167,7 +167,7 @@ const TranslateBar = props => {
         <button className={classes.box} onClick={clearInput}>
           <FontAwesomeIcon icon={faX} /> esc
         </button>
-        <Loader3dots load={true}></Loader3dots>
+        <Loader3dots load={props.loading}></Loader3dots>
         <button onClick={submitQuery} className={classes.box}>
           <FontAwesomeIcon icon={faSearch} /> enter
         </button>

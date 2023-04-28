@@ -16,9 +16,9 @@ import { useSelector } from 'react-redux';
 const RenderObjectList = props => {
   const historyList = useSelector(state => state.historyList);
 
-  useEffect(() => {
-    console.log('❌', historyList);
-  }, [historyList]);
+  // useEffect(() => {
+  //   console.log('❌', historyList);
+  // }, [historyList]);
 
   const icon = el => {
     switch (el) {

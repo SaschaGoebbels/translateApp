@@ -8,7 +8,9 @@ import TranslateBar from './components/translate/translateBar';
 import RenderObjectList from './components/translate/renderObjectList';
 
 import { FetchToGoogle } from './components/logic/fetch';
-
+//valtio
+import { useSnapshot } from 'valtio';
+import { state } from './store/state';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 // import loginReducer from './reducers/loginReducer';
@@ -22,11 +24,10 @@ function App() {
   const languageArray = useSelector(state => state.settings.languageArray);
   const [lang1, lang2] = useSelector(state => state.settings.defaultLanguage);
 
+  //valtio app state
+  const snap = useSnapshot(state);
+
   const defaultLanguageObjects = (array, lang) => {
-    console.log(
-      '✅',
-      array.filter(el => el.name === lang)
-    );
     return array.filter(el => el.name === lang);
   };
 
@@ -72,6 +73,7 @@ function App() {
         </button>
       </header>
       <TranslateBar
+        loading={snap.loading}
         settings={shortcuts}
         defaultLanguage={[
           ...defaultLanguageObjects(languageArray, lang1),
@@ -80,23 +82,12 @@ function App() {
         languageArray={languageArray}
         onSubmitSearch={onSubmitSearch}
       ></TranslateBar>
-      {/* <RenderObjectList
-        icon={'faLightbulb'}
-        name={'result'}
-        list={[]}
-        wordClick={wordClick}
-      ></RenderObjectList> */}
       <RenderObjectList
         icon={'faHistory'}
         name={'history'}
         list={[]}
         mainLanguage={'de'}
-        // wordClick={wordClick}
       ></RenderObjectList>
-      {/* <input contentEditable spellCheck="true" id="input"></input>
-      <textarea id="textarea" spellCheck="true"></textarea>
-      <button onClick={onsubmit}>Submit</button>
-      <button onClick={() => dispatch(login())}>Login</button> */}
     </div>
   );
 }

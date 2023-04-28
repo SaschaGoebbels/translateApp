@@ -7,7 +7,6 @@ export const logout = () => {
 };
 
 export const historyListAdd = action => {
-  console.log('✅', action);
   return { type: 'ADD', payload: action.payload };
 };
 

@@ -5,8 +5,6 @@ import { faEquals } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-// import { useSelector } from 'react-redux';
-
 const HistoryItem = props => {
   const onTrashHandler = id => {
     props.onTrashHandler(id);
@@ -14,8 +12,6 @@ const HistoryItem = props => {
   const onFavHandler = id => {
     props.onFavHandler(id);
   };
-  // console.log('✅', props.el);
-  console.log('✅', props.el.id);
   //==================================================================
   return (
     <li key={props.el.id} id={props.el.id} className={classes.listGridBox}>

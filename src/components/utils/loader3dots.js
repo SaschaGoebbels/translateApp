@@ -5,7 +5,7 @@ const Loader3dots = props => {
   return (
     <div className={''}>
       <div
-        className={`${props.load && classes.loaderHide} ${classes.loader}`}
+        className={`${!props.load && classes.loaderHide} ${classes.loader}`}
       ></div>
     </div>
   );
