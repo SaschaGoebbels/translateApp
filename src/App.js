@@ -7,6 +7,8 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import Header from './components/ui/header';
 import TranslateBar from './components/translate/translateBar';
 import HistoryList from './components/translate/historyList';
+// learn
+import Learn from './components/learn/learn';
 
 //logic components
 import { FetchToGoogle } from './components/logic/fetch';
@@ -52,13 +54,13 @@ function App() {
 
   const onSubmitSearch = async searchObj => {
     const res = await FetchToGoogle(searchObj);
-    if (res) {
-      const text = (res, searchObj) => {
-        if (res.language1 === searchObj.search.targetLang) {
-          return res.text2;
-        } else return res.text1;
-      };
-    }
+    // // if (res) {
+    // //   const text = (res, searchObj) => {
+    // //     if (res.language1 === searchObj.search.targetLang) {
+    // //       return res.text2;
+    // //     } else return res.text1;
+    // //   };
+    // // }
     if (res) dispatch(historyListAdd({ type: 'ADD', payload: res }));
     return;
   };
@@ -94,6 +96,7 @@ function App() {
         list={[]}
         mainLanguage={'de'}
       ></HistoryList>
+      <Learn></Learn>
     </div>
   );
 }

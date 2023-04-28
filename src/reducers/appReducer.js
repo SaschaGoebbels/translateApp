@@ -10,6 +10,8 @@ const defaultState = {
   learn: {
     list: [],
     timestamp: '',
+    count: 0,
+    currentIndex: 0,
     interval: {
       1: 1,
       2: 2,
