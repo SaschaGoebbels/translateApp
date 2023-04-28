@@ -14,11 +14,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 
 const RenderObjectList = props => {
-  const historyList = useSelector(state => state.historyList);
-
-  // useEffect(() => {
-  //   console.log('❌', historyList);
-  // }, [historyList]);
+  const historyList = useSelector(state => state.history.list);
 
   const icon = el => {
     switch (el) {

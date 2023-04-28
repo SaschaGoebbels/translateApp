@@ -4,8 +4,9 @@ import historyReducer from './historyReducer';
 import settingsReducer from './settingsReducer';
 
 const allReducers = combineReducers({
+  timestamp: Date.now(),
   userData: userReducer,
-  historyList: historyReducer,
+  history: historyReducer,
   settings: settingsReducer,
 });
 

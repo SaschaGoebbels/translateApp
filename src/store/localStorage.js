@@ -1,5 +1,4 @@
-// import React from 'react';
-
+//
 export const saveLocalStorage = data => {
   localStorage.setItem('translateAndRepeat', JSON.stringify(data));
 };

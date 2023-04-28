@@ -7,9 +7,11 @@ const defaultSettings = {
     { name: 'Spanish', lang: 'sp' },
   ],
   shortcuts: { clearWithESC: true, submitEnter: true },
+  timestamp: '',
 };
 
 const settingsReducer = (state = defaultSettings, action) => {
+  // timestamp: Date.now(),
   if (action.type === 'DEFAULTLANGUAGE') {
     state.defaultLanguage = action.payload;
     return state;

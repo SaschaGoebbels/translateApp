@@ -1,4 +1,5 @@
 import classes from './App.module.css';
+import { useEffect } from 'react';
 import './variables.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -20,14 +21,9 @@ import { useSelector, useDispatch } from 'react-redux';
 // import loginReducer from './reducers/loginReducer';
 // import { login, logout } from './actions/actions';
 import { historyListAdd } from './actions/actions';
-import { useEffect } from 'react';
+import { startup } from './actions/actions';
 
 function App() {
-  // read local data on startup
-  useEffect(() => {
-    const localData = readLocalStorage();
-  }, []);
-
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.settings.shortcuts);
 
@@ -36,14 +32,22 @@ function App() {
 
   //valtio app state
   const snap = useSnapshot(state);
-
+  //==================================================================
   // redux mainState
   const stateRedux = useSelector(state => state);
   // save local if state changes
   useEffect(() => {
+    console.log('❌', stateRedux);
     saveLocalStorage(stateRedux);
-  }, [stateRedux]);
+  }, [stateRedux, stateRedux.history.list]);
 
+  // read local data on startup
+  useEffect(() => {
+    const localData = readLocalStorage();
+    console.log('✅', localData);
+    if (localData) dispatch(startup(localData));
+  }, []);
+  //==================================================================
   const defaultLanguageObjects = (array, lang) => {
     return array.filter(el => el.name === lang);
   };
