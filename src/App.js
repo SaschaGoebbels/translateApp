@@ -6,12 +6,12 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 //components
 import Header from './components/ui/header';
 import TranslateBar from './components/translate/translateBar';
-import RenderObjectList from './components/translate/renderObjectList';
+import HistoryList from './components/translate/historyList';
 
 //logic components
 import { FetchToGoogle } from './components/logic/fetch';
 import { readLocalStorage } from './store/localStorage';
-import { saveLocalStorage } from './store/localStorage';
+// import { saveLocalStorage } from './store/localStorage';
 
 //valtio
 import { useSnapshot } from 'valtio';
@@ -25,26 +25,24 @@ import { startup } from './actions/actions';
 
 function App() {
   const dispatch = useDispatch();
-  const shortcuts = useSelector(state => state.settings.shortcuts);
+  const shortcuts = useSelector(state => state.appData.settings.shortcuts);
 
-  const languageArray = useSelector(state => state.settings.languageArray);
-  const [lang1, lang2] = useSelector(state => state.settings.defaultLanguage);
+  const languageArray = useSelector(
+    state => state.appData.settings.languageArray
+  );
+  const [lang1, lang2] = useSelector(
+    state => state.appData.settings.defaultLanguage
+  );
 
   //valtio app state
   const snap = useSnapshot(state);
   //==================================================================
   // redux mainState
   const stateRedux = useSelector(state => state);
-  // save local if state changes
-  useEffect(() => {
-    console.log('❌', stateRedux);
-    saveLocalStorage(stateRedux);
-  }, [stateRedux, stateRedux.history.list]);
 
   // read local data on startup
   useEffect(() => {
     const localData = readLocalStorage();
-    console.log('✅', localData);
     if (localData) dispatch(startup(localData));
   }, []);
   //==================================================================
@@ -90,12 +88,12 @@ function App() {
         languageArray={languageArray}
         onSubmitSearch={onSubmitSearch}
       ></TranslateBar>
-      <RenderObjectList
+      <HistoryList
         icon={'faHistory'}
         name={'history'}
         list={[]}
         mainLanguage={'de'}
-      ></RenderObjectList>
+      ></HistoryList>
     </div>
   );
 }

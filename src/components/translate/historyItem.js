@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import classes from './historyItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEquals } from '@fortawesome/free-solid-svg-icons';

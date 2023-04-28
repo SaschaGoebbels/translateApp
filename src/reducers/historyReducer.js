@@ -1,4 +1,7 @@
 //
+import { readLocalStorage } from '../store/localStorage';
+import { saveLocalStorage } from '../store/localStorage';
+
 const defaultState = { list: [], timestamp: '0' };
 
 const historyReducer = (state = { ...defaultState }, action) => {
@@ -10,9 +13,8 @@ const historyReducer = (state = { ...defaultState }, action) => {
     return state;
   }
   if (action.type === 'STARTUP') {
-    console.log('❌', action.payload);
-    // state = action.payload;
-    // return state;
+    state = action.payload.history;
+    return state;
   }
   return state;
 };

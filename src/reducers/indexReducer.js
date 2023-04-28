@@ -1,13 +1,8 @@
 import { combineReducers } from 'redux';
-import userReducer from './userReducer';
-import historyReducer from './historyReducer';
-import settingsReducer from './settingsReducer';
+import appReducer from './appReducer';
 
 const allReducers = combineReducers({
-  timestamp: Date.now(),
-  userData: userReducer,
-  history: historyReducer,
-  settings: settingsReducer,
+  appData: appReducer,
 });
 
 export default allReducers;

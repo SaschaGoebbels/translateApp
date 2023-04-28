@@ -1,4 +1,4 @@
-//
+// startup
 export const startup = action => {
   return { type: 'STARTUP', payload: action };
 };
@@ -10,15 +10,20 @@ export const login = () => {
 export const logout = () => {
   return { type: 'LOGOUT' };
 };
-
-export const startUpData = action => {
-  return { type: 'STARTUP', payload: action.data };
-};
-
+//#############################################################
+// history
 export const historyListAdd = action => {
   return { type: 'ADD', payload: action.payload };
 };
+export const historyAddToLearn = id => {
+  return { type: 'ADDTOLEARN', id };
+};
+export const historyDelete = id => {
+  return { type: 'DELETEHISTORYITEM', id };
+};
 
+//#############################################################
+// settings
 export const defaultLanguage = action => {
   return { type: 'DEFAULTLANGUAGE', payload: action.payload };
 };
