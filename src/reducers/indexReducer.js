@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import loginReducer from './loginReducer';
+import userReducer from './userReducer';
 import historyReducer from './historyReducer';
 import settingsReducer from './settingsReducer';
 
 const allReducers = combineReducers({
-  loggedIn: loginReducer,
+  userData: userReducer,
   historyList: historyReducer,
   settings: settingsReducer,
 });

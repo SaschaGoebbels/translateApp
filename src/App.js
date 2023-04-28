@@ -7,7 +7,11 @@ import Header from './components/ui/header';
 import TranslateBar from './components/translate/translateBar';
 import RenderObjectList from './components/translate/renderObjectList';
 
+//logic components
 import { FetchToGoogle } from './components/logic/fetch';
+import { readLocalStorage } from './store/localStorage';
+import { saveLocalStorage } from './store/localStorage';
+
 //valtio
 import { useSnapshot } from 'valtio';
 import { state } from './store/state';
@@ -16,8 +20,14 @@ import { useSelector, useDispatch } from 'react-redux';
 // import loginReducer from './reducers/loginReducer';
 // import { login, logout } from './actions/actions';
 import { historyListAdd } from './actions/actions';
+import { useEffect } from 'react';
 
 function App() {
+  // read local data on startup
+  useEffect(() => {
+    const localData = readLocalStorage();
+  }, []);
+
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.settings.shortcuts);
 
@@ -26,6 +36,13 @@ function App() {
 
   //valtio app state
   const snap = useSnapshot(state);
+
+  // redux mainState
+  const stateRedux = useSelector(state => state);
+  // save local if state changes
+  useEffect(() => {
+    saveLocalStorage(stateRedux);
+  }, [stateRedux]);
 
   const defaultLanguageObjects = (array, lang) => {
     return array.filter(el => el.name === lang);
@@ -39,19 +56,6 @@ function App() {
           return res.text2;
         } else return res.text1;
       };
-      // // ///////////////// BOOKMARK ///////////////// B
-      // // // res 1 & res 2 combine together and sort also update result in textarea
-      // const secondSearch = {
-      //   search: {
-      //     sourceText: text(res, searchObj),
-      //     sourceLang: searchObj.search.targetLang,
-      //     targetLang: searchObj.search.sourceLang,
-      //   },
-      //   setTarget: searchObj.setTarget,
-      // };
-      // const res2 = await FetchToGoogle(secondSearch);
-      // if (res2) dispatch(historyListAdd({ type: 'ADD', payload: res2 }));
-      // return;
     }
     if (res) dispatch(historyListAdd({ type: 'ADD', payload: res }));
     return;
