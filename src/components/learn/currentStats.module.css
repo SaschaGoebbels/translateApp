@@ -1,0 +1,13 @@
+.box {
+  font-size: 1.6rem;
+  gap: 1rem;
+}
+.textBox {
+  display: inline-flex;
+  padding: 0.2rem 0.8rem;
+  gap: 1rem;
+  border: var(--clr_accent_blue) solid 2px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}

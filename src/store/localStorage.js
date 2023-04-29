@@ -6,6 +6,3 @@ export const saveLocalStorage = data => {
 export const readLocalStorage = data => {
   return JSON.parse(localStorage.getItem('translateAndRepeat'));
 };
-
-// md:
-// if time is newer than current check all files for update

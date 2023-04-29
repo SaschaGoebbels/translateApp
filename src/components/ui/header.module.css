@@ -39,6 +39,9 @@ h1 {
   align-items: center;
   gap: 1rem;
 }
+.headline--clr {
+  border-bottom: var(--clr_accent_blue) solid 2px;
+}
 .andSymbol {
   height: 8vmin;
   pointer-events: none;

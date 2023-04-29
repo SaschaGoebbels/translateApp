@@ -11,7 +11,12 @@ const defaultState = {
     list: [],
     timestamp: '',
     count: 0,
-    currentIndex: 0,
+    stats: {
+      totalCards: 0,
+      totalRounds: 0,
+      currentRoundCards: 0,
+      currentIndex: 0,
+    },
     interval: {
       1: 1,
       2: 2,
@@ -58,6 +63,7 @@ const appReducer = (state = { ...defaultState }, action) => {
     const [item] = state.history.list.filter(el => el.id === action.id);
     //delete from array if item exist
     if (item.fav) {
+      console.log('✅', item);
       item.fav = false;
       state.learn.list = deleteFilteredId(state.learn.list, item.id);
     }
@@ -65,6 +71,7 @@ const appReducer = (state = { ...defaultState }, action) => {
     else if (!state.learn.list.some(el => el.id === item.id)) {
       item.fav = true;
       item.timestamp = timestamp;
+      // state.learn.list = [];
       state.learn.list = [item, ...state.learn.list];
       state.learn.timestamp = timestamp;
     }

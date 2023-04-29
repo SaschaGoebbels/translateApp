@@ -3,9 +3,8 @@ import classes from './buttonBox.module.css';
 import ButtonRound from './buttonRound';
 
 const ButtonBox = props => {
-  const onClickHandler = item => {
-    props.onClickHandler(item);
-    // console.log('ButtonBox', item);
+  const onClickHandler = id => {
+    props.onClickHandler(id);
   };
   return (
     <div className={classes.buttonBox}>
@@ -14,7 +13,7 @@ const ButtonBox = props => {
           btnId="x"
           className={classes.buttonAddEdit}
           buttonName={'x'}
-          color={'#fa5252'}
+          color={'#e34242'}
           iconColor={''}
           isFav={''}
           onClickHandler={onClickHandler}
@@ -25,7 +24,7 @@ const ButtonBox = props => {
           btnId="quest"
           className={classes.buttonAddEdit}
           buttonName={'quest'}
-          color={'#ffa94d'}
+          color={'#f08b35'}
           iconColor={''}
           isFav={''}
           onClickHandler={onClickHandler}
@@ -36,7 +35,7 @@ const ButtonBox = props => {
           btnId="check"
           className={classes.buttonAddEdit}
           buttonName={'check'}
-          color={''}
+          color={'#42bd71'}
           iconColor={''}
           isFav={''}
           onClickHandler={onClickHandler}

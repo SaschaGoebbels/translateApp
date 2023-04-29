@@ -32,9 +32,11 @@ const ButtonRound = props => {
       : props.buttonSize === 'large'
       ? classes.buttonRound_large
       : classes.buttonRound_medium; //small medium large
+
   let buttonColor = props.color || '';
   let buttonBorderColor = props.borderColor || '#087f5b';
   let buttonShadow = props.shadow || '0px 2px 20px rgba(0, 0, 0, 0.5)';
+
   const btnClickHandler = id => {
     props.onClickHandler(id.currentTarget.id);
   };

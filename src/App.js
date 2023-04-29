@@ -29,6 +29,10 @@ function App() {
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.appData.settings.shortcuts);
 
+  // eslint-disable-next-line no-unused-vars
+  const reduxState = useSelector(state => state.appData); // do not remove !!! needed to update state
+  // console.log('✅', reduxState.history.list[0].fav); //debug BUG update fav state not consistent
+
   const languageArray = useSelector(
     state => state.appData.settings.languageArray
   );
