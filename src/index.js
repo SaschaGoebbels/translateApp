@@ -11,18 +11,11 @@ const store = createStore(
   allReducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-//store
-
-//actions
-const action = type => {
-  if (type === 'UPDATEHISTORY') return { type: 'UPDATEHISTORY' };
-};
 
 //reducer
 const reducer = (state, action) => {
   return state;
 };
-//dispatch
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

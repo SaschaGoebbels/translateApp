@@ -54,13 +54,6 @@ function App() {
 
   const onSubmitSearch = async searchObj => {
     const res = await FetchToGoogle(searchObj);
-    // // if (res) {
-    // //   const text = (res, searchObj) => {
-    // //     if (res.language1 === searchObj.search.targetLang) {
-    // //       return res.text2;
-    // //     } else return res.text1;
-    // //   };
-    // // }
     if (res) dispatch(historyListAdd({ type: 'ADD', payload: res }));
     return;
   };
