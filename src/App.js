@@ -40,12 +40,13 @@ function App() {
   const snap = useSnapshot(state);
   //==================================================================
   // redux mainState
-  const stateRedux = useSelector(state => state);
+  // const stateRedux = useSelector(state => state);
 
   // read local data on startup
   useEffect(() => {
     const localData = readLocalStorage();
     if (localData) dispatch(startup(localData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   //==================================================================
   const defaultLanguageObjects = (array, lang) => {
@@ -73,23 +74,27 @@ function App() {
           />
         </button>
       </header>
-      <TranslateBar
-        loading={snap.loading}
-        settings={shortcuts}
-        defaultLanguage={[
-          ...defaultLanguageObjects(languageArray, lang1),
-          ...defaultLanguageObjects(languageArray, lang2),
-        ]}
-        languageArray={languageArray}
-        onSubmitSearch={onSubmitSearch}
-      ></TranslateBar>
-      <HistoryList
-        icon={'faHistory'}
-        name={'history'}
-        list={[]}
-        mainLanguage={'de'}
-      ></HistoryList>
-      <Learn></Learn>
+      {snap.translate && (
+        <div className={classes.divBox}>
+          <TranslateBar
+            loading={snap.loading}
+            settings={shortcuts}
+            defaultLanguage={[
+              ...defaultLanguageObjects(languageArray, lang1),
+              ...defaultLanguageObjects(languageArray, lang2),
+            ]}
+            languageArray={languageArray}
+            onSubmitSearch={onSubmitSearch}
+          ></TranslateBar>
+          <HistoryList
+            icon={'faHistory'}
+            name={'history'}
+            list={[]}
+            mainLanguage={'de'}
+          ></HistoryList>
+        </div>
+      )}
+      {!snap.translate && <Learn></Learn>}
     </div>
   );
 }

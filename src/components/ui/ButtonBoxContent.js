@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonRound from './ButtonRound';
+import ButtonRound from './buttonRound';
 import classes from './ButtonBoxContent.module.css';
 
 import { snapshot } from 'valtio';

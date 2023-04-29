@@ -1,8 +1,15 @@
 import React from 'react';
 import classes from './learn.module.css';
 
-const Learn = () => {
-  return <div>TEST</div>;
+//components
+import QuestionBox from './questionBox';
+
+const Learn = props => {
+  return (
+    <div className={classes.lernBox}>
+      <QuestionBox></QuestionBox>
+    </div>
+  );
 };
 
 export default Learn;

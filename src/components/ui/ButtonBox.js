@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import classes from './ButtonBox.module.css';
-import ButtonRound from './ButtonRound';
+import React from 'react';
+import classes from './buttonBox.module.css';
+import ButtonRound from './buttonRound';
 
 const ButtonBox = props => {
   const onClickHandler = item => {
@@ -9,37 +9,39 @@ const ButtonBox = props => {
   };
   return (
     <div className={classes.buttonBox}>
-      {!props.hideTrash && (
+      {!props.hideXBtn && (
         <ButtonRound
-          btnId="trash"
+          btnId="x"
           className={classes.buttonAddEdit}
-          buttonName={'trash'}
+          buttonName={'x'}
           color={'#fa5252'}
           iconColor={''}
           isFav={''}
           onClickHandler={onClickHandler}
         />
       )}
-      {!props.hideXBtn && (
+      {!props.hideQuest && (
         <ButtonRound
-          btnId="x"
+          btnId="quest"
           className={classes.buttonAddEdit}
-          buttonName={'x'}
+          buttonName={'quest'}
           color={'#ffa94d'}
           iconColor={''}
           isFav={''}
           onClickHandler={onClickHandler}
         />
       )}
-      <ButtonRound
-        btnId="check"
-        className={classes.buttonAddEdit}
-        buttonName={'check'}
-        color={''}
-        iconColor={''}
-        isFav={''}
-        onClickHandler={onClickHandler}
-      />
+      {!props.hideCheck && (
+        <ButtonRound
+          btnId="check"
+          className={classes.buttonAddEdit}
+          buttonName={'check'}
+          color={''}
+          iconColor={''}
+          isFav={''}
+          onClickHandler={onClickHandler}
+        />
+      )}
     </div>
   );
 };
