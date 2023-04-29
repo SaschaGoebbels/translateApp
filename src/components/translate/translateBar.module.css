@@ -29,8 +29,12 @@
   color: #fff;
 }
 
-.box {
+option {
   background-color: var(--clr_main_background);
+}
+
+.box {
+  background-color: transparent;
   border: var(--clr_accent_green) solid 2px;
   border-radius: 0.7rem;
   color: var(--font_color_bright);

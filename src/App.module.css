@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--clr_main_background);
   height: 100vh;
   width: 100vw;
   min-width: 300px;
@@ -18,9 +17,9 @@
   width: 100%;
 }
 .menuButton {
+  background-color: transparent;
   position: absolute;
   right: 1.4rem;
-  background-color: var(--clr_main_background);
   border: none;
   font-size: 4rem;
   top: 0.8rem;

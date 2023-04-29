@@ -18,7 +18,7 @@
 }
 
 .trash {
-  color: rgb(148, 38, 38);
+  color: rgba(148, 38, 38, 0.8);
 }
 .fav {
   color: rgb(206, 209, 49);

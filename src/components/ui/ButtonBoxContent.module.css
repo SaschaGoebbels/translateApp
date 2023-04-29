@@ -1,0 +1,33 @@
+.buttonBox {
+  /* border: red solid 2px; */
+}
+.buttonRight {
+  position: absolute;
+  right: 1.5rem;
+}
+.buttonAddEdit {
+  bottom: 2rem;
+}
+.buttonGear {
+  top: -0.5rem;
+  left: 1rem;
+}
+.buttonList {
+  bottom: 9rem;
+}
+.buttonPlan {
+  bottom: 16rem;
+}
+.buttonCoincidence {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 2rem;
+}
+@media (min-width: 600px) {
+  .buttonAddEdit {
+    right: 5rem;
+  }
+  .buttonCoincidence {
+    left: 5rem;
+  }
+}

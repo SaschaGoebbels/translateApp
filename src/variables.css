@@ -4,6 +4,10 @@
   --clr_accent_green: #44ad79;
   --clr_accent_blue: #69b7f3;
 
+  /* gradient background */
+  --back_1Clr: #485563;
+  --back_2Clr: #1b2027;
+
   /* gradient headline  */
   --firstClr: #2ca268;
   --secondClr: #439292;
