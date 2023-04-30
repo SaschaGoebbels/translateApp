@@ -46,6 +46,9 @@ const Learn = props => {
   const onEditLearnSwitch = () => {
     setEditLearn(prev => !prev);
   };
+  const onNewRoundHandler = () => {
+    console.log('❌ <new round>');
+  };
   //==================================================================
   return (
     <div className={classes.lernBox}>
@@ -54,7 +57,7 @@ const Learn = props => {
           name={'new round'}
           style={{ border: 'var(--clr_accent_blue) solid 2px' }}
           id={'newRound'}
-          onClickHandler={props.onClickHandler}
+          onClickHandler={onNewRoundHandler}
         ></ButtonText>
         <ButtonText
           name={editLearn ? 'learn' : 'edit list'}
