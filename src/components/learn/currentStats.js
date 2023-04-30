@@ -26,13 +26,6 @@ const CurrentStats = props => {
           <p>Archiv:</p>
           <p>{currentRound.count}</p>
         </div>
-        <button
-          onClick={props.onClickHandler}
-          className={classes.textBox}
-          id={'newRound'}
-        >
-          new Round
-        </button>
       </div>
     </div>
   );

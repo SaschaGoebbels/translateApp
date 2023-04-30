@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './renderObjectList.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHistory } from '@fortawesome/free-solid-svg-icons';
+// import { faHistory } from '@fortawesome/free-solid-svg-icons';
 
 import ObjectListItem from './objectListItem';
 
@@ -19,13 +19,19 @@ const RenderObjectList = props => {
   // // // const onFavHandler = id => {
   // // //   // dispatch(historyAddToLearn(id));
   // // // };
-  const styles = { borderTop: `var(${props.borderColor}) solid 2px` };
+  const border = { borderTop: `var(${props.borderColor}) solid 2px` };
+  const pStyles = {
+    background: `linear-gradient(to right, var(${props.gradientColor.left}) 0%, var(${props.gradientColor.right}) 100%)`,
+    webkitBackgroundClip: 'text',
+    // webkitTextFillColor: 'transparent',
+  };
+  const iconColor = { color: `var(${props.gradientColor.left})` };
   //==================================================================
   return (
-    <div className={classes.divBox} style={styles}>
-      <div className={classes.iconTextBox}>
-        <FontAwesomeIcon icon={faHistory} />
-        <p>{props.name}</p>
+    <div className={classes.divBox} style={border}>
+      <div className={classes.iconTextBox} style={iconColor}>
+        <FontAwesomeIcon icon={props.icon} />
+        <p style={pStyles}>{props.name}</p>
       </div>
       <ul>
         {array.map(el => {
@@ -33,8 +39,7 @@ const RenderObjectList = props => {
             <ObjectListItem
               el={el}
               key={el.id}
-              onFavHandler={props.onFavHandler}
-              onTrashHandler={props.onTrashHandler}
+              onClickHandler={props.onClickHandler}
               buttonShow={{ trash: true, fav: false, pen: true }}
               borderColor={props.borderColor}
             ></ObjectListItem>

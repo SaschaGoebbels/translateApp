@@ -3,17 +3,14 @@ import classes from './objectListItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEquals } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-// import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
-const HistoryItem = props => {
-  const onTrashHandler = id => {
-    props.onTrashHandler(id);
+const ObjectListItem = props => {
+  const onClickHandler = (button, id) => {
+    props.onClickHandler(button, id);
   };
-  const onFavHandler = id => {
-    props.onFavHandler(id);
-  };
+
   //==================================================================
   const styles = { borderBottom: `var(${props.borderColor}) dotted 2px` };
   //==================================================================
@@ -37,7 +34,7 @@ const HistoryItem = props => {
         {props.buttonShow.trash && (
           <div
             onClick={() => {
-              onTrashHandler(props.el.id);
+              onClickHandler('trash', props.el.id);
             }}
           >
             <FontAwesomeIcon icon={faTrash} className={classes.trash} />
@@ -46,7 +43,7 @@ const HistoryItem = props => {
         {props.buttonShow.fav && (
           <div
             onClick={() => {
-              onFavHandler(props.el.id);
+              onClickHandler('fav', props.el.id);
             }}
           >
             <FontAwesomeIcon
@@ -58,7 +55,7 @@ const HistoryItem = props => {
         {props.buttonShow.pen && (
           <div
             onClick={() => {
-              onFavHandler(props.el.id);
+              onClickHandler('pen', props.el.id);
             }}
           >
             <FontAwesomeIcon icon={faPenToSquare} className={`${''}`} />
@@ -69,4 +66,4 @@ const HistoryItem = props => {
   );
 };
 
-export default HistoryItem;
+export default ObjectListItem;
