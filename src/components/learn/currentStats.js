@@ -2,9 +2,8 @@ import React from 'react';
 import classes from './currentStats.module.css';
 
 const CurrentStats = props => {
-  const currentRound = props.currentRound || { count: 0, total: 0 };
-  const total = props.total || { cards: 0, rounds: 0 };
-
+  const currentRound = props.currentRound || { index: 0, length: 0 };
+  const total = props.total || { cards: 0, rounds: 0, archived: 0 };
   ///
   return (
     <div>
@@ -12,7 +11,7 @@ const CurrentStats = props => {
         <div className={classes.textBox}>
           <p>Current Round:</p>
           <p>
-            {currentRound.count} / {currentRound.total}
+            {currentRound.index} / {currentRound.length}
           </p>
         </div>
         <div className={classes.textBox}>
@@ -24,7 +23,7 @@ const CurrentStats = props => {
         </div>
         <div className={classes.textBox}>
           <p>Archiv:</p>
-          <p>{currentRound.count}</p>
+          <p>{total.archived}</p>
         </div>
       </div>
     </div>

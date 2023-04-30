@@ -5,7 +5,12 @@ import ButtonRound from '../ui/buttonRound';
 
 const QuestionBox = props => {
   return (
-    <div className={classes.questionBox}>
+    <div
+      className={classes.questionBox}
+      onKeyDown={() => {
+        console.log('✅');
+      }}
+    >
       <div className={classes.editButtonBox}>
         <ButtonRound
           btnId="pen"
@@ -19,14 +24,14 @@ const QuestionBox = props => {
         ></ButtonRound>
       </div>
       <div className={classes.textBox}>
-        <p>Hier steht die Frage</p>
+        <p>{props.text1}</p>
         <div className={classes.textBoxUnderLine}></div>
-        <p>Hier steht die Frage</p>
+        <p>{props.text2}</p>
       </div>
       <ButtonBox
-        hideXBtn={false}
-        hideQuest={false}
-        hideCheck={false}
+        hideXBtn={props.hideXBtn || false}
+        hideQuest={props.hideQuest || false}
+        hideCheck={props.hideCheck || false}
         onClickHandler={props.onClickHandler}
       ></ButtonBox>
     </div>

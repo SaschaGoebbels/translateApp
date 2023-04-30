@@ -27,3 +27,12 @@ export const historyDelete = id => {
 export const defaultLanguage = action => {
   return { type: 'DEFAULTLANGUAGE', payload: action.payload };
 };
+
+//#############################################################
+// learn
+export const learnDelete = id => {
+  return { type: 'LEARNDELETE', id };
+};
+export const currentList = array => {
+  return { type: 'CURRENTLIST', array };
+};

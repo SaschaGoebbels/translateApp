@@ -22,7 +22,7 @@ const RenderObjectList = props => {
   const border = { borderTop: `var(${props.borderColor}) solid 2px` };
   const pStyles = {
     background: `linear-gradient(to right, var(${props.gradientColor.left}) 0%, var(${props.gradientColor.right}) 100%)`,
-    webkitBackgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
     // webkitTextFillColor: 'transparent',
   };
   const iconColor = { color: `var(${props.gradientColor.left})` };

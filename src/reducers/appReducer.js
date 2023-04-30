@@ -9,25 +9,25 @@ const defaultState = {
   history: { list: [], timestamp: '' },
   learn: {
     list: [],
+    current: { list: [], index: 0 },
     timestamp: '',
-    count: 0,
     stats: {
-      totalCards: 0,
       totalRounds: 0,
-      currentRoundCards: 0,
-      currentIndex: 0,
+      archived: [],
     },
     interval: {
       1: 1,
-      2: 2,
-      3: 5,
-      4: 10,
-      5: 20,
-      6: 50,
-      7: 100,
-      8: 200,
-      9: 500,
-      10: 1000,
+      2: 1,
+      3: 2,
+      4: 2,
+      5: 5,
+      6: 5,
+      7: 10,
+      8: 10,
+      9: 20,
+      10: 20,
+      11: 50,
+      12: 50,
       archived: false,
     },
   },
@@ -38,7 +38,7 @@ const defaultState = {
       { name: 'German', lang: 'de' },
       { name: 'Spanish', lang: 'sp' },
     ],
-    shortcuts: { clearWithESC: true, submitEnter: true },
+    shortcuts: { clearWithESC: true, submitEnter: true, learn: true },
     timestamp: '',
   },
 };
@@ -76,12 +76,25 @@ const appReducer = (state = { ...defaultState }, action) => {
       state.learn.timestamp = timestamp;
     }
   }
+  if (action.type === 'LEARNDELETE') {
+    const list = deleteFilteredId(state.learn.list, action.id);
+    state.learn.timestamp = timestamp;
+    state.learn.list = list;
+  }
   //==================================================================
   if (action.type === 'DELETEHISTORYITEM') {
     const list = deleteFilteredId(state.history.list, action.id);
     state.history.timestamp = timestamp;
     state.history.list = list;
   }
+  //==================================================================
+  //learn
+  if (action.type === 'CURRENTLIST') {
+    // console.log('❌', action.array);
+    state.learn.current.list = action.array;
+    state.learn.timestamp = timestamp;
+  }
+  //==================================================================
   // saveLocalStorage(state); // debug
   // prevent save local on startup ! to avoid overwriting
   if (state.timestamp !== '') saveLocalStorage(state);
