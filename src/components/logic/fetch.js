@@ -5,13 +5,13 @@ import { state } from '../../store/state';
 class Result {
   constructor(text1, language1, text2, language2, id) {
     this.text1 = text1;
+    this.learn1 = { count: 0, interval: 1 };
     this.language1 = language1;
     this.text2 = text2;
+    this.learn2 = { count: 0, interval: 1 };
     this.language2 = language2;
     this.id = id;
     this.fav = false;
-    this.interval = 1;
-    this.count = 0;
     this.timestamp = Date.now();
   }
 }

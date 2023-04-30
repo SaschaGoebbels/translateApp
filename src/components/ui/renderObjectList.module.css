@@ -1,0 +1,28 @@
+.divBox {
+  width: 100%;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  padding: 1rem;
+  /* border-top: var(--clr_accent_green) solid 2px; */
+}
+.iconTextBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  color: var(--firstClr);
+  font-size: 2rem;
+}
+.iconTextBox p {
+  background: linear-gradient(
+    to right,
+    var(--firstClr) 0%,
+    var(--secondClr) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}

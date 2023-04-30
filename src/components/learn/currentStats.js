@@ -4,6 +4,7 @@ import classes from './currentStats.module.css';
 const CurrentStats = props => {
   const currentRound = props.currentRound || { count: 0, total: 0 };
   const total = props.total || { cards: 0, rounds: 0 };
+
   ///
   return (
     <div>
@@ -21,9 +22,18 @@ const CurrentStats = props => {
           <p>Rounds:</p>
           <p>{total.rounds}</p>
         </div>
+        <div className={classes.textBox}>
+          <p>Archiv:</p>
+          <p>{currentRound.count}</p>
+        </div>
+        <button
+          onClick={props.onClickHandler}
+          className={classes.textBox}
+          id={'newRound'}
+        >
+          new Round
+        </button>
       </div>
-      <button>weiter</button>
-      <button>neue Runde</button>
     </div>
   );
 };

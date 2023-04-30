@@ -1,26 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classes from './questionBox.module.css';
 import ButtonBox from '../ui/buttonBox';
 import ButtonRound from '../ui/buttonRound';
 
-//redux
-import { useSelector, useDispatch } from 'react-redux';
-
 const QuestionBox = props => {
-  const dispatch = useDispatch();
-  const learn = useSelector(state => state.appData.learn);
-  const [learnState, setLearnState] = useState(learn);
-  //filter interval
-  //show text ?
-  //show answer
-  //update object
-  //update current progress
-  const filteredArray = array => {
-    return array.filter(el => el.count >= el.interval);
-  };
-  const onClickHandler = id => {
-    // console.log('✅', id);
-  };
   return (
     <div className={classes.questionBox}>
       <div className={classes.editButtonBox}>
@@ -32,7 +15,7 @@ const QuestionBox = props => {
           shadow={'0px 0px 0px rgba(0, 0, 0, 0.0)'}
           color={''}
           iconColor={''}
-          onClickHandler={onClickHandler}
+          onClickHandler={props.onClickHandler}
         ></ButtonRound>
       </div>
       <div className={classes.textBox}>
@@ -44,7 +27,7 @@ const QuestionBox = props => {
         hideXBtn={false}
         hideQuest={false}
         hideCheck={false}
-        onClickHandler={onClickHandler}
+        onClickHandler={props.onClickHandler}
       ></ButtonBox>
     </div>
   );
