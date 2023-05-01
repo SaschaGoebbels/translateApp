@@ -8,6 +8,7 @@ import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { learnDelete } from '../../actions/actions';
 import { currentList } from '../../actions/actions';
+import { intervalCount } from '../../actions/actions';
 
 //components
 import QuestionBox from './questionBox';
@@ -16,58 +17,73 @@ import RenderObjectList from '../ui/renderObjectList';
 import ButtonText from '../ui/buttonText';
 
 // import { snapshot } from 'valtio';
+// export const newRound = array => {
+//   const newRound = array.filter(el => el.count >= el.interval);
+//   ///
+// };
 
 const Learn = props => {
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.appData.settings.shortcuts);
   const learn = useSelector(state => state.appData.learn);
+  console.log('✅', learn);
 
-  const [current, setCurrent] = useState({
-    list: learn.current.list,
-    index: learn.current.index,
-  });
+  const currentDefault = {
+    list: learn.current.list || [],
+    index: learn.current.index || 0,
+  };
+  const [current, setCurrent] = useState(currentDefault);
 
-  const [object, setObject] = useState(current.list[current.index]);
+  useEffect(() => {
+    console.log('✅ LEARN UPDATED EFFECT');
+    setCurrent(currentDefault);
+  }, [learn.list, learn.current.index]);
+
+  const currentObject = current.list[current.index];
+  // const [object, setObject] = useState(current.list[current.index]);
 
   const handleIntervalTextOutput = obj => {
-    const oddOrEven = obj.interval % 2 == 0 ? 'even' : 'odd';
+    // eslint-disable-next-line eqeqeq
+    const oddOrEven = obj?.interval % 2 == 0 ? 'even' : 'odd';
     if (oddOrEven === 'even') {
-      console.log('✅ even');
-      return [obj.text1, obj.text2];
+      return [obj?.text1, obj?.text2];
     } else {
-      console.log('✅ odd');
-      return [obj.text2, obj.text1];
+      return [obj?.text2, obj?.text1];
     }
   };
-
-  const [question, setQuestion] = useState({
-    text: handleIntervalTextOutput(object) || ['...', '...'],
-    answer: '',
+  const questionDefault = {
+    text: handleIntervalTextOutput(current.list[current.index]) || [
+      '...',
+      '...',
+    ],
+    answer: '...',
     button: true,
-  });
+  };
+  const [question, setQuestion] = useState(questionDefault);
+  useEffect(() => {
+    setQuestion(questionDefault);
+  }, [current]);
 
+  const knowItOrNotDispatchCount = (id, knowIt) => {
+    dispatch(intervalCount(id, knowIt));
+  };
   const onButtonBoxHandler = id => {
-    console.log('✅', id);
+    // console.log('✅', id);
     if (id === 'quest') {
-      handleIntervalTextOutput(object);
-      // setQuestion({
-      //   text: ['...', '...'],
-      //   button: false,
-      // });
+      // handleIntervalTextOutput(currentObject);
+      setQuestion({
+        text: handleIntervalTextOutput(currentObject),
+        answer: handleIntervalTextOutput(currentObject)[1],
+        button: false,
+      });
     }
     if (id === 'check') {
-      setQuestion({
-        text: ['...', '...'],
-        object: current.list[current.index],
-        button: true,
-      });
+      knowItOrNotDispatchCount(currentObject.id, true);
+      // dispatch object intervall +1
     }
     if (id === 'x') {
-      setQuestion({
-        text: ['...', '...'],
-        object: current.list[current.index],
-        button: true,
-      });
+      knowItOrNotDispatchCount(currentObject.id, false);
+      // dispatch object count 0 & interval 0
     }
   };
 
@@ -97,9 +113,9 @@ const Learn = props => {
   };
 
   const onNewRoundHandler = () => {
-    console.log('✅', filteredArray(learn.list));
+    // console.log('✅', filteredArray(learn.list));
     dispatch(currentList(filteredArray(learn.list)));
-    console.log('✅', dispatch(currentList(filteredArray(learn.list))));
+    // console.log('✅', dispatch(currentList(filteredArray(learn.list))));
   };
 
   const [editLearn, setEditLearn] = useState(false);
@@ -141,7 +157,7 @@ const Learn = props => {
             onClickHandler={onClickNewRound}
             currentRound={{
               length: current.list?.length,
-              index: current?.index,
+              index: current?.index + 1,
             }}
             total={{
               cards: learn?.list.length,
@@ -152,7 +168,7 @@ const Learn = props => {
           <QuestionBox
             onClickHandler={onButtonBoxHandler}
             text1={question.text[0]}
-            text2={question.text[1]}
+            text2={question.answer}
             hideXBtn={question.button}
             hideQuest={!question.button}
             hideCheck={question.button}

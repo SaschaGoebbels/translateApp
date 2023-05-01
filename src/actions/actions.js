@@ -36,3 +36,6 @@ export const learnDelete = id => {
 export const currentList = array => {
   return { type: 'CURRENTLIST', array };
 };
+export const intervalCount = (id, knowIt) => {
+  return { type: 'INTERVALCOUNT', id, knowIt };
+};

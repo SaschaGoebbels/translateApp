@@ -43,11 +43,28 @@ const defaultState = {
   },
 };
 //==================================================================
+const filterIntervalCount = array => {
+  array.filter(el => el.count >= el.interval);
+};
+const newRound = array => {
+  const newRound = filterIntervalCount(array);
+  if (newRound.length === 0) {
+    console.log('✅');
+    newRound(array.map(el => el.count + 1));
+    return;
+  }
+  return newRound;
+};
+
+//if index = length => new round
+// round empty = count +1
 
 const deleteFilteredId = (array, id) => {
   return array.filter(el => el.id !== id);
 };
 
+//==================================================================
+//==================================================================
 const appReducer = (state = { ...defaultState }, action) => {
   const timestamp = Date.now();
   if (action.type === 'STARTUP') {
@@ -94,9 +111,30 @@ const appReducer = (state = { ...defaultState }, action) => {
     state.learn.current.list = action.array;
     state.learn.timestamp = timestamp;
   }
+  if (action.type === 'INTERVALCOUNT') {
+    const [currentObject] = state.learn.current.list.filter(
+      el => el.id === action.id
+    );
+    if (!action.knowIt) {
+      currentObject.interval = 0;
+      currentObject.count = 0;
+    }
+    if (action.knowIt) {
+      currentObject.interval = currentObject.interval + 1;
+    }
+    state.learn.current.index = state.learn.current.index + 1;
+    //==================================================================
+    //
+    if (state.learn.current.index >= state.learn.current.list.length) {
+      newRound(state.learn.list);
+      //
+    }
+    state.learn.timestamp = timestamp;
+  }
   //==================================================================
   // saveLocalStorage(state); // debug
   // prevent save local on startup ! to avoid overwriting
+  // console.log('✅', timestamp);
   if (state.timestamp !== '') saveLocalStorage(state);
   state.timestamp = timestamp;
   return { ...state };

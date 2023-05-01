@@ -1,5 +1,6 @@
 //
 export const saveLocalStorage = data => {
+  // console.log('SAVE Data: ', data);
   localStorage.setItem('translateAndRepeat', JSON.stringify(data));
 };
 

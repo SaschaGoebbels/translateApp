@@ -1,5 +1,5 @@
 import uuid from 'react-uuid';
-import { proxy, useSnapshot } from 'valtio';
+// import { proxy, useSnapshot } from 'valtio';
 import { state } from '../../store/state';
 
 class Result {
