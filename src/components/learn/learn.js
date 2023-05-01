@@ -67,6 +67,7 @@ const Learn = props => {
   const knowItOrNotDispatchCount = (id, knowIt) => {
     dispatch(intervalCount(id, knowIt));
   };
+
   const onButtonBoxHandler = id => {
     // console.log('✅', id);
     if (id === 'quest') {
@@ -157,7 +158,7 @@ const Learn = props => {
             onClickHandler={onClickNewRound}
             currentRound={{
               length: current.list?.length,
-              index: current?.index + 1,
+              index: current?.index,
             }}
             total={{
               cards: learn?.list.length,

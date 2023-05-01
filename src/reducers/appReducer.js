@@ -44,20 +44,29 @@ const defaultState = {
 };
 //==================================================================
 const filterIntervalCount = array => {
-  array.filter(el => el.count >= el.interval);
+  return array.filter(el => el.count >= el.interval);
+};
+const arrayCountUp = array => {
+  return array.map(el => el.count + 1);
 };
 const newRound = array => {
-  const newRound = filterIntervalCount(array);
+  let newRound = filterIntervalCount(array);
+  console.log('✅', newRound);
   if (newRound.length === 0) {
-    console.log('✅');
-    newRound(array.map(el => el.count + 1));
+    while (newRound === 0) {
+      newRound = filterIntervalCount(arrayCountUp(array));
+      console.log('✅');
+    }
     return;
   }
   return newRound;
 };
 
-//if index = length => new round
-// round empty = count +1
+// if index = length ok
+// new round
+// round empty
+// count + 1
+// call again
 
 const deleteFilteredId = (array, id) => {
   return array.filter(el => el.id !== id);
@@ -97,6 +106,11 @@ const appReducer = (state = { ...defaultState }, action) => {
     const list = deleteFilteredId(state.learn.list, action.id);
     state.learn.timestamp = timestamp;
     state.learn.list = list;
+    // reset fav state in history when deleting
+    const [historyItem] = state.history.list.filter(el => el.id !== action.id);
+    if (historyItem) {
+      historyItem.fav = false;
+    }
   }
   //==================================================================
   if (action.type === 'DELETEHISTORYITEM') {
@@ -109,6 +123,7 @@ const appReducer = (state = { ...defaultState }, action) => {
   if (action.type === 'CURRENTLIST') {
     // console.log('❌', action.array);
     state.learn.current.list = action.array;
+    state.learn.current.index = 0;
     state.learn.timestamp = timestamp;
   }
   if (action.type === 'INTERVALCOUNT') {
@@ -125,8 +140,10 @@ const appReducer = (state = { ...defaultState }, action) => {
     state.learn.current.index = state.learn.current.index + 1;
     //==================================================================
     //
-    if (state.learn.current.index >= state.learn.current.list.length) {
-      newRound(state.learn.list);
+    if (state.learn.current.index >= state.learn.current.list.length - 1) {
+      console.log('✅ Index');
+      state.learn.current.list = newRound(state.learn.list);
+      state.learn.current.index = 0;
       //
     }
     state.learn.timestamp = timestamp;
