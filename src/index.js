@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
+
 import classes from './index.module.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,15 +9,19 @@ import { createStore } from 'redux';
 import allReducers from './reducers/indexReducer';
 import { Provider } from 'react-redux';
 
-const store = createStore(
-  allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+// const store = createStore(
+//   allReducers,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
+
+const store = configureStore({ reducer: allReducers });
 
 //reducer
 const reducer = (state, action) => {
   return state;
 };
+
+// createSlice();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -127,9 +127,11 @@ const appReducer = (state = { ...defaultState }, action) => {
     state.learn.timestamp = timestamp;
   }
   if (action.type === 'INTERVALCOUNT') {
+    console.log('✅');
     const [currentObject] = state.learn.current.list.filter(
       el => el.id === action.id
     );
+    console.log('✅', currentObject);
     if (!action.knowIt) {
       currentObject.interval = 0;
       currentObject.count = 0;
