@@ -7,12 +7,11 @@ import HistoryItem from './historyItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { historyAddToLearn } from '../../actions/actions';
-import { historyDelete } from '../../actions/actions';
+import { historyAddToLearn, historyDelete } from '../../redux/translateSlice';
 
 const HistoryList = props => {
   const dispatch = useDispatch();
-  const historyList = useSelector(state => state.appData.history.list);
+  const historyList = useSelector(state => state.translate.history.list);
 
   const onTrashHandler = id => {
     dispatch(historyDelete(id));

@@ -24,8 +24,8 @@ import ButtonText from '../ui/buttonText';
 
 const Learn = props => {
   const dispatch = useDispatch();
-  const shortcuts = useSelector(state => state.appData.settings.shortcuts);
-  const learn = useSelector(state => state.appData.learn);
+  const shortcuts = useSelector(state => state.settings.settings.shortcuts);
+  const learn = useSelector(state => state.learn);
   console.log('✅', learn);
 
   const currentDefault = {

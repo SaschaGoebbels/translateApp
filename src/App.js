@@ -20,24 +20,22 @@ import { useSnapshot } from 'valtio';
 import { state } from './store/state';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-// import loginReducer from './reducers/loginReducer';
-// import { login, logout } from './actions/actions';
-import { historyListAdd } from './actions/actions';
-import { startup } from './actions/actions';
+import { historyListAdd, historyAddToLearn } from './redux/translateSlice';
+
+// import { startup } from './actions/actions';
 
 function App() {
   const dispatch = useDispatch();
-  const shortcuts = useSelector(state => state.appData.settings.shortcuts);
+  const shortcuts = useSelector(state => state.settings.settings.shortcuts);
 
   // eslint-disable-next-line no-unused-vars
-  const reduxState = useSelector(state => state.appData); // do not remove !!! needed to update state
-  // console.log('✅', reduxState.history.list[0].fav); //debug BUG update fav state not consistent
+  const reduxState = useSelector(state => state); // do not remove !!! needed to update state
 
   const languageArray = useSelector(
-    state => state.appData.settings.languageArray
+    state => state.settings.settings.languageArray
   );
   const [lang1, lang2] = useSelector(
-    state => state.appData.settings.defaultLanguage
+    state => state.settings.settings.defaultLanguage
   );
 
   //valtio app state
@@ -47,11 +45,11 @@ function App() {
   // const stateRedux = useSelector(state => state);
 
   // read local data on startup
-  useEffect(() => {
-    const localData = readLocalStorage();
-    if (localData) dispatch(startup(localData));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // // // useEffect(() => {
+  // // //   const localData = readLocalStorage();
+  // // //   if (localData) dispatch(startup(localData));
+  // // //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // // // }, []);
   //==================================================================
   const defaultLanguageObjects = (array, lang) => {
     return array.filter(el => el.name === lang);
@@ -59,7 +57,7 @@ function App() {
 
   const onSubmitSearch = async searchObj => {
     const res = await FetchToGoogle(searchObj);
-    if (res) dispatch(historyListAdd({ type: 'ADD', payload: res }));
+    if (res) dispatch(historyListAdd({ ...res }));
     return;
   };
 
@@ -87,7 +85,7 @@ function App() {
               ...defaultLanguageObjects(languageArray, lang1),
               ...defaultLanguageObjects(languageArray, lang2),
             ]}
-            languageArray={languageArray}
+            languageArray={[...languageArray]}
             onSubmitSearch={onSubmitSearch}
           ></TranslateBar>
           <HistoryList
@@ -98,7 +96,7 @@ function App() {
           ></HistoryList>
         </div>
       )}
-      {!snap.translate && <Learn></Learn>}
+      {/* {!snap.translate && <Learn></Learn>} */}
     </div>
   );
 }

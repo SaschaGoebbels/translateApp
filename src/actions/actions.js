@@ -11,10 +11,10 @@ export const logout = () => {
   return { type: 'LOGOUT' };
 };
 //#############################################################
-// history
-export const historyListAdd = action => {
-  return { type: 'ADD', payload: action.payload };
-};
+// // // // history
+// // // export const historyListAdd = action => {
+// // //   return { type: 'ADD', payload: action.payload };
+// // // };
 export const historyAddToLearn = id => {
   return { type: 'ADDTOLEARN', id };
 };
