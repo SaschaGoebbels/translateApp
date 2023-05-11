@@ -6,27 +6,24 @@ import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { learnDelete } from '../../actions/actions';
-import { currentList } from '../../actions/actions';
-import { intervalCount } from '../../actions/actions';
 
 //components
 import QuestionBox from './questionBox';
 import CurrentStats from './currentStats';
 import RenderObjectList from '../ui/renderObjectList';
 import ButtonText from '../ui/buttonText';
-
+// state valtio
 // import { snapshot } from 'valtio';
-// export const newRound = array => {
-//   const newRound = array.filter(el => el.count >= el.interval);
-//   ///
-// };
+
+// if current list is empty create from array
+// if array is empty show divBox list empty
+// show current question
+// after answer update interval
 
 const Learn = props => {
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.settings.settings.shortcuts);
   const learn = useSelector(state => state.learn);
-  console.log('✅', learn);
 
   const currentDefault = {
     list: learn.current.list || [],
@@ -161,7 +158,7 @@ const Learn = props => {
               index: current?.index,
             }}
             total={{
-              cards: learn?.list.length,
+              cards: learn.learn.list?.length,
               rounds: learn?.stats.totalRounds,
               archived: learn?.stats.archived.length,
             }}

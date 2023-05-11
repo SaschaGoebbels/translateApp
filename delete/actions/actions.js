@@ -15,12 +15,12 @@ export const logout = () => {
 // // // export const historyListAdd = action => {
 // // //   return { type: 'ADD', payload: action.payload };
 // // // };
-export const historyAddToLearn = id => {
-  return { type: 'ADDTOLEARN', id };
-};
-export const historyDelete = id => {
-  return { type: 'DELETEHISTORYITEM', id };
-};
+// // // export const historyAddToLearn = id => {
+// // //   return { type: 'ADDTOLEARN', id };
+// // // };
+// // // export const historyDelete = id => {
+// // //   return { type: 'DELETEHISTORYITEM', id };
+// // // };
 
 //#############################################################
 // settings

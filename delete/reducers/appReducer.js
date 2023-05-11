@@ -1,6 +1,6 @@
 //
 // import { readLocalStorage } from '../store/localStorage';
-import { saveLocalStorage } from '../store/localStorage';
+import { saveLocalStorage } from '../../src/store/localStorage';
 
 //==================================================================
 const defaultState = {

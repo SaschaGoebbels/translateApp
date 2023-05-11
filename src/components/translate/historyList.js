@@ -5,19 +5,28 @@ import { faHistory } from '@fortawesome/free-solid-svg-icons';
 
 import HistoryItem from './historyItem';
 
+// redux
 import { useSelector, useDispatch } from 'react-redux';
-
-import { historyAddToLearn, historyDelete } from '../../redux/translateSlice';
+import { historyFavSwitch, historyDelete } from '../../redux/translateSlice';
+import { addOrRemoveByHistoryList } from '../../redux/learnSlice';
 
 const HistoryList = props => {
   const dispatch = useDispatch();
   const historyList = useSelector(state => state.translate.history.list);
 
-  const onTrashHandler = id => {
-    dispatch(historyDelete(id));
+  const itemFilteredId = (id, array) => {
+    return array.filter(el => el.id === id)[0];
   };
+  const onTrashHandler = id => {
+    console.log('✅');
+    dispatch(historyDelete({ id }));
+  };
+
   const onFavHandler = id => {
-    dispatch(historyAddToLearn(id));
+    dispatch(historyFavSwitch({ id }));
+    dispatch(
+      addOrRemoveByHistoryList({ item: itemFilteredId(id, historyList) })
+    );
   };
   //==================================================================
   return (

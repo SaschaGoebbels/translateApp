@@ -20,7 +20,7 @@ import { useSnapshot } from 'valtio';
 import { state } from './store/state';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { historyListAdd, historyAddToLearn } from './redux/translateSlice';
+import { historyListAdd, historyFavSwitch } from './redux/translateSlice';
 
 // import { startup } from './actions/actions';
 
@@ -96,7 +96,7 @@ function App() {
           ></HistoryList>
         </div>
       )}
-      {/* {!snap.translate && <Learn></Learn>} */}
+      {!snap.translate && <Learn></Learn>}
     </div>
   );
 }

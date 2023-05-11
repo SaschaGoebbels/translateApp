@@ -10,23 +10,23 @@ const appReducer = (state = { ...defaultState }, action) => {
   //   state.history.list = [action.payload, ...state.history.list];
   // }
   //==================================================================
-  if (action.type === 'ADDTOLEARN') {
-    const [item] = state.history.list.filter(el => el.id === action.id);
-    //delete from array if item exist
-    if (item.fav) {
-      console.log('✅', item);
-      item.fav = false;
-      state.learn.list = deleteFilteredId(state.learn.list, item.id);
-    }
-    //push to array if item not exist
-    else if (!state.learn.list.some(el => el.id === item.id)) {
-      item.fav = true;
-      item.timestamp = timestamp;
-      // state.learn.list = [];
-      state.learn.list = [item, ...state.learn.list];
-      state.learn.timestamp = timestamp;
-    }
-  }
+  // if (action.type === 'ADDTOLEARN') {
+  //   const [item] = state.history.list.filter(el => el.id === action.id);
+  //   //delete from array if item exist
+  //   if (item.fav) {
+  //     console.log('✅', item);
+  //     item.fav = false;
+  //     state.learn.list = deleteFilteredId(state.learn.list, item.id);
+  //   }
+  //   //push to array if item not exist
+  //   else if (!state.learn.list.some(el => el.id === item.id)) {
+  //     item.fav = true;
+  //     item.timestamp = timestamp;
+  //     // state.learn.list = [];
+  //     state.learn.list = [item, ...state.learn.list];
+  //     state.learn.timestamp = timestamp;
+  //   }
+  // }
   if (action.type === 'LEARNDELETE') {
     const list = deleteFilteredId(state.learn.list, action.id);
     state.learn.timestamp = timestamp;
