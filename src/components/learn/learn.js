@@ -8,7 +8,11 @@ import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { currentList } from '../../redux/learnSlice';
+import {
+  currentList,
+  intervalIncrease,
+  intervalReset,
+} from '../../redux/learnSlice';
 
 //components
 import QuestionBox from './questionBox';
@@ -75,10 +79,10 @@ const Learn = props => {
     setQuestion(questionDefault);
   }, [currentQuestion]);
 
-  const knowItOrNotDispatchCount = (id, knowIt) => {
-    // dispatch(intervalCount(id, knowIt));
-  };
-
+  //show text ?
+  //show answer
+  //update object
+  //update current progress
   const onButtonBoxHandler = id => {
     // console.log('✅', id);
     if (id === 'quest') {
@@ -90,19 +94,12 @@ const Learn = props => {
       });
     }
     if (id === 'check') {
-      knowItOrNotDispatchCount(currentObject.id, true);
-      // dispatch object intervall +1
+      dispatch(intervalIncrease({ id: currentObject.id }));
     }
     if (id === 'x') {
-      knowItOrNotDispatchCount(currentObject.id, false);
-      // dispatch object count 0 & interval 0
+      dispatch(intervalReset({ id: currentObject.id }));
     }
   };
-
-  //show text ?
-  //show answer
-  //update object
-  //update current progress
 
   const onClickNewRound = el => {
     console.log('✅', el);

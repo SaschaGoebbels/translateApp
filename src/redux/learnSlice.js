@@ -73,32 +73,15 @@ const initialState = {
   },
 };
 
+const filterById = (array, id) => {
+  return array.filter(el => el.id === id)[0];
+};
+
+// // const spliceObject = (array, object) => {
+// //   const index = array.indexOf(object);
+// //   return;
+// // };
 //==================================================================
-const filterIntervalCount = array => {
-  return array.filter(el => el.count >= el.interval);
-};
-const arrayCountUp = array => {
-  return array.map(el => el.count + 1);
-};
-const newRound = array => {
-  let newRound = filterIntervalCount(array);
-  console.log('✅', newRound);
-  if (newRound.length === 0) {
-    while (newRound === 0) {
-      newRound = filterIntervalCount(arrayCountUp(array));
-      console.log('✅');
-    }
-    return;
-  }
-  return newRound;
-};
-
-// if index = length ok
-// new round
-// round empty
-// count + 1
-// call again
-
 const timestamp = Date.now();
 //==================================================================
 export const learnSlice = createSlice({
@@ -120,11 +103,21 @@ export const learnSlice = createSlice({
       state.timestamp = timestamp;
       state.current.list = action.payload.list;
     },
-    xxx2: (state, action) => {
-      state.count += action.payload;
+    intervalIncrease: (state, action) => {
+      const item = filterById(state.learn.list, action.payload.id);
+      item.interval += 1;
+    },
+    intervalReset: (state, action) => {
+      const item = filterById(state.learn.list, action.payload.id);
+      item.interval = 0;
     },
   },
 });
 
-export const { addOrRemoveByHistoryList, currentList } = learnSlice.actions;
+export const {
+  addOrRemoveByHistoryList,
+  currentList,
+  intervalIncrease,
+  intervalReset,
+} = learnSlice.actions;
 export default learnSlice.reducer;
