@@ -3,40 +3,55 @@ import classes from './learn.module.css';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
+// state valtio
+// import { snapshot } from 'valtio';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
+import { currentList } from '../../redux/learnSlice';
 
 //components
 import QuestionBox from './questionBox';
 import CurrentStats from './currentStats';
 import RenderObjectList from '../ui/renderObjectList';
 import ButtonText from '../ui/buttonText';
-// state valtio
-// import { snapshot } from 'valtio';
-
-// if current list is empty create from array
-// if array is empty show divBox list empty
-// show current question
-// after answer update interval
+// logic components
+import { createNewRound } from '../logic/learnLogic';
 
 const Learn = props => {
+  // if currentList is empty create "currentList" from array
+  //// create new round with all objects where interval <= count
+  //// if newRound empty count +1 until array
+  // if array is empty show divBox list empty
+  // show current question
+  // after answer update interval
+
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.settings.settings.shortcuts);
+
   const learn = useSelector(state => state.learn);
 
   const currentDefault = {
     list: learn.current.list || [],
     index: learn.current.index || 0,
   };
-  const [current, setCurrent] = useState(currentDefault);
+  const [currentQuestion, setCurrentQuestion] = useState(currentDefault);
 
   useEffect(() => {
-    console.log('✅ LEARN UPDATED EFFECT');
-    setCurrent(currentDefault);
-  }, [learn.list, learn.current.index]);
+    // console.log('✅ LEARN UPDATED EFFECT', learn.current.list, currentQuestion);
+    setCurrentQuestion(currentDefault);
+  }, [learn.list, learn.current.index, learn.current.list]);
 
-  const currentObject = current.list[current.index];
+  const [currentQuestionEmpty, setCurrentQuestionEmpty] = useState(true);
+  useEffect(() => {
+    if (currentQuestion.list.length === 0) {
+      setCurrentQuestionEmpty(true);
+      return;
+    }
+    setCurrentQuestionEmpty(false);
+  }, [currentQuestion]);
+
+  const currentObject = currentQuestion.list[currentQuestion.index];
   // const [object, setObject] = useState(current.list[current.index]);
 
   const handleIntervalTextOutput = obj => {
@@ -49,20 +64,19 @@ const Learn = props => {
     }
   };
   const questionDefault = {
-    text: handleIntervalTextOutput(current.list[current.index]) || [
-      '...',
-      '...',
-    ],
+    text: handleIntervalTextOutput(
+      currentQuestion.list[currentQuestion.index]
+    ) || ['...', '...'],
     answer: '...',
     button: true,
   };
   const [question, setQuestion] = useState(questionDefault);
   useEffect(() => {
     setQuestion(questionDefault);
-  }, [current]);
+  }, [currentQuestion]);
 
   const knowItOrNotDispatchCount = (id, knowIt) => {
-    dispatch(intervalCount(id, knowIt));
+    // dispatch(intervalCount(id, knowIt));
   };
 
   const onButtonBoxHandler = id => {
@@ -94,10 +108,6 @@ const Learn = props => {
     console.log('✅', el);
   };
 
-  const filteredArray = array => {
-    return array.filter(el => el.count >= el.interval);
-  };
-
   // delete or edit
   const onClickHandler = (buttonId, id) => {
     if (buttonId === 'pen') {
@@ -105,15 +115,15 @@ const Learn = props => {
       return;
     }
     if (buttonId === 'trash') {
-      dispatch(learnDelete(id));
+      console.log('❌ trash');
+      // dispatch(learnDelete(id));
       return;
     }
   };
 
   const onNewRoundHandler = () => {
-    // console.log('✅', filteredArray(learn.list));
-    dispatch(currentList(filteredArray(learn.list)));
-    // console.log('✅', dispatch(currentList(filteredArray(learn.list))));
+    const newRound = createNewRound(learn.learn.list, learn.interval);
+    dispatch(currentList({ list: newRound }));
   };
 
   const [editLearn, setEditLearn] = useState(false);
@@ -154,8 +164,8 @@ const Learn = props => {
           <CurrentStats
             onClickHandler={onClickNewRound}
             currentRound={{
-              length: current.list?.length,
-              index: current?.index,
+              length: learn.current.list?.length || 0,
+              index: learn.current?.index || 0,
             }}
             total={{
               cards: learn.learn.list?.length,
@@ -163,14 +173,23 @@ const Learn = props => {
               archived: learn?.stats.archived.length,
             }}
           ></CurrentStats>
-          <QuestionBox
-            onClickHandler={onButtonBoxHandler}
-            text1={question.text[0]}
-            text2={question.answer}
-            hideXBtn={question.button}
-            hideQuest={!question.button}
-            hideCheck={question.button}
-          ></QuestionBox>
+          {!currentQuestionEmpty && (
+            <QuestionBox
+              onClickHandler={onButtonBoxHandler}
+              text1={question.text[0]}
+              text2={question.answer}
+              hideXBtn={question.button}
+              hideQuest={!question.button}
+              hideCheck={question.button}
+            ></QuestionBox>
+          )}
+          {currentQuestionEmpty && (
+            <div className={classes.emptyMessageBox}>
+              <p>
+                The current Round is empty or there are no translations saved !
+              </p>
+            </div>
+          )}
         </div>
       )}
       {editLearn && (

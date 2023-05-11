@@ -12,6 +12,7 @@ class Result {
     this.count = 0;
     this.id = id;
     this.fav = false;
+    this.archived = false;
     this.timestamp = Date.now();
   }
 }
