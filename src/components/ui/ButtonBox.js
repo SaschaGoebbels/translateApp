@@ -30,6 +30,17 @@ const ButtonBox = props => {
           onClickHandler={onClickHandler}
         />
       )}
+      {!props.hideTrash && (
+        <ButtonRound
+          btnId="trash"
+          className={classes.buttonAddEdit}
+          buttonName={'trash'}
+          color={'#f08b35'}
+          iconColor={''}
+          isFav={''}
+          onClickHandler={onClickHandler}
+        />
+      )}
       {!props.hideCheck && (
         <ButtonRound
           btnId="check"

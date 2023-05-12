@@ -8,10 +8,12 @@ import {
   currentList,
   intervalIncrease,
   intervalReset,
+  deleteItemOfLearnList,
 } from '../../redux/learnSlice';
 
 //components
 import QuestionBox from './questionBox';
+import EditBox from './editBox';
 import CurrentStats from './currentStats';
 import RenderObjectList from '../ui/renderObjectList';
 import ButtonText from '../ui/buttonText';
@@ -43,7 +45,7 @@ const Learn = props => {
   useEffect(() => {
     setCurrentQuestion(currentDefault);
   }, [learn.list, learn.current.index, learn.current.list]);
-
+  //==================================================================
   const [currentQuestionEmpty, setCurrentQuestionEmpty] = useState(true);
   useEffect(() => {
     if (currentQuestion.list.length === 0) {
@@ -54,7 +56,9 @@ const Learn = props => {
   }, [currentQuestion]);
 
   const currentObject = currentQuestion.list[currentQuestion.index];
-
+  //==================================================================
+  const [editMode, setEditMode] = useState(false);
+  //==================================================================
   const handleIntervalTextOutput = obj => {
     // eslint-disable-next-line eqeqeq
     const oddOrEven = obj?.interval % 2 == 0 ? 'even' : 'odd';
@@ -77,20 +81,35 @@ const Learn = props => {
   }, [currentQuestion]);
 
   const onButtonBoxHandler = id => {
-    if (id === 'quest') {
-      // handleIntervalTextOutput(currentObject);
-      setQuestion({
-        text: handleIntervalTextOutput(currentObject),
-        answer: handleIntervalTextOutput(currentObject)[1],
-        button: false,
-      });
+    if (editMode === false) {
+      if (id === 'quest') {
+        questButton();
+      }
+      if (id === 'check') {
+        checkButton();
+      }
+      if (id === 'x') {
+        xButton();
+      }
+      if (id === 'pen') {
+        setEditMode(true);
+      }
     }
-    if (id === 'check') {
-      dispatch(intervalIncrease({ id: currentObject.id }));
-    }
-    if (id === 'x') {
-      dispatch(intervalReset({ id: currentObject.id }));
-    }
+  };
+
+  const questButton = () => {
+    // handleIntervalTextOutput(currentObject);
+    setQuestion({
+      text: handleIntervalTextOutput(currentObject),
+      answer: handleIntervalTextOutput(currentObject)[1],
+      button: false,
+    });
+  };
+  const checkButton = () => {
+    dispatch(intervalIncrease({ id: currentObject.id }));
+  };
+  const xButton = () => {
+    dispatch(intervalReset({ id: currentObject.id }));
   };
 
   // delete or edit
@@ -101,7 +120,7 @@ const Learn = props => {
     }
     if (buttonId === 'trash') {
       console.log('❌ trash');
-      // dispatch(learnDelete(id));
+      dispatch(deleteItemOfLearnList({ id }));
       return;
     }
   };
@@ -119,13 +138,20 @@ const Learn = props => {
   // handle keyboard shortcuts
   document.onkeyup = function (e) {
     // console.log('✅', e.code);
-    if (snap.translate === false) return;
+    if (snap.translate === true) return;
     if (!shortcuts.learn) return;
     if (e.code === 'Enter') {
-      console.log('✅ Enter');
+      if (question.button) {
+        questButton();
+      }
+      if (!question.button) {
+        checkButton();
+      }
     }
     if (e.code === 'Escape') {
-      console.log('✅ Escape');
+      if (!question.button) {
+        xButton();
+      }
     }
   };
   //==================================================================
@@ -136,14 +162,14 @@ const Learn = props => {
   return (
     <div className={classes.lernBox}>
       <div className={classes.editLearnSwitchBox}>
-        {!editLearn && (
+        {/* {!editLearn && (
           <ButtonText
             name={'new round'}
             style={{ border: 'var(--clr_accent_blue) solid 2px' }}
             id={'newRound'}
             onClickHandler={onNewRoundHandler}
           ></ButtonText>
-        )}
+        )} */}
         <ButtonText
           name={editLearn ? 'learn' : 'edit list'}
           style={{ border: 'var(--clr_accent_blue) solid 2px' }}
@@ -165,7 +191,7 @@ const Learn = props => {
               archived: learn?.stats.archived.length,
             }}
           ></CurrentStats>
-          {!currentQuestionEmpty && (
+          {!currentQuestionEmpty && !editMode && (
             <QuestionBox
               onClickHandler={onButtonBoxHandler}
               text1={question.text[0]}
@@ -174,6 +200,20 @@ const Learn = props => {
               hideQuest={!question.button}
               hideCheck={question.button}
             ></QuestionBox>
+          )}
+          {editMode && (
+            <EditBox
+              disableEditMode={() => {
+                setEditMode(false);
+              }}
+              currentObject={currentObject}
+              deleteItem={() => {
+                dispatch(deleteItemOfLearnList({ id: currentObject.id }));
+              }}
+              // onClickHandler={onButtonBoxHandler}
+              text1={question.text[0]}
+              text2={question.text[1]}
+            ></EditBox>
           )}
           {currentQuestionEmpty && (
             <div className={classes.emptyMessageBox}>

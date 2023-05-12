@@ -83,6 +83,7 @@ const removeObjectFromArray = (array, object) => {
   const index = array.indexOf(object);
   return array.splice(index, 1);
 };
+//==================================================================
 const currentIndexPlusOneOrNewRound = (array, index, learnList, interval) => {
   // if length > index => index plus one
   if (array.length > index + 1) {
@@ -159,6 +160,20 @@ export const learnSlice = createSlice({
         state.current.list = newRound;
       }
     },
+    //==================================================================
+    deleteItemOfLearnList: (state, action) => {
+      console.log('✅', action.payload);
+      state.learn.list = deleteFilteredId(state.learn.list, action.payload.id);
+      state.current.list = deleteFilteredId(
+        state.current.list,
+        action.payload.id
+      );
+    },
+    //==================================================================
+    editItemOfLearnList: (state, action) => {
+      // find item and replace
+    },
+    //==================================================================
   },
 });
 
@@ -167,5 +182,7 @@ export const {
   currentList,
   intervalIncrease,
   intervalReset,
+  deleteItemOfLearnList,
+  editItemOfLearnList,
 } = learnSlice.actions;
 export default learnSlice.reducer;

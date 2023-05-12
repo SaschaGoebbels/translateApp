@@ -101,7 +101,7 @@ const TranslateBar = props => {
   };
   const handleKeyDown = e => {
     // console.log('✅', e.key);
-    if (snap.translate === true) return;
+    if (snap.translate === false) return;
     // tab to switch between input
     const activeTextarea = document.activeElement.id;
     if (e.code === 'Tab' && activeTextarea === 'secondSearchInput') {

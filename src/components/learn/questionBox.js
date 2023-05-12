@@ -32,6 +32,7 @@ const QuestionBox = props => {
         hideXBtn={props.hideXBtn || false}
         hideQuest={props.hideQuest || false}
         hideCheck={props.hideCheck || false}
+        hideTrash={true}
         onClickHandler={props.onClickHandler}
       ></ButtonBox>
     </div>
