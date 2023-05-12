@@ -17,8 +17,12 @@ import RenderObjectList from '../ui/renderObjectList';
 import ButtonText from '../ui/buttonText';
 // logic components
 import { createNewRound } from '../logic/learnLogic';
+//valtio
+import { useSnapshot } from 'valtio';
+import { state } from '../../store/state';
 
 const Learn = props => {
+  const snap = useSnapshot(state);
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.settings.settings.shortcuts);
   const learn = useSelector(state => state.learn);
@@ -115,6 +119,7 @@ const Learn = props => {
   // handle keyboard shortcuts
   document.onkeyup = function (e) {
     // console.log('✅', e.code);
+    if (snap.translate === false) return;
     if (!shortcuts.learn) return;
     if (e.code === 'Enter') {
       console.log('✅ Enter');

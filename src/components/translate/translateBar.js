@@ -9,8 +9,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+//valtio
+import { useSnapshot } from 'valtio';
+import { state } from '../../store/state';
 
 const TranslateBar = props => {
+  const snap = useSnapshot(state);
   const [searchInputMainState, setSearchInputMainState] = useState('');
   const [searchInputSecondState, setSearchInputSecondState] = useState('');
 
@@ -97,6 +101,7 @@ const TranslateBar = props => {
   };
   const handleKeyDown = e => {
     // console.log('✅', e.key);
+    if (snap.translate === true) return;
     // tab to switch between input
     const activeTextarea = document.activeElement.id;
     if (e.code === 'Tab' && activeTextarea === 'secondSearchInput') {
