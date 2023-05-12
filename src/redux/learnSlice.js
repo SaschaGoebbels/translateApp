@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { deleteFilteredId } from './utils/helperFunctions';
+// logic components
+import { createNewRound } from '../components/logic/learnLogic';
 
 const exampleList = [
   {
@@ -77,10 +79,25 @@ const filterById = (array, id) => {
   return array.filter(el => el.id === id)[0];
 };
 
-// // const spliceObject = (array, object) => {
-// //   const index = array.indexOf(object);
-// //   return;
-// // };
+const removeObjectFromArray = (array, object) => {
+  const index = array.indexOf(object);
+  return array.splice(index, 1);
+};
+const currentIndexPlusOneOrNewRound = (array, index, learnList, interval) => {
+  // if length > index => index plus one
+  if (array.length > index + 1) {
+    return [index + 1];
+  }
+  // else index 0 + new round
+  if (array.length <= index + 1) {
+    const newRound = createNewRound(learnList, interval);
+    return [0, newRound];
+  }
+};
+
+const increaseCount = array => {
+  array.map(el => el.count + 1);
+};
 //==================================================================
 const timestamp = Date.now();
 //==================================================================
@@ -104,12 +121,43 @@ export const learnSlice = createSlice({
       state.current.list = action.payload.list;
     },
     intervalIncrease: (state, action) => {
+      state.timestamp = timestamp;
       const item = filterById(state.learn.list, action.payload.id);
       item.interval += 1;
+      // if interval is greater than list of intervals then archive
+      if (item.interval > Object.keys(state.interval).slice(-1)) {
+        removeObjectFromArray(state.learn.list, item);
+        state.stats.archived = [item, ...state.stats.archived];
+      }
+      const [index, newRound] = currentIndexPlusOneOrNewRound(
+        state.current.list,
+        state.current.index,
+        state.learn.list,
+        state.interval
+      );
+      state.current.index = index;
+      if (newRound) {
+        state.stats.totalRounds += 1;
+        increaseCount(state.learn.list);
+        state.current.list = newRound;
+      }
     },
     intervalReset: (state, action) => {
+      state.timestamp = timestamp;
       const item = filterById(state.learn.list, action.payload.id);
       item.interval = 0;
+      const [index, newRound] = currentIndexPlusOneOrNewRound(
+        state.current.list,
+        state.current.index,
+        state.learn.list,
+        state.interval
+      );
+      state.current.index = index;
+      if (newRound) {
+        state.stats.totalRounds += 1;
+        increaseCount(state.learn.list);
+        state.current.list = newRound;
+      }
     },
   },
 });

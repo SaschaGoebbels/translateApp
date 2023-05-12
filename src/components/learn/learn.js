@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classes from './learn.module.css';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
-// state valtio
-// import { snapshot } from 'valtio';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,16 +19,8 @@ import ButtonText from '../ui/buttonText';
 import { createNewRound } from '../logic/learnLogic';
 
 const Learn = props => {
-  // if currentList is empty create "currentList" from array
-  //// create new round with all objects where interval <= count
-  //// if newRound empty count +1 until array
-  // if array is empty show divBox list empty
-  // show current question
-  // after answer update interval
-
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.settings.settings.shortcuts);
-
   const learn = useSelector(state => state.learn);
 
   const currentDefault = {
@@ -42,7 +30,13 @@ const Learn = props => {
   const [currentQuestion, setCurrentQuestion] = useState(currentDefault);
 
   useEffect(() => {
-    // console.log('✅ LEARN UPDATED EFFECT', learn.current.list, currentQuestion);
+    // on startUp check current is empty ? check learn empty : show div : else create new Round
+    if (currentQuestion.list.length === 0 && learn.learn.list.length !== 0) {
+      onNewRoundHandler();
+    }
+  }, []);
+
+  useEffect(() => {
     setCurrentQuestion(currentDefault);
   }, [learn.list, learn.current.index, learn.current.list]);
 
@@ -56,7 +50,6 @@ const Learn = props => {
   }, [currentQuestion]);
 
   const currentObject = currentQuestion.list[currentQuestion.index];
-  // const [object, setObject] = useState(current.list[current.index]);
 
   const handleIntervalTextOutput = obj => {
     // eslint-disable-next-line eqeqeq
@@ -79,12 +72,7 @@ const Learn = props => {
     setQuestion(questionDefault);
   }, [currentQuestion]);
 
-  //show text ?
-  //show answer
-  //update object
-  //update current progress
   const onButtonBoxHandler = id => {
-    // console.log('✅', id);
     if (id === 'quest') {
       // handleIntervalTextOutput(currentObject);
       setQuestion({
@@ -99,10 +87,6 @@ const Learn = props => {
     if (id === 'x') {
       dispatch(intervalReset({ id: currentObject.id }));
     }
-  };
-
-  const onClickNewRound = el => {
-    console.log('✅', el);
   };
 
   // delete or edit
@@ -127,7 +111,7 @@ const Learn = props => {
   const onEditLearnSwitch = () => {
     setEditLearn(prev => !prev);
   };
-
+  //==================================================================
   // handle keyboard shortcuts
   document.onkeyup = function (e) {
     // console.log('✅', e.code);
@@ -140,15 +124,21 @@ const Learn = props => {
     }
   };
   //==================================================================
+  const onClickArchiv = () => {
+    console.log('✅ archiv'); //TODO
+  };
+  //==================================================================
   return (
     <div className={classes.lernBox}>
       <div className={classes.editLearnSwitchBox}>
-        <ButtonText
-          name={'new round'}
-          style={{ border: 'var(--clr_accent_blue) solid 2px' }}
-          id={'newRound'}
-          onClickHandler={onNewRoundHandler}
-        ></ButtonText>
+        {!editLearn && (
+          <ButtonText
+            name={'new round'}
+            style={{ border: 'var(--clr_accent_blue) solid 2px' }}
+            id={'newRound'}
+            onClickHandler={onNewRoundHandler}
+          ></ButtonText>
+        )}
         <ButtonText
           name={editLearn ? 'learn' : 'edit list'}
           style={{ border: 'var(--clr_accent_blue) solid 2px' }}
@@ -159,7 +149,7 @@ const Learn = props => {
       {!editLearn && (
         <div>
           <CurrentStats
-            onClickHandler={onClickNewRound}
+            onClickArchiv={onClickArchiv}
             currentRound={{
               length: learn.current.list?.length || 0,
               index: learn.current?.index || 0,
@@ -193,7 +183,7 @@ const Learn = props => {
         <RenderObjectList
           icon={faLightbulb}
           name={'all translations'}
-          array={learn.list}
+          array={learn.learn.list}
           mainLanguage={'de'}
           onClickHandler={onClickHandler}
           borderColor={'--clr_accent_blue'}

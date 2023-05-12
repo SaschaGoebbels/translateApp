@@ -12,5 +12,5 @@ export const createNewRound = (array, intervalObject) => {
     newRound = temp;
     maxDistance += 1;
   }
-  return newRound;
+  return newRound ? newRound : [];
 };

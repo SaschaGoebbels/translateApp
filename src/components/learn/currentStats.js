@@ -21,7 +21,7 @@ const CurrentStats = props => {
           <p>Rounds:</p>
           <p>{total.rounds}</p>
         </div>
-        <div className={classes.textBox}>
+        <div className={classes.textBox} onClick={props.onClickArchiv}>
           <p>Archiv:</p>
           <p>{total.archived}</p>
         </div>
