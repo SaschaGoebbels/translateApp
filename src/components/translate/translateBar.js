@@ -141,6 +141,7 @@ const TranslateBar = props => {
     setSearchInputMainState('');
     setSearchInputSecondState('');
   };
+
   //==================================================================
   return (
     <div className={classes.translateBar_div}>

@@ -27,7 +27,8 @@ const EditBox = props => {
       props.disableEditMode();
     }
     if (id === 'check') {
-      console.log('✅ check');
+      props.editItem({ text1: text1State, text2: text2State });
+      props.disableEditMode();
     }
   };
   //==================================================================

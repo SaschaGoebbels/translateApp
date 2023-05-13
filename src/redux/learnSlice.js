@@ -162,7 +162,7 @@ export const learnSlice = createSlice({
     },
     //==================================================================
     deleteItemOfLearnList: (state, action) => {
-      console.log('✅', action.payload);
+      state.timestamp = timestamp;
       state.learn.list = deleteFilteredId(state.learn.list, action.payload.id);
       state.current.list = deleteFilteredId(
         state.current.list,
@@ -171,7 +171,10 @@ export const learnSlice = createSlice({
     },
     //==================================================================
     editItemOfLearnList: (state, action) => {
-      // find item and replace
+      state.timestamp = timestamp;
+      let item = filterById(state.learn.list, action.payload.id);
+      item.text1 = action.payload.text1;
+      item.text2 = action.payload.text2;
     },
     //==================================================================
   },

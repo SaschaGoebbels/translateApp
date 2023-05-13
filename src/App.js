@@ -13,14 +13,21 @@ import Learn from './components/learn/learn';
 //logic components
 import { FetchToGoogle } from './components/logic/fetch';
 import { readLocalStorage } from './store/localStorage';
-// import { saveLocalStorage } from './store/localStorage';
+import {
+  saveLocalStorageByKey,
+  readLocalStorageByKey,
+} from './store/localStorage';
 
 //valtio
 import { useSnapshot } from 'valtio';
 import { state } from './store/state';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { historyListAdd, historyFavSwitch } from './redux/translateSlice';
+import {
+  historyListAdd,
+  historyFavSwitch,
+  translateLocalData,
+} from './redux/translateSlice';
 
 // import { startup } from './actions/actions';
 
@@ -64,7 +71,15 @@ function App() {
   const onMenuButtonHandler = () => {
     console.log('❌ Menu Button');
   };
-
+  //==================================================================
+  // get localData at startup
+  useEffect(() => {
+    const dataStateLocal = readLocalStorageByKey('translate');
+    // console.log('⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡', dataStateLocal.history.list);
+    dispatch(translateLocalData({ state: dataStateLocal }));
+    console.log('✅', reduxState.translate);
+  }, []);
+  //==================================================================
   return (
     <div className={classes.App}>
       <header className={classes.header_menu}>
@@ -91,7 +106,7 @@ function App() {
           <HistoryList
             icon={'faHistory'}
             name={'history'}
-            list={[]}
+            // list={[]}
             mainLanguage={'de'}
           ></HistoryList>
         </div>

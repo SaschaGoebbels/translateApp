@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './historyList.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHistory } from '@fortawesome/free-solid-svg-icons';
@@ -9,10 +9,19 @@ import HistoryItem from './historyItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { historyFavSwitch, historyDelete } from '../../redux/translateSlice';
 import { addOrRemoveByHistoryList } from '../../redux/learnSlice';
+import { useEffect } from 'react';
 
 const HistoryList = props => {
   const dispatch = useDispatch();
-  const historyList = useSelector(state => state.translate.history.list);
+  const historyListRedux = useSelector(state => state.translate.history.list);
+  const Redux = useSelector(state => state.translate);
+  const [historyList, setHistoryList] = useState(historyListRedux);
+
+  useEffect(() => {
+    // console.log('❌ effect', historyListRedux);
+    // console.log('✅', Redux);
+    setHistoryList(historyListRedux);
+  }, [historyListRedux]);
 
   const itemFilteredId = (id, array) => {
     return array.filter(el => el.id === id)[0];
