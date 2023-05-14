@@ -43,6 +43,7 @@ const TextBox = props => {
   return (
     <textarea
       autoFocus={props.autoFocus}
+      placeholder={props.placeholder}
       onChange={onChangeText}
       onFocus={handleFocus}
       style={{ height: textareaSize }}

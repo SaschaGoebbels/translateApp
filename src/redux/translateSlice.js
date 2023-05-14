@@ -85,7 +85,7 @@ export const translateSlice = createSlice({
       state.history.list = list;
       saveLocalStorageByKey('translate', state);
     },
-    translateLocalData: (state, action) => {
+    translateStateLocalData: (state, action) => {
       state.history = action.payload.state.history;
     },
   },
@@ -95,7 +95,7 @@ export const {
   historyListAdd,
   historyFavSwitch,
   historyDelete,
-  translateLocalData,
+  translateStateLocalData,
 } = translateSlice.actions;
 export default translateSlice.reducer;
 //==================================================================

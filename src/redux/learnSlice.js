@@ -2,6 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { deleteFilteredId } from './utils/helperFunctions';
 // logic components
 import { createNewRound } from '../components/logic/learnLogic';
+//localStorage
+import {
+  saveLocalStorageByKey,
+  readLocalStorageByKey,
+} from '../store/localStorage';
 
 const exampleList = [
   {
@@ -51,27 +56,29 @@ const exampleList = [
 ];
 
 const initialState = {
-  learn: { list: [...exampleList], timestamp: '' },
-  current: { list: [], index: 0 },
-  timestamp: '',
-  stats: {
-    totalRounds: 0,
-    archived: [],
-  },
-  interval: {
-    0: 0,
-    1: 1,
-    2: 1,
-    3: 2,
-    4: 2,
-    5: 5,
-    6: 5,
-    7: 10,
-    8: 10,
-    9: 20,
-    10: 20,
-    11: 50,
-    12: 50,
+  learn: {
+    learn: { list: [...exampleList], timestamp: '' },
+    current: { list: [], index: 0 },
+    timestamp: '',
+    stats: {
+      totalRounds: 0,
+      archived: [],
+    },
+    interval: {
+      0: 0,
+      1: 1,
+      2: 1,
+      3: 2,
+      4: 2,
+      5: 5,
+      6: 5,
+      7: 10,
+      8: 10,
+      9: 20,
+      10: 20,
+      11: 50,
+      12: 50,
+    },
   },
 };
 
@@ -107,74 +114,90 @@ export const learnSlice = createSlice({
   initialState,
   reducers: {
     addOrRemoveByHistoryList: (state, action) => {
-      state.timestamp = timestamp;
+      state.learn.timestamp = timestamp;
       const item = action.payload.item;
-      if (state.learn.list.some(el => el.id === item.id)) {
-        state.learn.list = deleteFilteredId(state.learn.list, item.id);
+      if (state.learn.learn.list.some(el => el.id === item.id)) {
+        state.learn.learn.list = deleteFilteredId(
+          state.learn.learn.list,
+          item.id
+        );
       }
       //push to array if item not exist
       else {
-        state.learn.list = [item, ...state.learn.list];
+        state.learn.learn.list = [item, ...state.learn.learn.list];
       }
+      saveLocalStorageByKey('learn', state);
     },
     currentList: (state, action) => {
-      state.timestamp = timestamp;
-      state.current.list = action.payload.list;
+      state.learn.timestamp = timestamp;
+      state.learn.current.list = action.payload.list;
+      saveLocalStorageByKey('learn', state);
     },
     intervalIncrease: (state, action) => {
-      state.timestamp = timestamp;
-      const item = filterById(state.learn.list, action.payload.id);
+      state.learn.timestamp = timestamp;
+      const item = filterById(state.learn.learn.list, action.payload.id);
       item.interval += 1;
       // if interval is greater than list of intervals then archive
-      if (item.interval > Object.keys(state.interval).slice(-1)) {
-        removeObjectFromArray(state.learn.list, item);
-        state.stats.archived = [item, ...state.stats.archived];
+      if (item.interval > Object.keys(state.learn.interval).slice(-1)) {
+        removeObjectFromArray(state.learn.learn.list, item);
+        state.learn.stats.archived = [item, ...state.learn.stats.archived];
       }
       const [index, newRound] = currentIndexPlusOneOrNewRound(
-        state.current.list,
-        state.current.index,
-        state.learn.list,
-        state.interval
+        state.learn.current.list,
+        state.learn.current.index,
+        state.learn.learn.list,
+        state.learn.interval
       );
-      state.current.index = index;
+      state.learn.current.index = index;
       if (newRound) {
-        state.stats.totalRounds += 1;
-        increaseCount(state.learn.list);
-        state.current.list = newRound;
+        state.learn.stats.totalRounds += 1;
+        increaseCount(state.learn.learn.list);
+        state.learn.current.list = newRound;
       }
+      saveLocalStorageByKey('learn', state);
     },
     intervalReset: (state, action) => {
-      state.timestamp = timestamp;
-      const item = filterById(state.learn.list, action.payload.id);
+      state.learn.timestamp = timestamp;
+      const item = filterById(state.learn.learn.list, action.payload.id);
       item.interval = 0;
       const [index, newRound] = currentIndexPlusOneOrNewRound(
-        state.current.list,
-        state.current.index,
-        state.learn.list,
-        state.interval
+        state.learn.current.list,
+        state.learn.current.index,
+        state.learn.learn.list,
+        state.learn.interval
       );
-      state.current.index = index;
+      state.learn.current.index = index;
       if (newRound) {
-        state.stats.totalRounds += 1;
-        increaseCount(state.learn.list);
-        state.current.list = newRound;
+        state.learn.stats.totalRounds += 1;
+        increaseCount(state.learn.learn.list);
+        state.learn.current.list = newRound;
       }
+      saveLocalStorageByKey('learn', state);
     },
     //==================================================================
     deleteItemOfLearnList: (state, action) => {
-      state.timestamp = timestamp;
-      state.learn.list = deleteFilteredId(state.learn.list, action.payload.id);
-      state.current.list = deleteFilteredId(
-        state.current.list,
+      state.learn.timestamp = timestamp;
+      state.learn.learn.list = deleteFilteredId(
+        state.learn.learn.list,
         action.payload.id
       );
+      state.learn.current.list = deleteFilteredId(
+        state.learn.current.list,
+        action.payload.id
+      );
+      saveLocalStorageByKey('learn', state);
     },
     //==================================================================
     editItemOfLearnList: (state, action) => {
-      state.timestamp = timestamp;
-      let item = filterById(state.learn.list, action.payload.id);
+      state.learn.timestamp = timestamp;
+      let item = filterById(state.learn.learn.list, action.payload.id);
       item.text1 = action.payload.text1;
       item.text2 = action.payload.text2;
+      saveLocalStorageByKey('learn', state);
+    },
+    //==================================================================
+    learnStateLocalData: (state, action) => {
+      state.learn = action.payload.state.learn;
     },
     //==================================================================
   },
@@ -187,5 +210,6 @@ export const {
   intervalReset,
   deleteItemOfLearnList,
   editItemOfLearnList,
+  learnStateLocalData,
 } = learnSlice.actions;
 export default learnSlice.reducer;

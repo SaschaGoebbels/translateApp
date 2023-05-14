@@ -20,10 +20,7 @@ import RenderObjectList from '../ui/renderObjectList';
 import ButtonText from '../ui/buttonText';
 // logic components
 import { createNewRound } from '../logic/learnLogic';
-import {
-  saveLocalStorageByKey,
-  readLocalStorageByKey,
-} from '../../store/localStorage';
+
 //valtio
 import { useSnapshot } from 'valtio';
 import { state } from '../../store/state';
@@ -32,7 +29,7 @@ const Learn = props => {
   const snap = useSnapshot(state);
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.settings.settings.shortcuts);
-  const learn = useSelector(state => state.learn);
+  const learn = useSelector(state => state.learn.learn);
   const redux = useSelector(state => state);
 
   const currentDefault = {
@@ -173,18 +170,11 @@ const Learn = props => {
   const onClickArchiv = () => {
     console.log('✅ archiv'); //TODO
   };
-  //==================================================================
-  useEffect(() => {
-    saveLocalStorageByKey('learn', learn);
-    // console.log('✅ saved');
-  }, [learn]);
+
   //==================================================================
   return (
     <div className={classes.lernBox}>
       <div className={classes.editLearnSwitchBox}>
-        <button onClick={console.log('✅', redux.translate.history)}>
-          test
-        </button>
         {/* {!editLearn && (
           <ButtonText
             name={'new round'}

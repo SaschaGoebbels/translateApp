@@ -12,7 +12,6 @@ import Learn from './components/learn/learn';
 
 //logic components
 import { FetchToGoogle } from './components/logic/fetch';
-import { readLocalStorage } from './store/localStorage';
 import {
   saveLocalStorageByKey,
   readLocalStorageByKey,
@@ -26,8 +25,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   historyListAdd,
   historyFavSwitch,
-  translateLocalData,
+  translateStateLocalData,
 } from './redux/translateSlice';
+import { learnStateLocalData } from './redux/learnSlice';
+import { settingsStateLocalData } from './redux/settingsSlice';
 
 // import { startup } from './actions/actions';
 
@@ -74,11 +75,17 @@ function App() {
   //==================================================================
   // get localData at startup
   useEffect(() => {
-    const dataStateLocal = readLocalStorageByKey('translate');
-    // console.log('⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡', dataStateLocal.history.list);
-    dispatch(translateLocalData({ state: dataStateLocal }));
-    console.log('✅', reduxState.translate);
+    const translateStateLocal = readLocalStorageByKey('translate');
+    if (translateStateLocal !== null)
+      dispatch(translateStateLocalData({ state: translateStateLocal }));
+    const learnStateLocal = readLocalStorageByKey('learn');
+    if (learnStateLocal !== null)
+      dispatch(learnStateLocalData({ state: learnStateLocal }));
+    const settingsStateLocal = readLocalStorageByKey('settings');
+    if (settingsStateLocal !== null)
+      dispatch(settingsStateLocalData({ state: settingsStateLocal }));
   }, []);
+
   //==================================================================
   return (
     <div className={classes.App}>

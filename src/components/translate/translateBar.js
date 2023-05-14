@@ -99,6 +99,7 @@ const TranslateBar = props => {
       setTextareaSize(textareaSizeInitial);
     }
   };
+
   const handleKeyDown = e => {
     // console.log('✅', e.key);
     if (snap.translate === false) return;
@@ -124,6 +125,19 @@ const TranslateBar = props => {
       console.log('save as Fav');
     }
   };
+  //==================================================================
+
+  document.onkeydown = function (key) {
+    const e = key || window.event; // for IE to cover IEs window event-object
+    // console.log('✅', e);
+    if (e.ctrlKey && e.key === 'f') {
+      navigator.clipboard.readText().then(clipText => {
+        console.log('❌', clipText);
+      });
+      return;
+    }
+  };
+  //==================================================================
   const submitQuery = () => {
     props.onSubmitSearch({
       ...searchObj(
@@ -156,6 +170,7 @@ const TranslateBar = props => {
           autoFocus={props.loading}
           onChange={textInput}
           id="mainSearchInput"
+          placeholder={'STR-F'}
           value={searchInputMainState}
           onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}
@@ -164,6 +179,7 @@ const TranslateBar = props => {
         <TextBox
           onChange={textInput}
           id="secondSearchInput"
+          placeholder={'STR-R'}
           value={searchInputSecondState}
           onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}

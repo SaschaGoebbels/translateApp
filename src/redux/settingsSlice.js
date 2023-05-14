@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  userData: { loggedIn: false, timestamp: '' },
   settings: {
     defaultLanguage: ['German', 'English'],
     languageArray: [
@@ -11,6 +10,7 @@ const initialState = {
     ],
     shortcuts: { clearWithESC: true, submitEnter: true, learn: true },
     timestamp: '',
+    userData: { loggedIn: false, timestamp: '' },
   },
 };
 
@@ -33,8 +33,13 @@ export const settingsSlice = createSlice({
     xx3: (state, action) => {
       state.count += action.payload;
     },
+    //==================================================================
+    settingsStateLocalData: (state, action) => {
+      state.settings = action.payload.state.settings;
+    },
+    //==================================================================
   },
 });
 
-export const { xx1, xx2, xx3 } = settingsSlice.actions;
+export const { xx1, xx2, xx3, settingsStateLocalData } = settingsSlice.actions;
 export default settingsSlice.reducer;
