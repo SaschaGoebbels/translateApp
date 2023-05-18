@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './translateBar.module.css';
 
 const LanguageDropdown = props => {
+  // sort current language to the top
   const langOrder = (languageArray, language) => {
     const languageOrder = languageArray.sort((a, b) => {
       return b.name !== language ? -1 : 0;
@@ -21,7 +22,7 @@ const LanguageDropdown = props => {
       name="language"
       id={props.id}
     >
-      {langOrder(props.langArray, props.language)}
+      {langOrder([...props.langArray], props.language)}
     </select>
   );
 };

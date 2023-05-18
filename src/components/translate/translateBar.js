@@ -117,6 +117,7 @@ const TranslateBar = props => {
     }
     // submit when pushing enter
     if (props.settings.submitEnter && e.key === 'Enter') {
+      console.log('✅');
       e.preventDefault();
       submitQuery();
     }

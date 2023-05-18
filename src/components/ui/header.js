@@ -11,7 +11,6 @@ const Header = props => {
   const onClickHandler = el => {
     if (el.target.id === 'translate') {
       state.translate = true;
-      console.log('✅', snap);
     }
     if (el.target.id === 'learn') {
       state.translate = false;

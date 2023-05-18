@@ -12,7 +12,6 @@ const LanguageDoubleDropdown = props => {
   const [secondLanguageState, setSecondLanguage] = useState(
     props.secondLanguage
   );
-
   const setLanguage = (id, value) => {
     if (id === 'mainLanguage') setMainLanguage(value);
     if (id === 'secondLanguage') setSecondLanguage(value);

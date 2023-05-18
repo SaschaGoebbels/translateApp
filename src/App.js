@@ -12,6 +12,7 @@ import Learn from './components/learn/learn';
 
 //logic components
 import { FetchToGoogle } from './components/logic/fetch';
+import { sortArrayAlphabetically } from './components/logic/functions';
 import {
   saveLocalStorageByKey,
   readLocalStorageByKey,
@@ -30,8 +31,6 @@ import {
 import { learnStateLocalData } from './redux/learnSlice';
 import { settingsStateLocalData } from './redux/settingsSlice';
 
-// import { startup } from './actions/actions';
-
 function App() {
   const dispatch = useDispatch();
   const shortcuts = useSelector(state => state.settings.settings.shortcuts);
@@ -39,31 +38,23 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const reduxState = useSelector(state => state); // do not remove !!! needed to update state
 
-  const languageArray = useSelector(
-    state => state.settings.settings.languageArray
-  );
+  const languageArray = useSelector(state => {
+    return sortArrayAlphabetically([...state.settings.settings.languageArray]);
+  });
   const [lang1, lang2] = useSelector(
     state => state.settings.settings.defaultLanguage
   );
 
   //valtio app state
   const snap = useSnapshot(state);
-  //==================================================================
-  // redux mainState
-  // const stateRedux = useSelector(state => state);
 
-  // read local data on startup
-  // // // useEffect(() => {
-  // // //   const localData = readLocalStorage();
-  // // //   if (localData) dispatch(startup(localData));
-  // // //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // // // }, []);
   //==================================================================
   const defaultLanguageObjects = (array, lang) => {
     return array.filter(el => el.name === lang);
   };
 
   const onSubmitSearch = async searchObj => {
+    if (searchObj.search.sourceText === '') return;
     const res = await FetchToGoogle(searchObj);
     if (res) dispatch(historyListAdd({ ...res }));
     return;
@@ -109,13 +100,12 @@ function App() {
               ...defaultLanguageObjects(languageArray, lang1),
               ...defaultLanguageObjects(languageArray, lang2),
             ]}
-            languageArray={[...languageArray]}
+            languageArray={[...languageArray.reverse()]}
             onSubmitSearch={onSubmitSearch}
           ></TranslateBar>
           <HistoryList
             icon={'faHistory'}
             name={'history'}
-            // list={[]}
             mainLanguage={'de'}
           ></HistoryList>
         </div>
