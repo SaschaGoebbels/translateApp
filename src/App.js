@@ -73,6 +73,8 @@ function App() {
     console.log('❌ Menu Button');
   };
   //==================================================================
+
+  //==================================================================
   // get localData at startup
   useEffect(() => {
     const translateStateLocal = readLocalStorageByKey('translate');

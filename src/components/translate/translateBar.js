@@ -100,8 +100,13 @@ const TranslateBar = props => {
     }
   };
 
-  const handleKeyDown = e => {
-    // console.log('✅', e.key);
+  //==================================================================
+
+  document.onkeydown = async key => {
+    const e = key || window.event; // for IE to cover IEs window event-object
+    // console.log('✅', e);
+    //############################################################
+    // translatePage shortcuts on / off
     if (snap.translate === false) return;
     // tab to switch between input
     const activeTextarea = document.activeElement.id;
@@ -124,17 +129,21 @@ const TranslateBar = props => {
       e.preventDefault();
       console.log('save as Fav');
     }
-  };
-  //==================================================================
-
-  document.onkeydown = function (key) {
-    const e = key || window.event; // for IE to cover IEs window event-object
-    // console.log('✅', e);
-    if (e.ctrlKey && e.key === 'f') {
-      navigator.clipboard.readText().then(clipText => {
-        console.log('❌', clipText);
+    //################################################################
+    // paste clipboard to searchBox
+    if (e.ctrlKey && e.shiftKey) {
+      let text = '';
+      await navigator.clipboard.readText().then(clipText => {
+        text = clipText;
       });
-      return;
+      if (e.ctrlKey && e.shiftKey && e.key === 'F') {
+        setSearchInputMainState(text);
+        return;
+      }
+      if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+        setSearchInputSecondState(text);
+        return;
+      }
     }
   };
   //==================================================================
@@ -155,7 +164,6 @@ const TranslateBar = props => {
     setSearchInputMainState('');
     setSearchInputSecondState('');
   };
-
   //==================================================================
   return (
     <div className={classes.translateBar_div}>
@@ -165,12 +173,12 @@ const TranslateBar = props => {
         secondLanguage={'English'}
         getCurrentLanguage={getCurrentLanguage}
       ></LanguageDoubleDropdown>
-      <div className={classes.divBox} onKeyDown={handleKeyDown}>
+      <div className={classes.divBox}>
         <TextBox
           autoFocus={props.loading}
           onChange={textInput}
           id="mainSearchInput"
-          placeholder={'STR-F'}
+          placeholder={'str-f'}
           value={searchInputMainState}
           onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}
@@ -179,7 +187,7 @@ const TranslateBar = props => {
         <TextBox
           onChange={textInput}
           id="secondSearchInput"
-          placeholder={'STR-R'}
+          placeholder={'str-r'}
           value={searchInputSecondState}
           onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}
