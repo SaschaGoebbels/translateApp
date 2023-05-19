@@ -7,6 +7,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import Header from './components/ui/header';
 import TranslateBar from './components/translate/translateBar';
 import HistoryList from './components/translate/historyList';
+import ModalBox from './components/ui/modalBox';
 // learn
 import Learn from './components/learn/learn';
 
@@ -30,6 +31,7 @@ import {
 } from './redux/translateSlice';
 import { learnStateLocalData } from './redux/learnSlice';
 import { settingsStateLocalData } from './redux/settingsSlice';
+import { useState } from 'react';
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +49,19 @@ function App() {
 
   //valtio app state
   const snap = useSnapshot(state);
-
+  //==================================================================
+  // modalBox
+  const [modalState, setModalState] = useState({
+    message: 'Message',
+    title: 'Title',
+    dismiss: '',
+    confirm: '',
+    hideModalBox: false,
+    showBtnTrash: true,
+    showBtnX: true,
+    value: '',
+  });
+  // handle modal state change
   //==================================================================
   const defaultLanguageObjects = (array, lang) => {
     return array.filter(el => el.name === lang);
@@ -82,6 +96,7 @@ function App() {
   //==================================================================
   return (
     <div className={classes.App}>
+      <ModalBox modalState={modalState}></ModalBox>
       <header className={classes.header_menu}>
         <Header></Header>
         <button className={classes.menuButton} onClick={onMenuButtonHandler}>

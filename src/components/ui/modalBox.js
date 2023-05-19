@@ -1,35 +1,48 @@
-import classes from './InfoBox.module.css';
-import ButtonRound from './ButtonRound';
+import classes from './modalBox.module.css';
+import ButtonRound from './buttonRound';
 
-const InfoBox = props => {
+const ModalBox = props => {
   const onClickHandler = el => {
-    props.clickInfoBox(el);
-    if (el === 'x' && props.messageState.dismiss) {
-      props.messageState.dismiss(props.messageState.value);
+    props.clickmodalBox(el);
+    if (el === 'x' && props.modalState.dismiss) {
+      props.modalState.dismiss(props.modalState.value);
     }
-    if (el === 'check' && props.messageState.confirm) {
-      props.messageState.confirm(props.messageState.value);
+    if (el === 'check' && props.modalState.confirm) {
+      props.modalState.confirm(props.modalState.value);
     }
   };
   return (
     <div
-      className={`${classes.infoBox}  ${
-        props.messageState.hideInfoBox && classes.infoBox__hide
-      }`}
+      className={`${classes.modalBox}  ${
+        props.modalState.hideModalBox && classes.modalBox__hide
+      } `}
     >
-      <div className={classes.infoBox__card}>
-        <header className={classes.infoBox__header}>
-          <h2>{props.messageState.title}</h2>
+      <div
+        className={`${classes.modalBox__card} ${classes.modalBox__card_gradient}`}
+      >
+        <header className={classes.modalBox__header}>
+          <h2>{props.modalState.title}</h2>
         </header>
-        <div className={classes.infoBox__messageBox}>
-          <p>{props.messageState.message}</p>
+        <div className={classes.modalBox__messageBox}>
+          <p>{props.modalState.message}</p>
         </div>
-        <footer className={classes.infoBox__footer}>
-          {props.messageState.showBtnX && (
+        <footer className={classes.modalBox__footer}>
+          {props.modalState.showBtnX && (
             <ButtonRound
               btnId="x"
               className={classes.buttonAddEdit}
               buttonName={'x'}
+              color={'#AD5050'}
+              iconColor={''}
+              isFav={''}
+              onClickHandler={onClickHandler}
+            />
+          )}
+          {props.modalState.showBtnTrash && (
+            <ButtonRound
+              btnId="trash"
+              className={classes.buttonAddEdit}
+              buttonName={'trash'}
               color={'#AD5050'}
               iconColor={''}
               isFav={''}
@@ -51,4 +64,4 @@ const InfoBox = props => {
   );
 };
 
-export default InfoBox;
+export default ModalBox;

@@ -1,8 +1,9 @@
-.infoBox {
+.modalBox {
   position: absolute;
   top: 0;
-  width: 100%;
-  height: 100%;
+  left: 0rem;
+  width: 100vw;
+  height: 100vh;
   z-index: 9999999;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -12,42 +13,65 @@
   opacity: 1;
   transition: all 200ms;
 }
-.infoBox__hide {
+.modalBox__hide {
   position: absolute;
   transform-origin: center;
   transform: scale(0);
   opacity: 0;
   transition: all 200ms;
 }
-.infoBox__card {
+.modalBox__card {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 80%;
-  background-color: var(--clr-infoBox_background);
+  background-color: var(--clr-modalBox_background);
   border-radius: 2rem;
 }
-.infoBox__header {
-  background-color: var(--clr-accent_background);
+
+.modalBox__card_gradient {
+  background: linear-gradient(
+    to bottom,
+    var(--back_2Clr) 0%,
+    var(--back_4Clr) 100%
+  );
+}
+.modalBox__card_gradient_1 {
+  background: linear-gradient(
+    to bottom right,
+    var(--firstClr) 0%,
+    var(--secondClr) 100%
+  );
+}
+.modalBox__card_gradient_2 {
+  background: linear-gradient(
+    to bottom right,
+    var(--secondClr) 0%,
+    var(--thirdClr) 100%
+  );
+}
+.modalBox__header {
+  border-bottom: var(--back_1Clr) solid 2px;
   padding: 1.6rem;
-  width: 100%;
+  width: 90%;
+  max-width: 80rem;
   text-align: center;
   border-radius: 2rem 2rem 0 0;
 }
-.infoBox__header h2 {
+.modalBox__header h2 {
   font-size: 2rem;
   font-weight: 600;
 }
-.infoBox__messageBox {
+.modalBox__messageBox {
   padding: 1rem;
   text-align: center;
 }
-.infoBox__messageBox p {
+.modalBox__messageBox p {
   font-size: 1.5rem;
   white-space: pre-wrap;
 }
-.infoBox__footer {
+.modalBox__footer {
   display: flex;
   gap: 5rem;
   padding: 2rem;
