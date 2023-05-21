@@ -175,14 +175,6 @@ const Learn = props => {
   return (
     <div className={classes.lernBox}>
       <div className={classes.editLearnSwitchBox}>
-        {/* {!editLearn && (
-          <ButtonText
-            name={'new round'}
-            style={{ border: 'var(--clr_accent_blue) solid 2px' }}
-            id={'newRound'}
-            onClickHandler={onNewRoundHandler}
-          ></ButtonText>
-        )} */}
         <ButtonText
           name={editLearn ? 'learn' : 'edit list'}
           style={{ border: 'var(--clr_accent_blue) solid 2px' }}
@@ -190,6 +182,15 @@ const Learn = props => {
           onClickHandler={onEditLearnSwitch}
         ></ButtonText>
       </div>
+      {learn.learn.list.length < 30 && (
+        <div className={classes.emptyMessageBox}>
+          <p>
+            you should have at least 30-50 translations saved in you're list
+            before you start learning ! we highly recommend to add more
+            translations !
+          </p>
+        </div>
+      )}
       {!editLearn && (
         <div>
           <CurrentStats

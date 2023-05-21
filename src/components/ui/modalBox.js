@@ -2,14 +2,8 @@ import classes from './modalBox.module.css';
 import ButtonRound from './buttonRound';
 
 const ModalBox = props => {
-  const onClickHandler = el => {
-    props.clickmodalBox(el);
-    if (el === 'x' && props.modalState.dismiss) {
-      props.modalState.dismiss(props.modalState.value);
-    }
-    if (el === 'check' && props.modalState.confirm) {
-      props.modalState.confirm(props.modalState.value);
-    }
+  const onClickHandler = btnId => {
+    props.clickModalBox(btnId);
   };
   return (
     <div
@@ -49,15 +43,17 @@ const ModalBox = props => {
               onClickHandler={onClickHandler}
             />
           )}
-          <ButtonRound
-            btnId="check"
-            className={classes.buttonAddEdit}
-            buttonName={'check'}
-            color={''}
-            iconColor={''}
-            isFav={''}
-            onClickHandler={onClickHandler}
-          />
+          {props.modalState.showBtnCheck && (
+            <ButtonRound
+              btnId="check"
+              className={classes.buttonAddEdit}
+              buttonName={'check'}
+              color={''}
+              iconColor={''}
+              isFav={''}
+              onClickHandler={onClickHandler}
+            />
+          )}
         </footer>
       </div>
     </div>

@@ -27,11 +27,41 @@ const HistoryList = props => {
     return array.filter(el => el.id === id)[0];
   };
   const onTrashHandler = id => {
-    console.log('✅');
+    props.setModalStateInsideComponent({
+      message: 'delete this item ?',
+      title: 'caution',
+      trash: deleteHistoryItem,
+      hideModalBox: false,
+      showBtnTrash: true,
+      showBtnX: true,
+      showBtnCheck: false,
+      value: id,
+    });
+  };
+  const deleteHistoryItem = id => {
     dispatch(historyDelete({ id }));
   };
 
   const onFavHandler = id => {
+    const item = itemFilteredId(id, historyList);
+    // if fav ask to delete from learnList
+    if (item.fav === true) {
+      props.setModalStateInsideComponent({
+        message:
+          "this item will be removed from the learn list ! you lose the current interval count ! optional you can delete it from history this doesn't effect the learn list.",
+        title: 'caution',
+        confirm: favHandler,
+        hideModalBox: false,
+        showBtnX: true,
+        showBtnCheck: true,
+        value: id,
+      });
+      return;
+    }
+    // add to favList
+    favHandler(id);
+  };
+  const favHandler = id => {
     dispatch(historyFavSwitch({ id }));
     dispatch(
       addOrRemoveByHistoryList({ item: itemFilteredId(id, historyList) })

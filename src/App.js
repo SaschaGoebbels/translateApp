@@ -51,17 +51,38 @@ function App() {
   const snap = useSnapshot(state);
   //==================================================================
   // modalBox
-  const [modalState, setModalState] = useState({
+  const modalInit = {
     message: 'Message',
     title: 'Title',
     dismiss: '',
     confirm: '',
-    hideModalBox: false,
-    showBtnTrash: true,
+    trash: '',
+    hideModalBox: true,
+    showBtnCheck: true,
+    showBtnTrash: false,
     showBtnX: true,
     value: '',
-  });
+  };
+  const [modalState, setModalState] = useState(modalInit);
   // handle modal state change
+  const setModalStateInsideComponent = state => {
+    setModalState({ ...state });
+  };
+  const resetModalState = state => {
+    setModalState({ ...state });
+  };
+  const clickModalBox = btnId => {
+    if (btnId === 'x' && modalState.dismiss) {
+      modalState.dismiss(modalState.value);
+    }
+    if (btnId === 'trash' && modalState.trash) {
+      modalState.trash(modalState.value);
+    }
+    if (btnId === 'check' && modalState.confirm) {
+      modalState.confirm(modalState.value);
+    }
+    resetModalState(modalInit);
+  };
   //==================================================================
   const defaultLanguageObjects = (array, lang) => {
     return array.filter(el => el.name === lang);
@@ -96,7 +117,10 @@ function App() {
   //==================================================================
   return (
     <div className={classes.App}>
-      <ModalBox modalState={modalState}></ModalBox>
+      <ModalBox
+        modalState={modalState}
+        clickModalBox={clickModalBox}
+      ></ModalBox>
       <header className={classes.header_menu}>
         <Header></Header>
         <button className={classes.menuButton} onClick={onMenuButtonHandler}>
@@ -122,10 +146,15 @@ function App() {
             icon={'faHistory'}
             name={'history'}
             mainLanguage={'de'}
+            setModalStateInsideComponent={setModalStateInsideComponent}
           ></HistoryList>
         </div>
       )}
-      {!snap.translate && <Learn></Learn>}
+      {!snap.translate && (
+        <Learn
+          setModalStateInsideComponent={setModalStateInsideComponent}
+        ></Learn>
+      )}
     </div>
   );
 }
