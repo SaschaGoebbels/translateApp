@@ -4,12 +4,12 @@ import './variables.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 //components
-import Header from './components/ui/header';
-import TranslateBar from './components/translate/translateBar';
-import HistoryList from './components/translate/historyList';
-import ModalBox from './components/ui/modalBox';
+import Header from './components/ui/Header';
+import TranslateBar from './components/translate/TranslateBar';
+import HistoryList from './components/translate/HistoryList';
+import ModalBox from './components/ui/ModalBox';
 // learn
-import Learn from './components/learn/learn';
+import Learn from './components/learn/Learn';
 
 //logic components
 import { FetchToGoogle } from './components/logic/fetch';

@@ -1,5 +1,5 @@
-import classes from './modalBox.module.css';
-import ButtonRound from './buttonRound';
+import classes from './ModalBox.module.css';
+import ButtonRound from './ButtonRound';
 
 const ModalBox = props => {
   const onClickHandler = btnId => {

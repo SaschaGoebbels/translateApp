@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './currentStats.module.css';
+import classes from './CurrentStats.module.css';
 
 const CurrentStats = props => {
   const currentRound = props.currentRound || { index: 0, length: 0 };

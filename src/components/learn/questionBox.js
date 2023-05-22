@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from './questionBox.module.css';
-import ButtonBox from '../ui/buttonBox';
-import ButtonRound from '../ui/buttonRound';
+import classes from './QuestionBox.module.css';
+import ButtonBox from '../ui/ButtonBox';
+import ButtonRound from '../ui/ButtonRound';
 
 const QuestionBox = props => {
   return (

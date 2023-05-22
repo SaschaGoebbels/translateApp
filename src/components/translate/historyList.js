@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import classes from './historyList.module.css';
+import classes from './HistoryList.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHistory } from '@fortawesome/free-solid-svg-icons';
 
-import HistoryItem from './historyItem';
+import HistoryItem from './HistoryItem';
 
 // redux
 import { useSelector, useDispatch } from 'react-redux';

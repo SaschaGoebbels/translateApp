@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './translateBar.module.css';
+import classes from './TranslateBar.module.css';
 
 const TextBox = props => {
   //==================================================================

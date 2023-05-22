@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import classes from './translateBar.module.css';
+import classes from './TranslateBar.module.css';
 // components
-import LanguageDoubleDropdown from './languageDoubleDropdown';
-import TextBox from './textBox';
-import Loader3dots from '../utils/loader3dots';
+import LanguageDoubleDropdown from './LanguageDoubleDropdown';
+import TextBox from './TextBox';
+import Loader3dots from '../utils/Loader3dots';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';

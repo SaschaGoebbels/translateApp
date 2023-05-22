@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './buttonText.module.css';
+import classes from './ButtonText.module.css';
 
 const ButtonText = props => {
   return (

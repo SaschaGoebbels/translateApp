@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import classes from './learn.module.css';
+import classes from './Learn.module.css';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 //redux
@@ -13,11 +13,11 @@ import {
 } from '../../redux/learnSlice';
 
 //components
-import QuestionBox from './questionBox';
-import EditBox from './editBox';
-import CurrentStats from './currentStats';
-import RenderObjectList from '../ui/renderObjectList';
-import ButtonText from '../ui/buttonText';
+import QuestionBox from './QuestionBox';
+import EditBox from './EditBox';
+import CurrentStats from './CurrentStats';
+import RenderObjectList from '../ui/RenderObjectList';
+import ButtonText from '../ui/ButtonText';
 // logic components
 import { createNewRound } from '../logic/learnLogic';
 

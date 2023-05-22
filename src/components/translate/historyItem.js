@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './historyItem.module.css';
+import classes from './HistoryItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEquals } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';

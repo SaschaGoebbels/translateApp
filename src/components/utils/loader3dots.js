@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './loader3dots.module.css';
+import classes from './Loader3dots.module.css';
 
 const Loader3dots = props => {
   return (

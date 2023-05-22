@@ -1,9 +1,9 @@
 import React from 'react';
-import classes from './renderObjectList.module.css';
+import classes from './RenderObjectList.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faHistory } from '@fortawesome/free-solid-svg-icons';
 
-import ObjectListItem from './objectListItem';
+import ObjectListItem from './ObjectListItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 

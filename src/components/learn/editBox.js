@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import classes from './questionBox.module.css';
-import ButtonBox from '../ui/buttonBox';
-import ButtonRound from '../ui/buttonRound';
-import TextBoxEdit from './textBoxEdit';
+import classes from './QuestionBox.module.css';
+import ButtonBox from '../ui/ButtonBox';
+import ButtonRound from '../ui/ButtonRound';
+import TextBoxEdit from './TextBoxEdit';
 
 const EditBox = props => {
   const [text1State, setText1State] = useState(props.currentObject.text1);

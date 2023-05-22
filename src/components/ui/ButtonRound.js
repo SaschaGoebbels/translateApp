@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './buttonRound.module.css';
+import classes from './ButtonRound.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';

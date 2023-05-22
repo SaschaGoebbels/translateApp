@@ -1,6 +1,6 @@
 import React from 'react';
-import classes from './buttonBox.module.css';
-import ButtonRound from './buttonRound';
+import classes from './ButtonBox.module.css';
+import ButtonRound from './ButtonRound';
 
 const ButtonBox = props => {
   const onClickHandler = id => {

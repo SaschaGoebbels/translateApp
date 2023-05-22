@@ -1,6 +1,6 @@
 import React from 'react';
 import and from '../../files/and.svg';
-import classes from './header.module.css';
+import classes from './Header.module.css';
 
 //valtio
 import { useSnapshot } from 'valtio';

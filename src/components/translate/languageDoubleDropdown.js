@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import classes from './languageDoubleDropdown.module.css';
-import classesTranslateBar from './translateBar.module.css';
-import LanguageDropdown from './languageDropdown';
+import classesTranslateBar from './TranslateBar.module.css';
+import LanguageDropdown from './LanguageDropdown';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
