@@ -8,6 +8,7 @@ import Header from './components/ui/Header';
 import TranslateBar from './components/translate/TranslateBar';
 import HistoryList from './components/translate/HistoryList';
 import ModalBox from './components/ui/ModalBox';
+import Menu from './components/ui/Menu';
 // learn
 import Learn from './components/learn/Learn';
 
@@ -117,6 +118,10 @@ function App() {
   //==================================================================
   return (
     <div className={classes.App}>
+      <Menu
+        menuState={{ hide: false }}
+        userData={{ email: 'email', name: 'name' }}
+      ></Menu>
       <ModalBox
         modalState={modalState}
         clickModalBox={clickModalBox}

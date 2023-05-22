@@ -4,6 +4,7 @@
   border-bottom: var(--clr_border) solid 1px;
   height: 6rem;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 .menuItemBox__icon {
   height: 100%;
