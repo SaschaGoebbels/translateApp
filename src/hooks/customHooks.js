@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 
-export const useMenuHooks = props => {
-  const menuInitState = { hideMenu: false };
+export const useMenuHook = props => {
+  const menuInitState = { hideMenu: true };
   const [menuState, setMenuState] = useState(menuInitState);
-  return menuState;
+  const changeMenuState = state => {
+    setMenuState(state);
+  };
+  return { menuState, changeMenuState };
 };

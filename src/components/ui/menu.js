@@ -5,7 +5,7 @@ import ButtonRound from './ButtonRound';
 import MenuItem from './MenuItem';
 // import settingsBox from './SettingsBox.module.css';
 // customHooks
-import { useMenuHooks } from '../../hooks/customHooks';
+import { useMenuHook } from '../../hooks/customHooks';
 
 //fontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -50,22 +50,23 @@ const Menu = props => {
   //   </div>
   // );
   //==================================================================
+  const { menuState, changeMenuState } = useMenuHook();
   //==================================================================
   return (
     <div
       className={`${classes.menuBox} ${
-        !props.menuState.hide && classes['menuBox--modal']
+        !props.menuState.hideMenu && classes['menuBox--modal']
       }`}
     >
       <div
         className={`${classes.onClick} ${
-          props.menuState.hide && classes['onClick--hide']
+          props.menuState.hideMenu && classes['onClick--hide']
         }`}
-        // onClick={() => props.changeMenuState({ hide: true })}
+        onClick={() => props.closeMenu()}
       ></div>
       <div
         className={`${classes.menuBox__dropInBox} ${
-          props.menuState.hide && classes['menuBox__dropInBox--hide']
+          props.menuState.hideMenu && classes['menuBox__dropInBox--hide']
         }`}
       >
         <div className={classes.menuBox__UserBox} onClick={onLogoutHandler}>
@@ -103,12 +104,6 @@ const Menu = props => {
             id={'user'}
             onBtnClick={onMenuClickHandler}
           ></MenuItem>
-          {/* <MenuItem
-            text={'list'}
-            icon={faListUl}
-            id={'list'}
-            onBtnClick={onMenuClickHandler}
-          ></MenuItem> */}
           <MenuItem
             text={'export data'}
             icon={faFileExport}
@@ -116,7 +111,6 @@ const Menu = props => {
             onBtnClick={onMenuClickHandler}
           ></MenuItem>
           <MenuItem
-            // text={`import ${&nbsp} data`}
             text={'import data'}
             icon={faFileArrowDown}
             id={'get'}

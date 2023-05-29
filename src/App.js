@@ -11,6 +11,8 @@ import ModalBox from './components/ui/ModalBox';
 import Menu from './components/ui/Menu';
 // learn
 import Learn from './components/learn/Learn';
+// customHooks
+import { useMenuHook } from './hooks/customHooks';
 
 //logic components
 import { FetchToGoogle } from './components/logic/fetch';
@@ -85,6 +87,15 @@ function App() {
     resetModalState(modalInit);
   };
   //==================================================================
+  // const [menuState, setMenuState] = useState({ hide: true });
+  const { menuState, changeMenuState } = useMenuHook();
+
+  const onMenuButtonHandler = () => {
+    changeMenuState({ hideMenu: false });
+    console.log('✅');
+  };
+
+  //==================================================================
   const defaultLanguageObjects = (array, lang) => {
     return array.filter(el => el.name === lang);
   };
@@ -96,9 +107,6 @@ function App() {
     return;
   };
 
-  const onMenuButtonHandler = () => {
-    console.log('❌ Menu Button');
-  };
   //==================================================================
 
   //==================================================================
@@ -116,10 +124,11 @@ function App() {
   }, []);
 
   //==================================================================
+  //==================================================================
   return (
     <div className={classes.App}>
       <Menu
-        menuState={{ hide: true }}
+        menuState={menuState}
         userData={{ email: 'email', name: 'name' }}
       ></Menu>
       <ModalBox
