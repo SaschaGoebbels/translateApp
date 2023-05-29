@@ -137,12 +137,17 @@ const TranslateBar = props => {
       await navigator.clipboard.readText().then(clipText => {
         text = clipText;
       });
-      if (e.ctrlKey && e.shiftKey && e.key === 'F') {
+      if (
+        (e.ctrlKey && e.shiftKey && e.key === 'Y') ||
+        (e.ctrlKey && e.shiftKey && e.altKey && e.key === 'P')
+      ) {
         setSearchInputMainState(text);
         return;
       }
-      if (e.ctrlKey && e.shiftKey && e.key === 'R') {
-        e.preventDefault();
+      if (
+        (e.ctrlKey && e.shiftKey && e.key === 'F') ||
+        (e.ctrlKey && e.shiftKey && e.altKey && e.key === 'Ü')
+      ) {
         setSearchInputSecondState(text);
         return;
       }
@@ -180,7 +185,7 @@ const TranslateBar = props => {
           autoFocus={props.loading}
           onChange={textInput}
           id="mainSearchInput"
-          placeholder={'str-shift-f'}
+          placeholder={'str-shift-y'}
           value={searchInputMainState}
           onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}
@@ -189,7 +194,7 @@ const TranslateBar = props => {
         <TextBox
           onChange={textInput}
           id="secondSearchInput"
-          placeholder={'str-shift-r'}
+          placeholder={'str-shift-f'}
           value={searchInputSecondState}
           onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}

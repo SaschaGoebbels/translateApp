@@ -119,7 +119,7 @@ function App() {
   return (
     <div className={classes.App}>
       <Menu
-        menuState={{ hide: false }}
+        menuState={{ hide: true }}
         userData={{ email: 'email', name: 'name' }}
       ></Menu>
       <ModalBox
