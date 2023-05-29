@@ -142,6 +142,7 @@ const TranslateBar = props => {
         return;
       }
       if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+        e.preventDefault();
         setSearchInputSecondState(text);
         return;
       }
@@ -179,7 +180,7 @@ const TranslateBar = props => {
           autoFocus={props.loading}
           onChange={textInput}
           id="mainSearchInput"
-          placeholder={'str-f'}
+          placeholder={'str-shift-f'}
           value={searchInputMainState}
           onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}
@@ -188,7 +189,7 @@ const TranslateBar = props => {
         <TextBox
           onChange={textInput}
           id="secondSearchInput"
-          placeholder={'str-r'}
+          placeholder={'str-shift-r'}
           value={searchInputSecondState}
           onChangeTextareaSize={onChangeTextareaSize}
           textareaSize={textareaSize}
