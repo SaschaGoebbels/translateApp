@@ -21,6 +21,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Menu = props => {
+  // const { menuState, changeMenuState } = useMenuHook();
   const onMenuClickHandler = btnId => {
     console.log('✅', btnId);
   };
@@ -50,23 +51,22 @@ const Menu = props => {
   //   </div>
   // );
   //==================================================================
-  const { menuState, changeMenuState } = useMenuHook();
   //==================================================================
   return (
     <div
       className={`${classes.menuBox} ${
-        !props.menuState.hideMenu && classes['menuBox--modal']
+        !props.menuState && classes['menuBox--modal']
       }`}
     >
       <div
         className={`${classes.onClick} ${
-          props.menuState.hideMenu && classes['onClick--hide']
+          props.menuState && classes['onClick--hide']
         }`}
         onClick={() => props.closeMenu()}
       ></div>
       <div
         className={`${classes.menuBox__dropInBox} ${
-          props.menuState.hideMenu && classes['menuBox__dropInBox--hide']
+          props.menuState && classes['menuBox__dropInBox--hide']
         }`}
       >
         <div className={classes.menuBox__UserBox} onClick={onLogoutHandler}>
@@ -85,7 +85,7 @@ const Menu = props => {
             />
             <div>
               <p className={classes['menuBox__UserBox--userName']}>
-                {props.userData.user}
+                {props.userData.name}
               </p>
             </div>
           </div>

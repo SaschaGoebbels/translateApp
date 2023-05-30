@@ -87,14 +87,14 @@ function App() {
     resetModalState(modalInit);
   };
   //==================================================================
-  // const [menuState, setMenuState] = useState({ hide: true });
-  const { menuState, changeMenuState } = useMenuHook();
+  const [menuState, setMenuState] = useState(true);
 
   const onMenuButtonHandler = () => {
-    changeMenuState({ hideMenu: false });
-    console.log('✅');
+    setMenuState(false);
   };
-
+  const closeMenu = () => {
+    setMenuState(true);
+  };
   //==================================================================
   const defaultLanguageObjects = (array, lang) => {
     return array.filter(el => el.name === lang);
@@ -129,7 +129,8 @@ function App() {
     <div className={classes.App}>
       <Menu
         menuState={menuState}
-        userData={{ email: 'email', name: 'name' }}
+        closeMenu={closeMenu}
+        userData={{ email: 'offline, please login !', name: 'name' }}
       ></Menu>
       <ModalBox
         modalState={modalState}
