@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import classes from './Menu.module.css';
+//redux
+import { useSelector, useDispatch } from 'react-redux';
 //components
 import ButtonRound from './ButtonRound';
 import MenuItem from './MenuItem';
+//logic
+import { exportDataToJSON } from '../../logic/exportData';
 // import settingsBox from './SettingsBox.module.css';
 // customHooks
 import { useMenuHook } from '../../hooks/customHooks';
@@ -22,12 +26,19 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Menu = props => {
   // const { menuState, changeMenuState } = useMenuHook();
+  const redux = useSelector(state => state);
+
   const onMenuClickHandler = btnId => {
     console.log('✅', btnId);
+    if (btnId === 'exp') {
+      exportDataToJSON(redux, 'testName');
+    }
   };
+
   const onLogoutHandler = () => {
     console.log('✅ logout');
   };
+
   //==================================================================
   // about
   // const aboutContent = (
