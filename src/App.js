@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 //components
 import Header from './components/ui/Header';
-import TranslateBar from './components/translate/TranslateBar';
 import HistoryList from './components/translate/HistoryList';
+import TranslateBar from './components/translate/TranslateBar';
 import ModalBox from './components/ui/ModalBox';
 import Menu from './components/ui/Menu';
 // learn
