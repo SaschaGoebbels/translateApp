@@ -140,6 +140,11 @@ const Learn = props => {
   const onStartHandler = () => {
     onNewRoundHandler();
   };
+
+  const onLoadJsonHandler = () => {
+    //
+    console.log('✅');
+  };
   //==================================================================
   // handle keyboard shortcuts
   document.onkeyup = function (e) {
@@ -189,6 +194,12 @@ const Learn = props => {
           style={{ border: 'var(--clr_accent_blue) solid 2px' }}
           id={'start'}
           onClickHandler={onStartHandler}
+        ></ButtonText>
+        <ButtonText
+          name={'load json'}
+          style={{ border: 'var(--clr_accent_blue) solid 2px' }}
+          id={'load'}
+          onClickHandler={onLoadJsonHandler}
         ></ButtonText>
       </div>
       {learn.learn.list.length < 30 && (
