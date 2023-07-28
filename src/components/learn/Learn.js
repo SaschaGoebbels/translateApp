@@ -137,6 +137,9 @@ const Learn = props => {
   const onEditLearnSwitch = () => {
     setEditLearn(prev => !prev);
   };
+  const onStartHandler = () => {
+    onNewRoundHandler();
+  };
   //==================================================================
   // handle keyboard shortcuts
   document.onkeyup = function (e) {
@@ -180,6 +183,12 @@ const Learn = props => {
           style={{ border: 'var(--clr_accent_blue) solid 2px' }}
           id={'editLearnSwitch'}
           onClickHandler={onEditLearnSwitch}
+        ></ButtonText>
+        <ButtonText
+          name={'start'}
+          style={{ border: 'var(--clr_accent_blue) solid 2px' }}
+          id={'start'}
+          onClickHandler={onStartHandler}
         ></ButtonText>
       </div>
       {learn.learn.list.length < 30 && (
