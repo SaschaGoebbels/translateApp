@@ -130,7 +130,7 @@ function App() {
       <Menu
         menuState={menuState}
         closeMenu={closeMenu}
-        userData={{ email: 'offline, please login !', name: 'name' }}
+        userData={{ email: 'offline, please login !', name: '' }}
       ></Menu>
       <ModalBox
         modalState={modalState}
@@ -168,6 +168,8 @@ function App() {
       {!snap.translate && (
         <Learn
           setModalStateInsideComponent={setModalStateInsideComponent}
+          gradientColor={{ left: '--secondClr', right: '--clr_accent_blue' }}
+          listName={'translations'}
         ></Learn>
       )}
     </div>

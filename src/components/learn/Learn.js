@@ -179,6 +179,7 @@ const Learn = props => {
   const onClickArchiv = () => {
     console.log('✅ archiv'); //TODO
   };
+  //==================================================================
 
   //==================================================================
   return (
@@ -196,12 +197,12 @@ const Learn = props => {
           id={'start'}
           onClickHandler={onStartHandler}
         ></ButtonText>
-        {/* <ButtonText
-          name={'load json'}
+        <ButtonText
+          name={'open'}
           style={{ border: 'var(--clr_accent_blue) solid 2px' }}
-          id={'load'}
+          id={'open'}
           onClickHandler={onLoadJsonHandler}
-        ></ButtonText> */}
+        ></ButtonText>
       </div>
       {learn.learn.list.length < 30 && (
         <div className={classes.emptyMessageBox}>
@@ -214,6 +215,10 @@ const Learn = props => {
       )}
       {!editLearn && (
         <div>
+          <div className={classes.listNameTextBox}>
+            <p>list name:</p>
+            <p>{props.listName}</p>
+          </div>
           <CurrentStats
             onClickArchiv={onClickArchiv}
             currentRound={{

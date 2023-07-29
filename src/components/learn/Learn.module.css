@@ -21,3 +21,14 @@
   gap: 2rem;
   font-size: 2.2rem;
 }
+.listNameTextBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.8rem;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--thirdClr);
+}
