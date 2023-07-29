@@ -15,11 +15,11 @@ const CurrentStats = props => {
           </p>
         </div>
         <div className={classes.textBox}>
-          <p>Total</p>
-          <p>Cards:</p>
+          <p>Total:</p>
+          {/* <p>Cards:</p> */}
           <p>{total.cards}</p>
-          <p>Rounds:</p>
-          <p>{total.rounds}</p>
+          {/* <p>Rounds:</p>
+          <p>{total.rounds}</p> */}
         </div>
         <div className={classes.textBox} onClick={props.onClickArchiv}>
           <p>Archiv:</p>
