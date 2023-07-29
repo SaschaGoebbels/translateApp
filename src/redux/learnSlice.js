@@ -11,7 +11,7 @@ import {
 //==================================================================
 import data from '../files/voca.json';
 const exList = data.learn.learn.current.list;
-console.log('✅', exList);
+
 //==================================================================
 
 const exampleList = exList;

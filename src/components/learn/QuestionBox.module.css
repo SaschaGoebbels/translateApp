@@ -38,3 +38,14 @@
   width: 100%;
   border-bottom: var(--clr_accent_blue) solid 2px;
 }
+.buttonBox {
+  position: relative;
+  width: 100%;
+}
+.buttonBoxInfo {
+  position: absolute;
+  align-self: flex-end;
+  right: -1.6rem;
+  bottom: -1.6rem;
+  font-size: 1.8rem;
+}

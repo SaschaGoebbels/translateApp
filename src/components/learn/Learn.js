@@ -59,6 +59,7 @@ const Learn = props => {
   }, [currentQuestion]);
 
   const currentObject = currentQuestion.list[currentQuestion.index];
+
   //==================================================================
   const [editMode, setEditMode] = useState(false);
   //==================================================================
@@ -195,12 +196,12 @@ const Learn = props => {
           id={'start'}
           onClickHandler={onStartHandler}
         ></ButtonText>
-        <ButtonText
+        {/* <ButtonText
           name={'load json'}
           style={{ border: 'var(--clr_accent_blue) solid 2px' }}
           id={'load'}
           onClickHandler={onLoadJsonHandler}
-        ></ButtonText>
+        ></ButtonText> */}
       </div>
       {learn.learn.list.length < 30 && (
         <div className={classes.emptyMessageBox}>
@@ -230,6 +231,7 @@ const Learn = props => {
               onClickHandler={onButtonBoxHandler}
               text1={question.text[0]}
               text2={question.answer}
+              interval={currentQuestion.list[currentQuestion.index].interval}
               hideXBtn={question.button}
               hideQuest={!question.button}
               hideCheck={question.button}

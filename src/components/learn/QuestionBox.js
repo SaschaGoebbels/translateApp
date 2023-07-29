@@ -28,13 +28,16 @@ const QuestionBox = props => {
         <div className={classes.textBoxUnderLine}></div>
         <p>{props.text2}</p>
       </div>
-      <ButtonBox
-        hideXBtn={props.hideXBtn || false}
-        hideQuest={props.hideQuest || false}
-        hideCheck={props.hideCheck || false}
-        hideTrash={true}
-        onClickHandler={props.onClickHandler}
-      ></ButtonBox>
+      <div className={classes.buttonBox}>
+        <ButtonBox
+          hideXBtn={props.hideXBtn || false}
+          hideQuest={props.hideQuest || false}
+          hideCheck={props.hideCheck || false}
+          hideTrash={true}
+          onClickHandler={props.onClickHandler}
+        ></ButtonBox>
+        <dir className={classes.buttonBoxInfo}>i. {props.interval}</dir>
+      </div>
     </div>
   );
 };
