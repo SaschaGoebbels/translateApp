@@ -9,7 +9,7 @@ const CurrentStats = props => {
     <div>
       <div className={classes.box}>
         <div className={classes.textBox}>
-          <p>Current Round:</p>
+          <p>Current:</p>
           <p>
             {currentRound.index} / {currentRound.length}
           </p>
