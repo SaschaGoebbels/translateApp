@@ -13,6 +13,16 @@ const QuestionBox = props => {
     >
       <div className={classes.editButtonBox}>
         <ButtonRound
+          btnId="arrowLeft"
+          className={classes.buttonAddEdit}
+          buttonName={'arrowLeft'}
+          borderColor={'rgba(0, 0, 0, 0.0)'}
+          shadow={'0px 0px 0px rgba(0, 0, 0, 0.0)'}
+          color={''}
+          iconColor={''}
+          onClickHandler={props.onClickHandler}
+        ></ButtonRound>
+        <ButtonRound
           btnId="pen"
           className={classes.buttonAddEdit}
           buttonName={'pen'}

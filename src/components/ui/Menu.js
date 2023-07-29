@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ButtonRound from './ButtonRound';
 import MenuItem from './MenuItem';
 //logic
-import { exportDataToJSON } from '../../logic/exportData';
+import { exportDataToJSON } from '../logic/exportData';
 // import settingsBox from './SettingsBox.module.css';
 // customHooks
 import { useMenuHook } from '../../hooks/customHooks';

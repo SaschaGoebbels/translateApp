@@ -169,7 +169,7 @@ function App() {
         <Learn
           setModalStateInsideComponent={setModalStateInsideComponent}
           gradientColor={{ left: '--secondClr', right: '--clr_accent_blue' }}
-          listName={'translations'}
+          listName={'favorites'}
         ></Learn>
       )}
     </div>

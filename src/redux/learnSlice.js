@@ -10,6 +10,7 @@ import {
 
 //==================================================================
 import data from '../files/voca.json';
+import beginner from '../files/templates/beginner.json';
 const exList = data.learn.learn.current.list;
 
 //==================================================================
@@ -18,12 +19,25 @@ const exampleList = exList;
 
 const initialState = {
   learn: {
-    learn: { list: [...exampleList], timestamp: '' },
+    learn: {
+      listName: 'favorites',
+      list: [...exampleList],
+      timestamp: '',
+      archived: [],
+    },
     current: { list: [], index: 0 },
     timestamp: '',
+    templates: {
+      beginner: {
+        listName: 'beginner',
+        template: [...beginner],
+        list: [],
+        timestamp: '',
+      },
+    },
     stats: {
       totalRounds: 0,
-      archived: [],
+      archived: [], //DELETE
     },
     interval: {
       0: 0,

@@ -7,6 +7,7 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const ButtonRound = props => {
   let buttonIconColor = props.iconColor;
@@ -30,6 +31,9 @@ const ButtonRound = props => {
       break;
     case 'user':
       buttonName = faUser;
+      break;
+    case 'arrowLeft':
+      buttonName = faArrowLeft;
       break;
     default:
       buttonName = faCheck;
