@@ -216,7 +216,7 @@ const Learn = props => {
       {!editLearn && (
         <div>
           <div className={classes.listNameTextBox}>
-            <p>list name:</p>
+            <p>list:</p>
             <p>{props.listName}</p>
           </div>
           <CurrentStats
