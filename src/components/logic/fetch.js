@@ -21,6 +21,7 @@ export const FetchToGoogle = async obj => {
   state.loading = true;
   let response, body;
   const { sourceText, sourceLang, targetLang } = obj.search;
+  // console.log('✅', obj.search);
   const noSpecialCharacters = sourceText.replace(/[^\w\s]/gi, '');
   const url =
     'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +

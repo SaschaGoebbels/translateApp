@@ -20,6 +20,7 @@ import RenderObjectList from '../ui/RenderObjectList';
 import ButtonText from '../ui/ButtonText';
 // logic components
 import { createNewRound } from '../logic/learnLogic';
+import { fetchTemplates } from '../logic/fetchTemplates';
 
 //valtio
 import { useSnapshot } from 'valtio';
@@ -212,6 +213,13 @@ const Learn = props => {
           id={'open'}
           onClickHandler={onLoadJsonHandler}
         ></ButtonText>
+        <button
+          onClick={() => {
+            fetchTemplates([1, 2, 3], 'en', 'de');
+          }}
+        >
+          Test
+        </button>
       </div>
       {learn.learn.list.length < 30 && (
         <div className={classes.emptyMessageBox}>
