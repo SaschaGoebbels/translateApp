@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './QuestionBox.module.css';
 import ButtonBox from '../ui/ButtonBox';
 import ButtonRound from '../ui/ButtonRound';
+import { textToSpeech } from '../logic/textToSpeech';
 
 const QuestionBox = props => {
   return (
@@ -34,9 +35,43 @@ const QuestionBox = props => {
         ></ButtonRound>
       </div>
       <div className={classes.textBox}>
-        <p>{props.text1}</p>
+        <div className={classes.textButtonBox}>
+          <p>{props.text1}</p>
+          <div className={classes.buttonSpeech}>
+            <ButtonRound
+              btnId="speech"
+              className={classes.buttonAddEdit}
+              buttonName={'speech'}
+              borderColor={'rgba(0, 0, 0, 0.0)'}
+              shadow={'0px 0px 0px rgba(0, 0, 0, 0.0)'}
+              color={''}
+              iconColor={''}
+              // onClickHandler={props.onClickHandler}
+              onClickHandler={() => {
+                textToSpeech(props.text1);
+              }}
+            ></ButtonRound>
+          </div>
+        </div>
         <div className={classes.textBoxUnderLine}></div>
-        <p>{props.text2}</p>
+        <div className={classes.textButtonBox}>
+          <p>{props.text2}</p>
+          <div className={classes.buttonSpeech}>
+            <ButtonRound
+              btnId="speech"
+              className={classes.buttonAddEdit}
+              buttonName={'speech'}
+              borderColor={'rgba(0, 0, 0, 0.0)'}
+              shadow={'0px 0px 0px rgba(0, 0, 0, 0.0)'}
+              color={''}
+              iconColor={''}
+              // onClickHandler={props.onClickHandler}
+              onClickHandler={() => {
+                textToSpeech(props.text2);
+              }}
+            ></ButtonRound>
+          </div>
+        </div>
       </div>
       <div className={classes.buttonBox}>
         <ButtonBox

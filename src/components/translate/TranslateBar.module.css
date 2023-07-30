@@ -34,6 +34,7 @@ option {
 }
 
 .box {
+  position: relative;
   background-color: transparent;
   border: var(--clr_accent_green) solid 2px;
   border-radius: 0.7rem;
@@ -42,10 +43,29 @@ option {
   font-size: var(--font_size);
   min-width: 10rem;
 }
-
+.textInputBox {
+  position: relative;
+  display: flex;
+  width: 100%;
+  background-color: transparent;
+  border: var(--clr_accent_green) solid 2px;
+  border-radius: 0.7rem;
+  min-width: 10rem;
+}
 .textareaInput {
-  width: 50%;
+  color: var(--font_color_bright);
+  font-size: var(--font_size);
+  background-color: transparent;
+  padding: 0.2rem 0.8rem;
+  border: none;
+  width: 100%;
   overflow: hidden;
   resize: none;
   font-family: 'Roboto', sans-serif;
+}
+.buttonBox {
+  position: absolute;
+  right: -0.4rem;
+  top: -0.7rem;
+  opacity: 50%;
 }

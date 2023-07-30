@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './TranslateBar.module.css';
+import ButtonRound from '../ui/ButtonRound';
+import { textToSpeech } from '../logic/textToSpeech';
 
 const TextBox = props => {
   //==================================================================
@@ -41,17 +43,35 @@ const TextBox = props => {
   const handleFocus = event => event.target.select();
   //==================================================================
   return (
-    <textarea
-      autoFocus={props.autoFocus}
-      placeholder={props.placeholder}
-      onChange={onChangeText}
-      onFocus={handleFocus}
-      style={{ height: textareaSize }}
-      className={`${classes.box} ${classes.textareaInput} `}
-      type="text"
-      id={props.id}
-      value={props.value}
-    />
+    <div className={`${classes.textInputBox} `}>
+      <textarea
+        autoFocus={props.autoFocus}
+        placeholder={props.placeholder}
+        onChange={onChangeText}
+        onFocus={handleFocus}
+        style={{ height: textareaSize }}
+        // className={`${classes.box} ${classes.textareaInput} `}
+        className={` ${classes.textareaInput} `}
+        type="text"
+        id={props.id}
+        value={props.value}
+      />
+      <div className={classes.buttonBox}>
+        <ButtonRound
+          btnId="speech"
+          className={classes.buttonAddEdit}
+          buttonName={'speech'}
+          borderColor={'rgba(0, 0, 0, 0.0)'}
+          shadow={'0px 0px 0px rgba(0, 0, 0, 0.0)'}
+          color={''}
+          iconColor={''}
+          // onClickHandler={props.onClickHandler}
+          onClickHandler={() => {
+            textToSpeech(props.value);
+          }}
+        ></ButtonRound>
+      </div>
+    </div>
   );
 };
 
