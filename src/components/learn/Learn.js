@@ -80,6 +80,7 @@ const Learn = props => {
     button: true,
   };
   const [question, setQuestion] = useState(questionDefault);
+
   useEffect(() => {
     setQuestion(questionDefault);
   }, [currentQuestion]);
@@ -97,6 +98,14 @@ const Learn = props => {
       }
       if (id === 'pen') {
         setEditMode(true);
+      }
+      if (id === 'arrowLeft') {
+        const x = learn.current.index === 0 ? 0 : 1;
+
+        setCurrentQuestion({
+          list: learn.current.list,
+          index: learn.current.index - x,
+        });
       }
     }
   };
@@ -223,7 +232,8 @@ const Learn = props => {
             onClickArchiv={onClickArchiv}
             currentRound={{
               length: learn.current.list?.length || 0,
-              index: learn.current?.index || 0,
+              index: currentQuestion?.index || 0,
+              // index: learn.current?.index || 0,
             }}
             total={{
               cards: learn.learn.list?.length,
