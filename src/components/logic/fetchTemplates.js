@@ -1,5 +1,4 @@
 import { FetchToGoogle } from './fetch';
-import beginner from '../../files/templates/beginner.json';
 
 const searchObj = {
   search: {
@@ -12,11 +11,32 @@ const searchObj = {
   },
 };
 
-export const fetchTemplates = async (list, lang1, lang2) => {
-  console.log('✅', 'fetch', list, lang1, lang2);
+export const fetchTemplates = async (listObj, targetLang) => {
+  if (targetLang !== 'en') {
+    console.log('✅', readTemplatesListArray(listObj, targetLang));
+  }
+  // console.log('✅', 'fetch', listObj, targetLang);
 
-  const res = await FetchToGoogle(searchObj);
-  console.log('✅', res);
+  // const res = await FetchToGoogle(searchObj);
+  // console.log('✅', res);
   // // if (res) dispatch(historyListAdd({ ...res }));
   return;
+};
+
+const readTemplatesListArray = async (listObj, targetLang) => {
+  // console.log('✅', listObj, targetLang);
+  let resArray = [];
+
+  await listObj.list.forEach(async element => {
+    const res = await FetchToGoogle({
+      search: {
+        sourceText: element,
+        sourceLang: listObj.lang,
+        targetLang,
+      },
+      setTarget: text => {},
+    });
+    resArray = [...resArray, res];
+  });
+  // console.log('✅', resArray);
 };

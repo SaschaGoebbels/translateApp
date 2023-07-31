@@ -21,10 +21,11 @@ import ButtonText from '../ui/ButtonText';
 // logic components
 import { createNewRound } from '../logic/learnLogic';
 import { fetchTemplates } from '../logic/fetchTemplates';
-
 //valtio
 import { useSnapshot } from 'valtio';
 import { state } from '../../store/state';
+// files
+import beginner from '../../files/templates/en-beginner.json';
 
 const Learn = props => {
   const snap = useSnapshot(state);
@@ -215,7 +216,7 @@ const Learn = props => {
         ></ButtonText>
         <button
           onClick={() => {
-            fetchTemplates([1, 2, 3], 'en', 'de');
+            fetchTemplates(beginner, 'de');
           }}
         >
           Test

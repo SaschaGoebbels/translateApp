@@ -10,7 +10,7 @@ import {
 
 //==================================================================
 import data from '../files/voca.json';
-import beginner from '../files/templates/beginner.json';
+import beginner from '../files/templates/en-beginner.json';
 const exList = data.learn.learn.current.list;
 
 //==================================================================
@@ -30,7 +30,7 @@ const initialState = {
     templates: {
       beginner: {
         listName: 'beginner',
-        template: [...beginner],
+        template: [...beginner.list],
         list: [],
         timestamp: '',
       },
