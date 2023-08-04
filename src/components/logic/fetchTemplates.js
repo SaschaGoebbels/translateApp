@@ -27,16 +27,29 @@ const readTemplatesListArray = async (listObj, targetLang) => {
   // console.log('✅', listObj, targetLang);
   let resArray = [];
 
-  await listObj.list.forEach(async element => {
-    const res = await FetchToGoogle({
-      search: {
-        sourceText: element,
-        sourceLang: listObj.lang,
-        targetLang,
-      },
-      setTarget: text => {},
-    });
-    resArray = [...resArray, res];
-  });
-  // console.log('✅', resArray);
+  // // await listObj.list.forEach(async element => {
+  // //   const res = await FetchToGoogle({
+  // //     search: {
+  // //       sourceText: element,
+  // //       sourceLang: listObj.lang,
+  // //       targetLang,
+  // //     },
+  // //     setTarget: text => {},
+  // //   });
+  // //   resArray = [...resArray, res];
+  // // });
+  await Promise.all(
+    listObj.list.map(async el => {
+      const res = await FetchToGoogle({
+        search: {
+          sourceText: el,
+          sourceLang: listObj.lang,
+          targetLang,
+        },
+        setTarget: text => {},
+      });
+      resArray = [...resArray, res];
+    })
+  );
+  console.log('✅', resArray);
 };
