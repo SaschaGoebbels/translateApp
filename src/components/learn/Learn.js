@@ -216,7 +216,7 @@ const Learn = props => {
         ></ButtonText>
         <button
           onClick={() => {
-            fetchTemplates(beginner, 'de');
+            fetchTemplates(beginner, 'de', 'en');
           }}
         >
           Test

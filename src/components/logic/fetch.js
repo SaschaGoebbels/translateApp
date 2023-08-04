@@ -41,7 +41,8 @@ export const FetchToGoogle = async obj => {
     const text2 = body[0][0][0];
     const text1 = sourceText;
 
-    const res = new Result(text1, targetLang, text2, sourceLang, uuid());
+    // const res = new Result(text1, targetLang, text2, sourceLang, uuid());
+    const res = new Result(text1, sourceLang, text2, targetLang, uuid());
     obj.setTarget(res.text2);
     return res;
   }
