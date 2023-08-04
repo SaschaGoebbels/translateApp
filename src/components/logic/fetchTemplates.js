@@ -12,32 +12,17 @@ const searchObj = {
 };
 
 export const fetchTemplates = async (listObj, targetLang) => {
+  // if en is source language just fetch target language
   if (targetLang !== 'en') {
-    console.log('✅', readTemplatesListArray(listObj, targetLang));
+    console.log('✅', await readTemplatesListArray(listObj, targetLang));
   }
-  // console.log('✅', 'fetch', listObj, targetLang);
-
-  // const res = await FetchToGoogle(searchObj);
-  // console.log('✅', res);
-  // // if (res) dispatch(historyListAdd({ ...res }));
+  // if source language is not en fetch target language and then again the source language
   return;
 };
 
 const readTemplatesListArray = async (listObj, targetLang) => {
-  // console.log('✅', listObj, targetLang);
   let resArray = [];
 
-  // // await listObj.list.forEach(async element => {
-  // //   const res = await FetchToGoogle({
-  // //     search: {
-  // //       sourceText: element,
-  // //       sourceLang: listObj.lang,
-  // //       targetLang,
-  // //     },
-  // //     setTarget: text => {},
-  // //   });
-  // //   resArray = [...resArray, res];
-  // // });
   await Promise.all(
     listObj.list.map(async el => {
       const res = await FetchToGoogle({
@@ -51,5 +36,5 @@ const readTemplatesListArray = async (listObj, targetLang) => {
       resArray = [...resArray, res];
     })
   );
-  console.log('✅', resArray);
+  return resArray;
 };
