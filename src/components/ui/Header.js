@@ -14,7 +14,6 @@ const Header = props => {
     }
     if (el.target.id === 'learn') {
       state.translate = false;
-      console.log('✅', snap);
     }
   };
 

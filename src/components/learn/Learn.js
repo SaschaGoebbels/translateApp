@@ -18,6 +18,7 @@ import EditBox from './EditBox';
 import CurrentStats from './CurrentStats';
 import RenderObjectList from '../ui/RenderObjectList';
 import ButtonText from '../ui/ButtonText';
+import Dropdown from '../manageLists/Dropdown';
 // logic components
 import { createNewRound } from '../logic/learnLogic';
 import { fetchTemplates } from '../logic/fetchTemplates';
@@ -155,7 +156,7 @@ const Learn = props => {
 
   const onLoadJsonHandler = () => {
     //
-    console.log('✅');
+    console.log('✅ load JSON');
   };
   //==================================================================
   // handle keyboard shortcuts
@@ -191,6 +192,8 @@ const Learn = props => {
     console.log('✅ archiv'); //TODO
   };
   //==================================================================
+  // dropdown openList
+  const [dropdownState, setDropdownState] = useState({ hide: true });
 
   //==================================================================
   return (
@@ -214,14 +217,15 @@ const Learn = props => {
           id={'open'}
           onClickHandler={onLoadJsonHandler}
         ></ButtonText>
-        <button
+        <Dropdown></Dropdown>
+        {/* <button
           onClick={() => {
-            fetchTemplates(beginner, 'it', 'de');
-            // fetchTemplates(beginner, 'de', 'en');
+            // fetchTemplates(beginner, 'it', 'de'); // list target source
+            fetchTemplates(beginner, 'de', 'en');
           }}
         >
           Test
-        </button>
+        </button> */}
       </div>
       {learn.learn.list.length < 30 && (
         <div className={classes.emptyMessageBox}>

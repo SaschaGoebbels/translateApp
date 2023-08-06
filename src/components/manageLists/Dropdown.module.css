@@ -1,0 +1,9 @@
+.dropdownBox {
+  position: absolute;
+  top: 4rem;
+  background-color: var(--secondClr);
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 2rem;
+  z-index: 99999;
+}

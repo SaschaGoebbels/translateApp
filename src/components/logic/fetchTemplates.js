@@ -1,28 +1,17 @@
 import { FetchToGoogle } from './fetch';
 
-const searchObj = {
-  search: {
-    sourceText: 'Bitte diesen text übersetzen',
-    sourceLang: 'de',
-    targetLang: 'en',
-  },
-  setTarget: text => {
-    // not needed just to match expect format of search obj
-  },
-};
-
 export const fetchTemplates = async (listObj, targetLang, sourceLang) => {
   // // // if source language is not en fetch target language and then again the source language
   if (sourceLang !== 'en') {
     const resTwice = await fetchTwice(listObj, targetLang, sourceLang);
     console.log('✅ TWICE', resTwice);
-    return;
+    return resTwice;
   }
   // // // if en is source language just fetch target language
   if (sourceLang === 'en') {
     const resSourceEn = await readTemplatesListArray(listObj, targetLang);
     console.log('✅ source en', resSourceEn);
-    return;
+    return resSourceEn;
   }
   return;
 };
@@ -37,7 +26,9 @@ const readTemplatesListArray = async (listObj, targetLang) => {
           sourceLang: listObj.lang,
           targetLang,
         },
-        setTarget: text => {},
+        setTarget: text => {
+          // not needed just to match expect format of search obj
+        },
       });
       resArray = [...resArray, res];
     })
