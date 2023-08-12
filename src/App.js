@@ -9,6 +9,7 @@ import HistoryList from './components/translate/HistoryList';
 import TranslateBar from './components/translate/TranslateBar';
 import ModalBox from './components/ui/ModalBox';
 import Menu from './components/ui/Menu';
+import ModalBlur from './components/utils/ModalBlur';
 // learn
 import Learn from './components/learn/Learn';
 // customHooks
@@ -124,9 +125,12 @@ function App() {
   }, []);
 
   //==================================================================
+  // modalBox
+  // const [modalBox, SetVisibility] = useState(props.modalBoxShow);
   //==================================================================
   return (
     <div className={classes.App}>
+      {/* <ModalBlur modalBoxShow={true}></ModalBlur> */}
       <Menu
         menuState={menuState}
         closeMenu={closeMenu}

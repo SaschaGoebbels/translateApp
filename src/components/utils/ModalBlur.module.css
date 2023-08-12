@@ -1,0 +1,13 @@
+.modalBox {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
+.modalBoxAnimation {
+  transition: all 3s;
+}
+.modalHide {
+  opacity: 0;
+}
